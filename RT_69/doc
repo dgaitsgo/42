@@ -1,0 +1,812 @@
+==71963== Memcheck, a memory error detector
+==71963== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==71963== Memcheck, a memory error detector
+==71963== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==71963== Using Valgrind-3.12.0 and LibVEX; rerun with -h for copyright info
+==71963== Command: ./rt scenes/a_sphere.rtsd
+==71963== 
+==71963== Using Valgrind-3.12.0 and LibVEX; rerun with -h for copyright info
+==71963== Command: ./rt scenes/a_sphere.rtsd
+==71963== 
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963==    at 0x7FFF5FC23DC7: bcmp (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC23DC7: bcmp (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963== Use of uninitialised value of size 8
+==71963== Use of uninitialised value of size 8
+==71963==    at 0x7FFF5FC23DDF: bcmp (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC23DDF: bcmp (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963== Use of uninitialised value of size 8
+==71963== Use of uninitialised value of size 8
+==71963==    at 0x7FFF5FC23DE4: bcmp (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC23DE4: bcmp (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963==    at 0x7FFF5FC11AF7: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC11AF7: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC14566: ImageLoaderMachOClassic::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C97: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC078C5: dyld::loadPhase2(char const*, char const*, dyld::LoadContext const&, char const* const*, char const* const*, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC077E6: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0EA4D: ImageLoader::recursiveLoadLibraries(ImageLoader::LinkContext const&, bool, ImageLoader::RPathChain const&) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC0EA4D: ImageLoader::recursiveLoadLibraries(ImageLoader::LinkContext const&, bool, ImageLoader::RPathChain const&) (in /usr/lib/dyld)
+==71963== 
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963==    at 0x7FFF5FC23DC7: bcmp (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC23DC7: bcmp (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963== Use of uninitialised value of size 8
+==71963== Use of uninitialised value of size 8
+==71963==    at 0x7FFF5FC23DDF: bcmp (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC23DDF: bcmp (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963== Use of uninitialised value of size 8
+==71963== Use of uninitialised value of size 8
+==71963==    at 0x7FFF5FC23DE4: bcmp (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC23DE4: bcmp (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC11AF4: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963== 
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963==    at 0x7FFF5FC11AF7: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    at 0x7FFF5FC11AF7: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC16D6A: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC10C5E: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC038C2: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC085BF: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC082DF: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC08044: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC07799: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0347A: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0315E: dyld::load(char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC088F9: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*) (in /usr/lib/dyld)
+==71963==    by 0x7FFF5FC0EA4D: ImageLoader::recursiveLoadLibraries(ImageLoader::LinkContext const&, bool, ImageLoader::RPathChain const&) (in /usr/lib/dyld)
+==71963== 
+==71963==    by 0x7FFF5FC0EA4D: ImageLoader::recursiveLoadLibraries(ImageLoader::LinkContext const&, bool, ImageLoader::RPathChain const&) (in /usr/lib/dyld)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000F54B: ft_strcat (in ./rt)
+==71963==    at 0x10000F54B: ft_strcat (in ./rt)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid write of size 1
+==71963== Invalid write of size 1
+==71963==    at 0x10000F5AD: ft_strcat (in ./rt)
+==71963==    at 0x10000F5AD: ft_strcat (in ./rt)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000F7D6: ft_strncat (in ./rt)
+==71963==    at 0x10000F7D6: ft_strncat (in ./rt)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== 
+==71963== Invalid write of size 1
+==71963== Invalid write of size 1
+==71963==    at 0x10000F874: ft_strncat (in ./rt)
+==71963==    at 0x10000F874: ft_strncat (in ./rt)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000DF0B: only_spaces (parse_tools.c:42)
+==71963==    at 0x10000DF0B: only_spaces (parse_tools.c:42)
+==71963==    by 0x10000B859: file_to_string (file_to_string.c:53)
+==71963==    by 0x10000B859: file_to_string (file_to_string.c:53)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6a9930 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000F778: ft_strlen (in ./rt)
+==71963==    at 0x10000F778: ft_strlen (in ./rt)
+==71963==    by 0x10000B9B8: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9B8: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6ac7e0 is 0 bytes after a block of size 0 alloc'd
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6ac7e0 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000F56F: ft_strcat (in ./rt)
+==71963==    at 0x10000F56F: ft_strcat (in ./rt)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6ac7e0 is 0 bytes after a block of size 0 alloc'd
+==71963==  Address 0x10b6ac7e0 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000BAF3: get_next_line (get_next_line.c:79)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000F54B: ft_strcat (in ./rt)
+==71963==    at 0x10000F54B: ft_strcat (in ./rt)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid write of size 1
+==71963== Invalid write of size 1
+==71963==    at 0x10000F5AD: ft_strcat (in ./rt)
+==71963==    at 0x10000F5AD: ft_strcat (in ./rt)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000B9EC: fill_line (get_next_line.c:25)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000F7D6: ft_strncat (in ./rt)
+==71963==    at 0x10000F7D6: ft_strncat (in ./rt)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid write of size 1
+==71963== Invalid write of size 1
+==71963==    at 0x10000F874: ft_strncat (in ./rt)
+==71963==    at 0x10000F874: ft_strncat (in ./rt)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BA01: fill_line (get_next_line.c:26)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Invalid read of size 1
+==71963== Invalid read of size 1
+==71963==    at 0x10000BBEF: get_next_line (get_next_line.c:91)
+==71963==    at 0x10000BBEF: get_next_line (get_next_line.c:91)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    by 0x100005B00: main (main.c:38)
+==71963==  Address 0x10b6b1bc0 is 0 bytes after a block of size 0 alloc'd
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    at 0x100023671: malloc (in /Users/trecomps/.brew/Cellar/valgrind/3.12.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000F3C8: ft_memalloc (in ./rt)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000B9C4: fill_line (get_next_line.c:23)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000BB96: get_next_line (get_next_line.c:87)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000B847: file_to_string (file_to_string.c:51)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x10000C1FE: parse (parse.c:50)
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963==    by 0x100005B00: main (main.c:38)
+==71963== 
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963== Conditional jump or move depends on uninitialised value(s)
+==71963==    at 0x10000B2AD: check_sphere_flags (check_object_flags.c:37)
+==71963==    by 0x10000B470: check_object_flags (check_object_flags.c:49)
+==71963==    at 0x10000B2AD: check_sphere_flags (check_object_flags.c:37)
+==71963==    by 0x10000B470: check_object_flags (check_object_flags.c:49)
+==71963==    by 0x10000D2E3: parse_object (parse_object.c:32)
+==71963==    by 0x10000D2E3: parse_object (parse_object.c:32)
+==71963==    by 0x10000D488: parse_object (parse_object.c:46)
+==71963==    by 0x10000D488: parse_object (parse_object.c:46)
+==71963==    by 0x10000D488: parse_object (parse_object.c:46)
+==71963==    by 0x10000D488: parse_object (parse_object.c:46)
+==71963==    by 0x10000C6C6: parse_element_container (parse_element.c:43)
+==71963==    by 0x10000C6C6: parse_element_container (parse_element.c:43)
+==71963==    by 0x10000C8B5: element (parse_element.c:70)
+==71963==    by 0x10000C8B5: element (parse_element.c:70)
+==71963==    by 0x10000C981: element (parse_element.c:77)
+==71963==    by 0x10000C981: element (parse_element.c:77)
+==71963==    by 0x10000C981: element (parse_element.c:77)
+==71963==    by 0x10000C981: element (parse_element.c:77)
+==71963==    by 0x10000C981: element (parse_element.c:77)
+==71963==    by 0x10000C981: element (parse_element.c:77)
+==71963==    by 0x10000C9BA: parse_scene (parse_element.c:85)
+==71963==    by 0x10000C9BA: parse_scene (parse_element.c:85)
+==71963==    by 0x10000C27D: parse (parse.c:58)
+==71963== 
+==71963==    by 0x10000C27D: parse (parse.c:58)
+==71963== 
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 2 times)
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 2 times)
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 4 times)
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 4 times)
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 8 times)
+--71963-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 8 times)
+
+Memcheck: mc_main.c:1779 (void set_address_range_perms(Addr, SizeT, UWord, UWord)): Assertion '! sr_isError(sres)' failed.
+Memcheck: SecMap valgrind munmap failure
+
+Memcheck: mc_main.c:1779 (void set_address_range_perms(Addr, SizeT, UWord, UWord)): Assertion '! sr_isError(sres)' failed.
+Memcheck: SecMap valgrind munmap failure
+
+
+
+host stacktrace:
+
+host stacktrace:
+==71963==    at 0x238040C62: ???
+==71963==    at 0x238040C62: ???
+==71963==    by 0x238041078: ???
+==71963==    by 0x238041078: ???
+==71963==    by 0x23804105B: ???
+==71963==    by 0x23804105B: ???
+==71963==    by 0x2380063FF: ???
+==71963==    by 0x2380063FF: ???
+==71963==    by 0x238005AAA: ???
+==71963==    by 0x238005AAA: ???
+==71963==    by 0x2380BDD9F: ???
+==71963==    by 0x2380BDD9F: ???
+==71963==    by 0x2380DE8D1: ???
+==71963==    by 0x2380DE8D1: ???
+==71963==    by 0x2380BC090: ???
+==71963==    by 0x2380BC090: ???
+==71963==    by 0x2380BA9D2: ???
+==71963==    by 0x2380BA9D2: ???
+==71963==    by 0x2380B8A2E: ???
+==71963==    by 0x2380B8A2E: ???
+==71963==    by 0x2380CA0BC: ???
+==71963==    by 0x2380CA0BC: ???
+==71963==    by 0x2380CA360: ???
+==71963==    by 0x2380CA360: ???
+
+sched status:
+  running_tid=2
+
+Thread 1: status = VgTs_WaitSys (lwpid 2567)
+
+sched status:
+  running_tid=2
+
+Thread 1: status = VgTs_WaitSys (lwpid 2567)
+==71963==    at 0x102F39F72: mach_msg_trap (in /usr/lib/system/libsystem_kernel.dylib)
+==71963==    at 0x102F39F72: mach_msg_trap (in /usr/lib/system/libsystem_kernel.dylib)
+==71963==    by 0x102F393B2: mach_msg (in /usr/lib/system/libsystem_kernel.dylib)
+==71963==    by 0x102F393B2: mach_msg (in /usr/lib/system/libsystem_kernel.dylib)
+==71963==    by 0x103073257: _notify_server_register_check_2 (in /usr/lib/system/libsystem_notify.dylib)
+==71963==    by 0x103073257: _notify_server_register_check_2 (in /usr/lib/system/libsystem_notify.dylib)
+==71963==    by 0x10307711B: notify_register_check (in /usr/lib/system/libsystem_notify.dylib)
+==71963==    by 0x102EEBB54: __si_module_static_ds_block_invoke (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102D3D40A: _dispatch_client_callout (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102D3D302: dispatch_once_f (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102EEBAC3: si_module_static_ds (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB53B: si_module_with_name (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB99F: si_module_config_modules_for_category (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB694: __si_module_static_search_block_invoke (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102D3D40A: _dispatch_client_callout (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102D3D302: dispatch_once_f (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102EEB63B: si_module_static_search (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB53B: si_module_with_name (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB4B9: getpwuid (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x1006952DB: CFCopyHomeDirectoryURLForUser (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x1006950A3: __71+[CFPrefsSource withSourceForIdentifier:user:byHost:container:perform:]_block_invoke63 (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x100694349: +[CFPrefsSource withSourceForIdentifier:user:byHost:container:perform:] (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x100693F6F: -[CFPrefsSearchListSource addSourceForIdentifier:user:byHost:container:] (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x10068DE09: __73+[CFPrefsSearchListSource withSearchListForIdentifier:container:perform:]_block_invoke (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x10068DA52: +[CFPrefsSearchListSource withSearchListForIdentifier:container:perform:] (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x10068D7C6: _CFPreferencesCopyAppValueWithContainer (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x102239857: -[NSUserDefaults(NSUserDefaults) init] (in /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation)
+==71963==    by 0x102239239: +[NSUserDefaults(NSUserDefaults) standardUserDefaults] (in /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation)
+==71963==    by 0x100D5B273: +[NSApplication initialize] (in /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit)
+==71963==    by 0x10282038F: _class_initialize (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x102820122: _class_initialize (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x10281FC8F: lookUpImpOrForward (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x102819590: objc_msgSend (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x100064B7F: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x10006909B: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x1000A04EE: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x1000606C9: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x100004931: initialize_window (initializations.c:68)
+==71963==    by 0x100005B1E: main (main.c:40)
+
+Thread 2: status = VgTs_Runnable (lwpid 4099)
+==71963==    at 0x102F3F48A: __bsdthread_terminate (in /usr/lib/system/libsystem_kernel.dylib)
+==71963==    by 0x10309918C: _pthread_exit (in /usr/lib/system/libsystem_pthread.dylib)
+==71963==    by 0x103097581: _pthread_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==71963==    by 0x103095340: start_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+
+T==71963==    by 0x10307711B: notify_register_check (in /usr/lib/system/libsystem_notify.dylib)
+==71963==    by 0x102EEBB54: __si_module_static_ds_block_invoke (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102D3D40A: _dispatch_client_callout (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102D3D302: dispatch_once_f (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102EEBAC3: si_module_static_ds (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB53B: si_module_with_name (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB99F: si_module_config_modules_for_category (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB694: __si_module_static_search_block_invoke (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102D3D40A: _dispatch_client_callout (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102D3D302: dispatch_once_f (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102EEB63B: si_module_static_search (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB53B: si_module_with_name (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x102EEB4B9: getpwuid (in /usr/lib/system/libsystem_info.dylib)
+==71963==    by 0x1006952DB: CFCopyHomeDirectoryURLForUser (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x1006950A3: __71+[CFPrefsSource withSourceForIdentifier:user:byHost:container:perform:]_block_invoke63 (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x100694349: +[CFPrefsSource withSourceForIdentifier:user:byHost:container:perform:] (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x100693F6F: -[CFPrefsSearchListSource addSourceForIdentifier:user:byHost:container:] (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x10068DE09: __73+[CFPrefsSearchListSource withSearchListForIdentifier:container:perform:]_block_invoke (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x10068DA52: +[CFPrefsSearchListSource withSearchListForIdentifier:container:perform:] (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x10068D7C6: _CFPreferencesCopyAppValueWithContainer (in /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation)
+==71963==    by 0x102239857: -[NSUserDefaults(NSUserDefaults) init] (in /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation)
+==71963==    by 0x102239239: +[NSUserDefaults(NSUserDefaults) standardUserDefaults] (in /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation)
+==71963==    by 0x100D5B273: +[NSApplication initialize] (in /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit)
+==71963==    by 0x10282038F: _class_initialize (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x102820122: _class_initialize (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x10281FC8F: lookUpImpOrForward (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x102819590: objc_msgSend (in /usr/lib/libobjc.A.dylib)
+==71963==    by 0x100064B7F: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x10006909B: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x1000A04EE: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x1000606C9: ??? (in /Library/Frameworks/SDL2.framework/Versions/A/SDL2)
+==71963==    by 0x100004931: initialize_window (initializations.c:68)
+==71963==    by 0x100005B1E: main (main.c:40)
+
+Thread 2: status = VgTs_Runnable (lwpid 4099)
+==71963==    at 0x102F3F48A: __bsdthread_terminate (in /usr/lib/system/libsystem_kernel.dylib)
+==71963==    by 0x10309918C: _pthread_exit (in /usr/lib/system/libsystem_pthread.dylib)
+==71963==    by 0x103097581: _pthread_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+==71963==    by 0x103095340: start_wqthread (in /usr/lib/system/libsystem_pthread.dylib)
+
+Thread 3: status = VgTs_Yielding (lwpid 5635)
+==71963==    at 0x102D431AA: _dispatch_mgr_invoke (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102D42DCC: _dispatch_mgr_thread (in /usr/lib/system/libdispatch.dylib)
+
+
+Note: see also the FAQ in the source distribution.
+It contains workarounds to several common problems.
+In particular, if Valgrind aborted or crashed after
+identifying problems in your program, there's a good chance
+that fixing those problems will prevent Valgrind aborting or
+crashing, especially if it happened in m_mallocfree.c.
+
+If that doesn't help, please report this bug to: www.valgrind.org
+
+In the bug report, send all the above text, the valgrind
+version, and what OS and version you are using.  Thanks.
+
+hread 3: status = VgTs_Yielding (lwpid 5635)
+==71963==    at 0x102D431AA: _dispatch_mgr_invoke (in /usr/lib/system/libdispatch.dylib)
+==71963==    by 0x102D42DCC: _dispatch_mgr_thread (in /usr/lib/system/libdispatch.dylib)
+
+
+Note: see also the FAQ in the source distribution.
+It contains workarounds to several common problems.
+In particular, if Valgrind aborted or crashed after
+identifying problems in your program, there's a good chance
+that fixing those problems will prevent Valgrind aborting or
+crashing, especially if it happened in m_mallocfree.c.
+
+If that doesn't help, please report this bug to: www.valgrind.org
+
+In the bug report, send all the above text, the valgrind
+version, and what OS and version you are using.  Thanks.
+

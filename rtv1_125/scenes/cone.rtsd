@@ -1,0 +1,124 @@
+Window {
+	width <1000>
+	height <600>
+}
+
+Camera {
+	fov <90>
+	origin <0, 0, 0>
+	direction <0, 0, -1>
+	Transformation {
+	rotation <3, 0, 0>
+	}
+}
+
+Light { 
+	position <0, -90, 0>
+}
+
+Cone {
+	Transformation {
+	scale <10, 10, 26>
+	rotation <-90, 0, 0>
+	translation <-20, 10, -90>
+	}
+	Material {
+	color <14, 155, 255>
+	lambert <.3>
+	specular <.4>
+	ambient <.2>
+	reflective <1>
+	}
+}
+
+Plane {
+	Transformation {
+	scale <30, 30, 30>
+	rotation <-90, -30, 0>
+	translation <40, 0, -100>
+	}
+	Material {
+	color <250, 250, 250>
+	lambert <.0>
+	specular <0.0>
+	ambient <0.0>
+	reflective <1>
+	}
+}
+
+Plane {
+	Transformation {
+	scale <100, 100, 100>
+	rotation <30, 0, 0>
+	translation <0, -20, -200>
+	}
+	Material {
+	color <250, 250, 250>
+	lambert <1.0>
+	specular <1.0>
+	ambient <0.2>
+	reflective <1>
+	}
+}
+
+Plane {
+	Transformation {
+	scale <30, 30, 30>
+	rotation <90, 30, 0>
+	translation <-40, 0, -100>
+	}
+	Material {
+	color <250, 250, 250>
+	lambert <.0>
+	specular <0.0>
+	ambient <0.0>
+	reflective <1>
+	}
+}
+
+Sphere {
+	Transformation {
+	scale <2, 2, 2>
+	rotation <0, 0, 0>
+	translation <0, 0, -100>
+	}
+	Material {
+	color <155, 55, 210>
+//	color <255, 255, 255>
+	lambert <.2>
+	specular <0.4>
+	ambient <0.2>
+	reflective <0>
+	}
+}
+
+Sphere {
+	Transformation {
+	scale <8, 8, 8>
+	rotation <0, 0, 0>
+	translation <0, 0, -70>
+	}
+	Material {
+//	color <155, 55, 210>
+	color <255, 255, 255>
+	lambert <.2>
+	specular <0.4>
+	ambient <0.2>
+	reflective <0>
+	}
+}
+
+Cylinder {
+	Transformation {
+	scale <6, 6, 20>
+	rotation <90, 0, 45>
+	translation <10, -10, -80>
+	}
+	Material {
+	color <1, 155, 255>
+	lambert <.3>
+	specular <.4>
+	ambient <.2>
+	reflective <1>
+	}
+}

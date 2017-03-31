@@ -1,0 +1,32 @@
+Window
+{
+	width <700>
+	height <300>
+}
+
+Camera
+{
+	fov <45>
+	origin <0, 0, 0>
+	direction <0, 0, -1>
+}
+
+Light
+{
+	position <0, -70, -40>
+}
+
+Cylinder {
+	Transformation {
+	scale <10, 10, 60>
+	translation <0, 0, -180>
+	rotation <0, 0, 0>
+	}
+	Material {
+	lambert <.7>
+	specular <.3>
+	ambient <.3>
+	reflective <.2>
+	color <30, 60, 205>
+	}
+}

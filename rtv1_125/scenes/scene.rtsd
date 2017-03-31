@@ -1,0 +1,87 @@
+Window {
+	width <600>
+	height <400>
+}
+
+Camera {
+	fov <45>
+	origin <0, 0, 0>
+	direction <0, 0, -1>
+}
+
+
+Light { position <40, -45, -160> }
+
+Light { position <-40, -45, -160> }
+
+Sphere {
+	Transformation
+	{
+		scale <20, 20, 20>
+		rotation <0, 0, 50>
+		translation <0, 0, -140>
+	}
+	Material
+	{
+		color <14, 200, 88>
+		lambert <0.8>
+		specular <0.5>
+		ambient <0.07>
+		reflective <1.0>
+	}
+}
+
+Plane
+{
+	Transformation
+	{
+		scale <130, 130, 130>
+		rotation <-5, 0, 90>
+		translation <50, -14, -150>
+	}
+	Material
+	{
+		color <0, 0, 20>
+		lambert <0.3>
+		specular <1.0>
+		ambient <0.03>
+		reflective <1.0>
+	}
+}
+
+
+Plane
+{
+	Transformation
+	{
+		scale <130, 130, 130>
+		rotation <-5, 0, 90>
+		translation <-50, -14, -150>
+	}
+	Material
+	{
+		color <0, 0, 20>
+		lambert <0.3>
+		specular <1.0>
+		ambient <0.03>
+		reflective <1.0>
+	}
+}
+
+Plane
+{
+	Transformation
+	{
+		scale <130, 130, 130>
+		rotation <-5, 0, 0>
+		translation <0, 30, -150>
+	}
+	Material
+	{
+		color <0, 0, 20>
+		lambert <0.3>
+		specular <1.0>
+		ambient <0.03>
+		reflective <1.0>
+	}
+}

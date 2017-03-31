@@ -1,0 +1,9 @@
+dgaitsgo :
+
+- Objects are not dynamicaly allocated and the structures : t_sphere, t_cone, t_cylinder, t_cone don't serve much
+- Big problems :
+	- No tone mapping - e.g. 125 is half bright as 255
+	- Generating shadow rays is inefficient : intersection routine looks for nearest object,
+		not IF an object is between the intersected object and the light
+	- edge cases for when capped objects (cylinder, cone) are parellel - for now the code checks if the object is exactly parallel
+		and shifts it slightly throught the transformation matrix

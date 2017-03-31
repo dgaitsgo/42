@@ -1,0 +1,64 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
+#    Updated: 2017/03/31 16:43:54 by dgaitsgo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = scop 
+
+SRC_DIR = ./src
+OBJ_DIR = ./obs
+INC_DIR = ./inc
+
+SRC_FILES = \
+$(SRC_DIR)/main.c \
+$(SRC_DIR)/window.c \
+$(SRC_DIR)/open_gl.c \
+$(SRC_DIR)/constructors.c \
+$(SRC_DIR)/parse_mesh.c \
+$(SRC_DIR)/helpers.c \
+
+OBJ_FILES = $(SRC_FILES:.c=.o)
+
+INC_FILES = \
+$(INC_DIR)/scop.h \
+$(INC_DIR)/libft.h \
+$(INC_DIR)/get_next_line.h \
+$(INC_DIR)/macros.h \
+$(INC_DIR)/matrix.h \
+$(INC_DIR)/flags.h \
+$(INC_DIR)/vector.h \
+$(INC_DIR)/wavefront_obj.h \
+$(INC_DIR)/window.h \
+$(INC_DIR)/helpers.h \
+
+LIB_DIR = ./lib/libft
+
+FLAGS = -Wall -Wextra -Werror -g
+
+.PHONY: all, clean, fclean, re
+
+all: $(NAME)
+
+$(NAME): $(OBJ_FILES)
+	make -C ./lib/libft
+	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIB_DIR) -lft -F/Library/Frameworks -framework SDL2 -framework OpenGL
+
+%.o:%.c $(INC_FILES)
+	gcc -c -I$(INC_DIR) $< -o $@
+
+clean:
+	make -C ./lib/libft/ clean
+	rm -rf $(OBJ_FILES)
+
+fclean: clean
+	make -C ./lib/libft/ fclean
+	rm -rf $(NAME)
+
+re: fclean all
