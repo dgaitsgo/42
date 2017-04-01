@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 16:13:37 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/03/31 16:14:38 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/01 18:27:04 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		load_obj(t_model *model, const int fd)
 	{
 		if (line[0] == 'g')
 			push_obj_group(model);
-		if (line[0] == 'v' && line[1] == ' ')
+		else if (line[0] == 'v' && line[1] == ' ')
 			push_obj_vertex(model->curr_group, &line);
 		else if (line[0] == 'v' && line[1] == 'n')
 			push_obj_normal(model->curr_group, &line);

@@ -6,15 +6,15 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/03/30 19:46:57 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/01 20:22:33 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __SCOP_H
 # define __SCOP_H
 
-//haram
 #include <stdio.h>
+#include <dirent.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -39,9 +39,10 @@ typedef struct		s_scop
 {
 	WINDOW			window;
 	t_model			*model;	
+	t_gl			*gl;
 }					t_scop;
 
-void							poll_events(t_scop *display);
-void							put_image(t_scop *display);
+void				poll_events(t_scop *display);
+void				put_image(t_scop *display);
 
 #endif

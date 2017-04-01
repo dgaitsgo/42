@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:37:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/03/31 16:11:54 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/01 20:42:04 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ struct s_face_lst			*new_face(void)
 	ft_memset(&node->f, 0, 4);
 	ft_memset(&node->t, 0, 4);
 	ft_memset(&node->n, 0, 4);
+	node->next = NULL;
+	return (node);
+}
+
+struct s_shader_lst		*new_shader(short type)
+{
+	struct s_shader_lst	*node;
+
+	node = malloc(sizeof(t_shader_lst));
+	node->type = type;
+	if (!node)
+		exit(1);
 	node->next = NULL;
 	return (node);
 }

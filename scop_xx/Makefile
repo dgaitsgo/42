@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/03/31 16:43:54 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/01 13:52:22 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ $(SRC_DIR)/open_gl.c \
 $(SRC_DIR)/constructors.c \
 $(SRC_DIR)/parse_mesh.c \
 $(SRC_DIR)/helpers.c \
+$(SRC_DIR)/render.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
