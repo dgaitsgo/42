@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:37:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/01 20:42:04 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 03:35:12 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ struct s_shader_lst		*new_shader(short type)
 	if (!node)
 		exit(1);
 	node->next = NULL;
+	node->previous = NULL;
 	return (node);
 }
 
@@ -86,6 +87,10 @@ struct s_group_lst			*new_group(void)
 	node->curr_text_coord = node->root_text_coord;
 	node->curr_normal = node->root_normal;
 	node->curr_face = node->root_face;
+	node->n_vertices = 0;
+	node->n_normals = 0;
+	node->n_text_coords = 0;
+	node->n_faces = 0;
 	node->next = NULL;
 	return (node);
 }

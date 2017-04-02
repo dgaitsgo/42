@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 16:13:37 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 03:39:31 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 03:57:30 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		push_obj_face(t_group_lst *g, char **line)
 void		load_obj(t_model *model, const int fd)
 {
 	char	*line;
-
+	
 	line = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -116,3 +116,29 @@ void		load_obj(t_model *model, const int fd)
 	}
 	free_if(line);
 }
+
+void		count_file_components(t_model *model, const int fd)
+{
+	t_obj_stats		obj_stat;
+	char			*line;
+	int				i;
+
+	i = 0;
+	line = NULL;
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (line[0] == 'g')
+			obj_stat.g++;
+		else if (line[0] == 'v' && line[1] == ' ')
+			push_obj_vertex(model->curr_group, &line);
+		else if (line[0] == 'v' && line[1] == 'n')
+			push_obj_normal(model->curr_group, &line);
+		else if (line[0] == 'v' && line[1] == 't')
+			push_obj_text_coord(model->curr_group, &line);
+		else if (line[0] == 'f')
+			push_obj_face(model->curr_group, &line);
+		free_if(line);
+	}
+	free_if(line);
+}
+

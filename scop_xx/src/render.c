@@ -6,21 +6,31 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/01 20:49:18 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/01 23:02:12 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
 float vertices[] = {
-	0.0f, 0.5f,
-	0.5f, -0.5f,
-	-0.5f, -0.5f
+	0.0f, 0.5f, 0.0f,
+	0.5f, -0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f,
 };
 
-const char *fragmentSource = "#version 400\nout vec4 outColor; void	main() { outColor = vec4(1.0, 1.0, 1.0, 1.0); }";
+const char* vertexSource =
+	"#version 410\n"
+	"in vec3 vp;"
+	"void main () {"
+	"  gl_Position = vec4 (vp, 1.0);"
+	"}";
 
-const char *vertexSource = "#version 400\nin vec2 position; void main(){ gl_Position = vec4(position, 0.0, 1.0); }";
+const char* fragmentSource =
+	"#version 410\n"
+	"out vec4 frag_colour;"
+	"void main () {"
+	"  frag_colour = vec4 (0.5, 0.5, 0.5, 1.0);"
+	"}";
 
 void	check_shader_compile(GLuint shader_name)
 {
@@ -53,20 +63,26 @@ void	status_gl(const char *message, int line, char *file)
 void	setup_render(t_scop *display)
 {	
 	GLuint err;
-
-	/* Pass vertices to Graphics Card*/
 	GLuint vbo;
+	GLuint vao;
+	/* Pass vertices to Graphics Card*/
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	status_gl("Got some vbos", __LINE__, __FILE__);
+	//status_gl("Got some vbos", __LINE__, __FILE__);
+
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	//status_gl("Got some vbos", __LINE__, __FILE__);
 
 	/* Vertex shader */	
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
 	glCompileShader(vertexShader);
-	status_gl("Vertex shadezzz", __LINE__, __FILE__);
+	//status_gl("Vertex shadezzz", __LINE__, __FILE__);
 
 	/* Fragment shader*/
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -83,21 +99,39 @@ void	setup_render(t_scop *display)
 	GLuint shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertexShader);
 	glAttachShader(shaderProgram, fragmentShader);
-	glBindFragDataLocation(shaderProgram, 0, "outColor");
+//	glBindFragDataLocation(shaderProgram, 0, "outColor");
 	glLinkProgram(shaderProgram);
-	glUseProgram(shaderProgram);
+//	glUseProgram(shaderProgram);
 	status_gl("generated and linked nukka", __LINE__, __FILE__);
 
 	/* Attach dem' VAOs*/
-	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
-	status_gl("A = All them VAOs can getit", __LINE__, __FILE__);
-	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);	
-	status_gl("B = All them VAOs can getit", __LINE__, __FILE__);
-	glEnableVertexAttribArray(posAttrib);
-	status_gl("C = All them VAOs can getit", __LINE__, __FILE__);
+	//GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+	//status_gl("A = All them VAOs can getit", __LINE__, __FILE__);
+	//status_gl("C = All them VAOs can getit", __LINE__, __FILE__);
 
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	status_gl("My shit bown", __LINE__, __FILE__);
+
+	
+	int			quit;
+	WINDOW		*window;
+	GLuint		vertexbuffer;
+
+	window = &display->window;
+	quit = 0;
+	while (!quit)
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glUseProgram(shaderProgram);
+		glBindVertexArray(vao);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		while (SDL_PollEvent(&SDL_EVENT))
+		{
+			if (SDL_EVENT.type == SDL_QUIT ||
+			KEY == SDLK_ESCAPE)
+			{
+				quit = 1;
+				kill_sdl(&display->window);
+			}
+		}
+		SDL_GL_SwapWindow(SDL_WINDOW);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:25:05 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/01 19:12:39 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 03:57:37 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ enum			e_flags
 	MTL_ASSOCIATED,
 };
 
-enum			e_model_indices
+enum						e_model_indices
 {
 	vertex,
 	NORMAL,
@@ -42,7 +42,7 @@ typedef struct 				s_texture
 
 typedef struct				s_face_lst
 {
-	int						f[4];
+	int						v[4];
 	int						t[4];
 	int						n[4];
 	struct	s_face_lst		*next;
@@ -63,12 +63,11 @@ typedef	struct				s_text_coord_lst
 typedef struct				s_normal_lst
 {
 	t_vector				normal;
-	struct s_normal_lst	*next;
+	struct s_normal_lst		*next;
 }							t_normal_lst;
 
 typedef	struct				s_group_lst
 {
-	t_texture				texture;
 	t_vertex_lst			*root_vertex;
 	t_vertex_lst			*curr_vertex;
 	t_text_coord_lst		*root_text_coord;
@@ -77,6 +76,10 @@ typedef	struct				s_group_lst
 	t_normal_lst			*curr_normal;
 	t_face_lst				*root_face;
 	t_face_lst				*curr_face;
+	int						n_vertices;
+	int						n_text_coords;
+	int						n_normals;
+	int						n_faces;
 	struct s_group_lst		*next;
 }							t_group_lst;
 
@@ -86,9 +89,8 @@ typedef struct				s_model
 	int						flags;
 	t_group_lst				*curr_group;
 	t_group_lst				*root_group;
+	int						n_groups;
 	GLuint					vao;
-	GLuint					vbo;
-	GLuint					ebo;
 }							t_model;
 
 typedef struct				s_wavefront_obj
