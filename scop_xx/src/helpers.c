@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:49:35 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 19:54:59 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 21:56:23 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		multi_free_4(void *addr1, void *addr2,
 	free_if(addr4);
 }
 
-void		*if_malloc(long size, int n)
+void		*malloc_if(long size, int n)
 {
 	void	*mem;
 
@@ -38,6 +38,6 @@ void		*if_malloc(long size, int n)
 
 void		free_if(void *ptr)
 {
-	if (ptr)
+	if (ptr != NULL)
 		free(ptr);
 }

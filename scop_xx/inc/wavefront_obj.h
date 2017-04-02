@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:25:05 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 05:22:32 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 00:44:24 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef	struct				s_group_lst
 
 typedef struct				s_model
 {
-	//missing reference to mtl file
+	// missing reference to mtl file
 	int						flags;
 	t_group_lst				*curr_group;
 	t_group_lst				*root_group;

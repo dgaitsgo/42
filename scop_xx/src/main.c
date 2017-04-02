@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 20:02:36 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 00:43:09 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,6 @@ void	fill_index_arrays(t_array_group *arr_groups, t_face_lst *face, int i_group,
 	arr_groups[i_group].norm_indexes[i_face + 0] = face->n[0];
 	arr_groups[i_group].norm_indexes[i_face + 1] = face->n[1];
 	arr_groups[i_group].norm_indexes[i_face + 2] = face->n[2];
-
-/*
-	printf("FROM CHECK:");
-	printf("%d/%d/%d %d/%d/%d %d/%d/%d\n",
-	arr_groups[i_group].vert_indexes[i_face + 0],
-	arr_groups[i_group].vert_indexes[i_face + 1],
-	arr_groups[i_group].vert_indexes[i_face + 2],
-	arr_groups[i_group].text_indexes[i_face + 0],
-	arr_groups[i_group].text_indexes[i_face + 1],
-	arr_groups[i_group].text_indexes[i_face + 2],
-	arr_groups[i_group].norm_indexes[i_face + 0],
-	arr_groups[i_group].norm_indexes[i_face + 1],
-	arr_groups[i_group].norm_indexes[i_face + 2]);
-*/
 }
 
 void				gen_index_array(t_model *model)
@@ -95,30 +81,12 @@ void				gen_index_array(t_model *model)
 		i_face = 0;
 		while (face != NULL)
 		{
-			//fill_index_arrays(model->arr_groups, face, i_group, i_face);
+			fill_index_arrays(model->arr_groups, face, i_group, i_face);
 			face = face->next;
-			printf("%d, %d\n", i_group, i_face);
 			i_face += 3;
 		}
 		i_group++;
 		group = group->next;
-	}	
-}
-
-void		check_indexes(t_model *model)
-{
-	int i_face = 0;
-	int	i_group = 0;
-	t_array_group *arr_groups = model->arr_groups;
-
-	while (i_group < model->n_groups)
-	{
-		i_face = 0;
-		while (i_face < arr_groups[i_group].n_faces * 3)
-		{
-			i_face += 3;
-		}
-		i_group++;
 	}
 }
 
@@ -138,8 +106,7 @@ int			main(int argc, char **argv)
 		load_obj(scop.model, fd);
 		init_array_memory(scop.model);
 		gen_index_array(scop.model);
-		printf("Can run over the whole thing\n");
-		//fill_model_arrays(scop.model);
+		fill_model_arrays(scop.model);
 		//check_indexes(scop.model);
 		init_window(&scop.window, argv[1], 400, 400);
 		init_open_gl();
