@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 16:13:37 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 05:22:28 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 19:03:36 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,26 @@ void		push_obj_normal(t_group_lst *g, char **line)
 void		push_face_subfields(t_face_lst *f, char **tokens)
 {
 	f->v[0] = atoi(strsep(&tokens[1], "/"));
-	f->v[1] = atoi(strsep(&tokens[2], "/"));
-	f->v[2] = atoi(strsep(&tokens[3], "/"));
-	f->v[3] = tokens[4] ? atoi(strsep(&tokens[4], "/")) : 0;
-	f->t[0] = atoi(strsep(&tokens[1], "/"));
+	f->v[1] = atoi(strsep(&tokens[1], "/"));
+	f->v[2] = atoi(strsep(&tokens[1], "/"));
+	f->t[0] = atoi(strsep(&tokens[2], "/"));
 	f->t[1] = atoi(strsep(&tokens[2], "/"));
-	f->t[2] = atoi(strsep(&tokens[3], "/"));
-	f->t[3] = tokens[4] ? atoi(strsep(&tokens[4], "/")) : 0;
-	f->n[0] = atoi(strsep(&tokens[1], "/"));
-	f->n[1] = atoi(strsep(&tokens[2], "/"));
+	f->t[2] = atoi(strsep(&tokens[2], "/"));
+	f->n[0] = atoi(strsep(&tokens[3], "/"));
+	f->n[1] = atoi(strsep(&tokens[3], "/"));
 	f->n[2] = atoi(strsep(&tokens[3], "/"));
-	f->n[3] = tokens[4] ? atoi(strsep(&tokens[4], "/")) : 0;
+
+	//printf("FROM PARSE:");
+	//printf("%d/%d/%d %d/%d/%d %d/%d/%d\n",
+	//f->v[0],
+    //f->v[1], 
+    //f->v[2], 
+    //f->t[0], 
+    //f->t[1], 
+    //f->t[2], 
+    //f->n[0], 
+    //f->n[1], 
+    //f->n[2]);
 }
 
 void		push_obj_face(t_group_lst *g, char **line)
