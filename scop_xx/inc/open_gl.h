@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 03:57:35 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:22:31 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define __OPEN_GL_H
 
 #include <OpenGL/gl3.h>
+#include "wavefront_obj.h"
 
 # define SHADER_PATH	"./shaders"
 
@@ -41,9 +42,13 @@ typedef struct			s_array_group
 	GLfloat				*vertices;
 	GLfloat				*normals;
 	GLfloat				*text_coords;
-	GLint				*vert_index;
+	GLint				*vert_indexes;
 	GLint				*norm_indexes;
 	GLint				*text_indexes;
+	int					n_text_coords;
+	int					n_normals;
+	int					n_vertices;
+	int					n_faces;
 }						t_array_group;
 
 typedef struct			s_gl
@@ -56,7 +61,6 @@ typedef struct			s_gl
 	GLuint				shader_program;
 	GLint				pos_attrib;
 	GLuint				*vao;
-	t_array_group		*arr_groups;
 }						t_gl;
 
 void					init_open_gl();

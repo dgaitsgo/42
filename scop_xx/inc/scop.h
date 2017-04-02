@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 03:57:36 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:04:51 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ typedef struct		s_scop
 	t_gl			*gl;
 }					t_scop;
 
+
+t_gl				*init_gl_mem(void);
+void				init_array_memory(t_model *m);
+t_model				*init_model_mem(void);
 void				poll_events(t_scop *display);
 void				put_image(t_scop *display);
 

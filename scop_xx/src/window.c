@@ -6,11 +6,13 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:34:16 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/01 22:44:46 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 04:47:18 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+void	setup_render(t_scop *display);
 
 void			init_window(WINDOW *window, char *title, int width, int height)
 {
@@ -19,16 +21,12 @@ void			init_window(WINDOW *window, char *title, int width, int height)
 	SDL_DEPTH = DEFAULT_COLOR_DEPTH;
 	SDL_BPL = SDL_WIDTH * (SDL_DEPTH / DEFAULT_COLOR_DEPTH / 3);
 	SDL_Init(SDL_INIT_VIDEO);
-	if (!window->gl_context)
-		printf("Couldn't get context  SDL Error: %s\n", SDL_GetError());
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_WINDOW = SDL_CreateWindow(title, 100, 200,
 	SDL_WIDTH, SDL_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	window->gl_context = SDL_GL_CreateContext(SDL_WINDOW);
-	if (window->gl_context == NULL)
-		printf("Couldn't get context  SDL Error: %s\n", SDL_GetError());
 }
 
 void			kill_sdl(WINDOW *window)
@@ -45,7 +43,7 @@ void			poll_events(t_scop *display)
 
 	window = &display->window;
 	quit = 0;
-	setup_render();
+	setup_render(display);
 	while (!quit)
 	{
 		while (SDL_PollEvent(&SDL_EVENT))

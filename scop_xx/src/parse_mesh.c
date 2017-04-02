@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 16:13:37 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 03:39:31 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:22:28 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		push_obj_group(t_model *model)
 {
 	model->curr_group->next = new_group();
 	model->curr_group = model->curr_group->next;
+	model->n_groups++;
 }
 
 void		push_obj_text_coord(t_group_lst *g, char **line)

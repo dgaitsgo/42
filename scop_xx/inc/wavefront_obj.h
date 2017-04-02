@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:25:05 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 03:57:37 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:22:32 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include "vector.h"
 #include "open_gl.h"
+
+typedef struct	s_array_group t_array_group;
 
 enum			e_flags
 {
@@ -89,6 +91,7 @@ typedef struct				s_model
 	int						flags;
 	t_group_lst				*curr_group;
 	t_group_lst				*root_group;
+	t_array_group			*arr_groups;
 	int						n_groups;
 	GLuint					vao;
 }							t_model;

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:37:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 03:35:12 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 04:35:07 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct s_face_lst			*new_face(void)
 	node = malloc(sizeof(t_face_lst));
 	if (!node)
 		exit(1);
-	ft_memset(&node->f, 0, 4);
+	ft_memset(&node->v, 0, 4);
 	ft_memset(&node->t, 0, 4);
 	ft_memset(&node->n, 0, 4);
 	node->next = NULL;

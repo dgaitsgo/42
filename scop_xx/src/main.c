@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 03:39:09 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/02 05:22:20 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void				load_shaders(t_gl *gl)
 			gl->curr_frag_shdr->previous = gl->curr_frag_shdr;
 			gl->curr_frag_shdr->next = new_shader(FRAG);
 			gl->curr_frag_shdr = gl->curr_frag_shdr->next;
-
 		}
 		else if (ext == VERT)
 		{
@@ -50,26 +49,26 @@ void				load_shaders(t_gl *gl)
 
 void		list_to_table(t_gl *gl, t_model *model)
 {
-	
+	return ;
 }
 
-void	fill_index_arrays(t_arry_obs *arr_groups, t_face *face, int i_group, int i_face)
+void	fill_index_arrays(t_array_group *arr_groups, t_face_lst *face, int i_group, int i_face)
 {
-	arr_groups[i_group].vert_index[i_face + 0] = face->v[0];
-	arr_groups[i_group].vert_index[i_face + 1] = face->v[1];
-	arr_groups[i_group].vert_index[i_face + 2] = face->v[2];
-	arr_groups[i_group].text_index[i_face + 0] = face->t[0];
-	arr_groups[i_group].text_index[i_face + 1] = face->t[1];
-	arr_groups[i_group].text_index[i_face + 2] = face->t[2];
-	arr_groups[i_group].norm_index[i_face + 0] = face->n[0];
-	arr_groups[i_group].norm_index[i_face + 1] = face->n[1];
-	arr_groups[i_group].norm_index[i_face + 2] = face->n[2];
+	arr_groups[i_group].vert_indexes[i_face + 0] = face->v[0];
+	arr_groups[i_group].vert_indexes[i_face + 1] = face->v[1];
+	arr_groups[i_group].vert_indexes[i_face + 2] = face->v[2];
+	arr_groups[i_group].text_indexes[i_face + 0] = face->t[0];
+	arr_groups[i_group].text_indexes[i_face + 1] = face->t[1];
+	arr_groups[i_group].text_indexes[i_face + 2] = face->t[2];
+	arr_groups[i_group].norm_indexes[i_face + 0] = face->n[0];
+	arr_groups[i_group].norm_indexes[i_face + 1] = face->n[1];
+	arr_groups[i_group].norm_indexes[i_face + 2] = face->n[2];
 }
 
-void				gen_index_array(t_model *model, t_array_obs *arr_groups)
+void				gen_index_array(t_model *model)
 {
 	t_group_lst		*group;
-	t_face			*face;
+	t_face_lst		*face;
 	int				i_face;
 	int				i_group;
 
@@ -81,30 +80,45 @@ void				gen_index_array(t_model *model, t_array_obs *arr_groups)
 		face = group->root_face;
 		while (face != NULL)
 		{
-			fill_index_arrays(arr_groups, face, i_group, i_face);
+			fill_index_arrays(model->arr_groups, face, i_group, i_face);
 			face = face->next;
+			i_face++;
 		}
+		i_group++;
 		group = group->next;
 	}	
 }
 
-void	init_array_memory(t_model *display)
+void		check_indexes(t_model *model)
 {
-	t_array_group	*arr_groups;
-	int				i;
-	
-	i = 0;
-	arr_groups = malloc(sizeof(t_array_group) * display.model.n_groups);
-	while (i < display.model.n_groups)
+	int i_face = 0;
+	int	i_group = 0;
+	t_array_group *arr_groups = model->arr_groups;
+
+	while (i_group < model->n_groups)
 	{
-		
-		i++;
+		i_face = 0;
+		while (i_face < arr_groups[i_group].n_faces)
+		{
+			printf("%d/%d/%d %d/%d/%d %d/%d/%d\n",
+			arr_groups[i_group].vert_indexes[i_face + 0],
+			arr_groups[i_group].vert_indexes[i_face + 1],
+			arr_groups[i_group].vert_indexes[i_face + 2],
+			arr_groups[i_group].text_indexes[i_face + 0],
+			arr_groups[i_group].text_indexes[i_face + 1],
+			arr_groups[i_group].text_indexes[i_face + 2],
+			arr_groups[i_group].norm_indexes[i_face + 0],
+			arr_groups[i_group].norm_indexes[i_face + 1],
+			arr_groups[i_group].norm_indexes[i_face + 2]);
+			i_face++;
+		}
+		i_group++;
 	}
 }
 
 int			main(int argc, char **argv)
 {
-	t_scop	display;
+	t_scop	scop;
 	int		fd;
 
 	if (argc == 2)
@@ -112,14 +126,18 @@ int			main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 2)
 			exit(1);
-		display.model = init_display_mem();
-		display.gl = init_gl_mem(0);
-		load_shaders(display.gl);
-		load_obj(display.model, fd);
-		init_array_memory(display.gl.groups);
-		init_window(&display.window, argv[1], 400, 400);
+		scop.model = init_model_mem();
+		scop.gl = init_gl_mem();
+		load_shaders(scop.gl);
+		load_obj(scop.model, fd);
+		printf("%d\n", scop.model->n_groups);
+		init_array_memory(scop.model);
+		gen_index_array(scop.model);
+		//fill_model_arrays(scop.model);
+		//check_indexes(scop.model);
+		init_window(&scop.window, argv[1], 400, 400);
 		init_open_gl();
-		put_image(&display);
+		put_image(&scop);
 	}
 	else
 		usage();
