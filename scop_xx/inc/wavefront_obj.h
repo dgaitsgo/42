@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:25:05 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 00:44:24 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 20:25:27 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef	struct				s_group_lst
 	t_normal_lst			*curr_normal;
 	t_face_lst				*root_face;
 	t_face_lst				*curr_face;
+	long					byte_marker;
 	int						n_vertices;
 	int						n_text_coords;
 	int						n_normals;
@@ -85,21 +86,38 @@ typedef	struct				s_group_lst
 	struct s_group_lst		*next;
 }							t_group_lst;
 
+typedef struct				s_obj_data
+{
+	t_vector				*vertices;
+	t_vector				*text_coords;
+	t_vector				*normals;
+
+	int						*vert_indices;
+	int						*text_indices;
+	int						*norm_indices;
+
+	int						n_vertices;
+	int						n_text_coords;
+	int						n_normals;
+
+	int						n_vert_indices;
+	int						n_text_indices;
+	int						n_norm_indices;
+}							t_obj_data;
+
 typedef struct				s_model
 {
 	// missing reference to mtl file
 	int						flags;
-	t_group_lst				*curr_group;
-	t_group_lst				*root_group;
-	t_array_group			*arr_groups;
 	int						n_groups;
+	t_group_lst				*root_group;
+	t_obj_data				**obj_data;
 	GLuint					vao;
 }							t_model;
 
 typedef struct				s_wavefront_obj
 {
 	int						flags;
-	int						face_jump;
 	int						index_sign;
 
 	t_vector				*vertices;

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 21:56:04 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 16:12:37 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void				init_array_memory(t_model *m);
 t_model				*init_model_mem(void);
 void				poll_events(t_scop *display);
 void				put_image(t_scop *display);
-
+void				load_obj(t_model *model, FILE *fd);
 #endif

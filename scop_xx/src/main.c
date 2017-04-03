@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 00:43:09 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 19:29:49 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				gen_index_array(t_model *model)
 		i_face = 0;
 		while (face != NULL)
 		{
-			fill_index_arrays(model->arr_groups, face, i_group, i_face);
+			//fill_index_arrays(model->arr_groups, face, i_group, i_face);
 			face = face->next;
 			i_face += 3;
 		}
@@ -93,20 +93,20 @@ void				gen_index_array(t_model *model)
 int			main(int argc, char **argv)
 {
 	t_scop	scop;
-	int		fd;
+	FILE	*fd;
 
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd < 2)
+		fd = fopen(argv[1], "r");
+		if (fd == NULL)
 			exit(1);
 		scop.model = init_model_mem();
 		scop.gl = init_gl_mem();
 		load_shaders(scop.gl);
 		load_obj(scop.model, fd);
-		init_array_memory(scop.model);
-		gen_index_array(scop.model);
-		fill_model_arrays(scop.model);
+		//init_array_memory(scop.model);
+		//gen_index_array(scop.model);
+		//fill_model_arrays(scop.model);
 		//check_indexes(scop.model);
 		init_window(&scop.window, argv[1], 400, 400);
 		init_open_gl();

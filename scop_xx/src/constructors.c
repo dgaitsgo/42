@@ -6,11 +6,17 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:37:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 21:56:43 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 17:11:46 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+void	init_getline(t_getline *line)
+{
+	line->s = NULL;
+	line->n = 0;
+}
 
 struct s_vertex_lst			*new_vertex(void)
 {

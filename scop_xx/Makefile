@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/03 00:44:44 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/03 20:11:55 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ $(SRC_DIR)/helpers.c \
 $(SRC_DIR)/render.c \
 $(SRC_DIR)/file_helpers.c \
 $(SRC_DIR)/fetch_memory.c \
-$(SRC_DIR)/unordered_fill.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:37:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 23:06:34 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 20:44:56 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_model		*init_model_mem(void)
 
 	model = malloc_if(sizeof(t_model), 1);
 	model->root_group = new_group();
-	model->curr_group = model->root_group;
 	model->n_groups = 1;
 	return (model);
 }
@@ -35,7 +34,7 @@ t_gl		*init_gl_mem(void)
 	gl->vao = malloc_if(sizeof(GLuint), 1);
 	return (gl);
 }
-
+/*
 void	init_array_memory(t_model *m)
 {
 	t_group_lst		*group;
@@ -60,3 +59,4 @@ void	init_array_memory(t_model *m)
 		group = group->next;
 	}
 }
+*/
