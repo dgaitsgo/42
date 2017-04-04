@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:37:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 17:11:46 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 23:48:36 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ struct s_group_lst			*new_group(void)
 	node->curr_text_coord = node->root_text_coord;
 	node->curr_normal = node->root_normal;
 	node->curr_face = node->root_face;
+	node->quads = 0;
 	node->n_vertices = 0;
 	node->n_normals = 0;
 	node->n_text_coords = 0;

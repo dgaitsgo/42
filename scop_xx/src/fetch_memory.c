@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:37:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 20:44:56 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/04 01:02:49 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_model		*init_model_mem(void)
 	t_model *model;
 
 	model = malloc_if(sizeof(t_model), 1);
+	model->flags = 0;
 	model->root_group = new_group();
 	model->n_groups = 1;
 	return (model);
@@ -27,8 +28,8 @@ t_gl		*init_gl_mem(void)
 	t_gl	*gl;
 
 	gl = malloc_if(sizeof(t_gl), 1);
-	gl->root_frag_shdr = new_shader(FRAG);
-	gl->root_vert_shdr = new_shader(VERT);
+	gl->root_frag_shdr = new_shader(FRAG_SHDR);
+	gl->root_vert_shdr = new_shader(VERT_SHDR);
 	gl->curr_frag_shdr = gl->root_frag_shdr;
 	gl->curr_vert_shdr = gl->root_vert_shdr;
 	gl->vao = malloc_if(sizeof(GLuint), 1);

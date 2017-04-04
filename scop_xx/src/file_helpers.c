@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:36:57 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 16:10:33 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 22:08:18 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int			get_extension(const char *file_name)
 	if (file_extension)
 	{
 		if (ft_strncmp(file_extension, ".frag", 4) == 0)
-			return (FRAG);
+			return (FRAG_SHDR);
 		if (ft_strncmp(file_extension, ".vert", 4) == 0)
-			return (VERT);
+			return (VERT_SHDR);
 	}
 	return (NONE);
 }

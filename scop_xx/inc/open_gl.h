@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 16:59:37 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 23:48:05 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 enum					e_SHADER_TYPES
 {
 	NONE,
-	FRAG,
-	VERT,
+	FRAG_SHDR,
+	VERT_SHDR,
 };
 
 typedef struct			s_shader_lst

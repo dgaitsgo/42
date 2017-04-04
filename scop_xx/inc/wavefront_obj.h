@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:25:05 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 20:25:27 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/04 03:03:15 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ typedef struct	s_array_group t_array_group;
 enum			e_flags
 {
 	NEGATIVE_INDEXES,
-	W_FACE_DEFINED,
-	W_TEXTURE_DEFINED,
-	UNDEFINED_MATERIAL,
-	UNDEFINED_TEXT_COORDS,
-	UNDEFINED_NORMALS,
+	ONLY_GEOMETRY,
+	ALL_VERTS_DEFINED,
+	TEXT_COORDS_DEFINED,
+	NORMALS_DEFINED,
 	MTL_ASSOCIATED,
 };
 
@@ -79,6 +78,7 @@ typedef	struct				s_group_lst
 	t_face_lst				*root_face;
 	t_face_lst				*curr_face;
 	long					byte_marker;
+	int						quads;
 	int						n_vertices;
 	int						n_text_coords;
 	int						n_normals;
@@ -86,8 +86,19 @@ typedef	struct				s_group_lst
 	struct s_group_lst		*next;
 }							t_group_lst;
 
+typedef	struct				s_shader_state
+{
+	int						smooth_shading;
+	char					*mtl;
+	int						beg;
+	int						end;
+	struct s_shader_state	*next;
+}							t_shader_state;
+
 typedef struct				s_obj_data
 {
+	int						quads;
+
 	t_vector				*vertices;
 	t_vector				*text_coords;
 	t_vector				*normals;
@@ -100,9 +111,12 @@ typedef struct				s_obj_data
 	int						n_text_coords;
 	int						n_normals;
 
+	int						n_faces;
 	int						n_vert_indices;
 	int						n_text_indices;
 	int						n_norm_indices;
+
+	t_shader_state			*shdr_state;
 }							t_obj_data;
 
 typedef struct				s_model

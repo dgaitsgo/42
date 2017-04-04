@@ -6,12 +6,19 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:05:56 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 16:59:16 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 22:06:27 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __PARSE_MESH_H
 # define __PARSE_MESH_H
+
+enum			e_VERTEX_TYPES
+{
+	VERT_V,
+	TEXT_V,
+	NORM_V,
+};
 
 typedef struct	s_getline
 {

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 19:29:49 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/03 22:07:27 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void				load_shaders(t_gl *gl)
 	while ((file = readdir(dir)) != NULL)
 	{
 		ext = get_extension(file->d_name);
-		if (ext == FRAG)
+		if (ext == FRAG_SHDR)
 		{
 			gl->curr_frag_shdr->source = file_to_string(SHADER_PATH, file->d_name);
 			gl->curr_frag_shdr->previous = gl->curr_frag_shdr;
-			gl->curr_frag_shdr->next = new_shader(FRAG);
+			gl->curr_frag_shdr->next = new_shader(FRAG_SHDR);
 			gl->curr_frag_shdr = gl->curr_frag_shdr->next;
 		}
-		else if (ext == VERT)
+		else if (ext == VERT_SHDR)
 		{
 			gl->curr_vert_shdr->source = file_to_string(SHADER_PATH, file->d_name);
 			gl->curr_vert_shdr->previous = gl->curr_vert_shdr;
-			gl->curr_vert_shdr->next = new_shader(VERT);
+			gl->curr_vert_shdr->next = new_shader(VERT_SHDR);
 			gl->curr_vert_shdr = gl->curr_vert_shdr->next;
 		}
 	}

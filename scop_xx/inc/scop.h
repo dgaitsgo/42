@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 16:12:37 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/04 03:03:28 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_scop
 	t_gl			*gl;
 }					t_scop;
 
+void				push_face(t_obj_data *data, char *line, int flags);
 void				fill_model_arrays(t_model *model);
 t_gl				*init_gl_mem(void);
 void				init_array_memory(t_model *m);
