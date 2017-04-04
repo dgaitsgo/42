@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 22:07:27 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/04 19:22:36 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,49 +47,6 @@ void				load_shaders(t_gl *gl)
 	}
 }
 
-void		list_to_table(t_gl *gl, t_model *model)
-{
-	return ;
-}
-
-void	fill_index_arrays(t_array_group *arr_groups, t_face_lst *face, int i_group, int i_face)
-{
-	arr_groups[i_group].vert_indexes[i_face + 0] = face->v[0];
-	arr_groups[i_group].vert_indexes[i_face + 1] = face->v[1];
-	arr_groups[i_group].vert_indexes[i_face + 2] = face->v[2];
-	arr_groups[i_group].text_indexes[i_face + 0] = face->t[0];
-	arr_groups[i_group].text_indexes[i_face + 1] = face->t[1];
-	arr_groups[i_group].text_indexes[i_face + 2] = face->t[2];
-	arr_groups[i_group].norm_indexes[i_face + 0] = face->n[0];
-	arr_groups[i_group].norm_indexes[i_face + 1] = face->n[1];
-	arr_groups[i_group].norm_indexes[i_face + 2] = face->n[2];
-}
-
-void				gen_index_array(t_model *model)
-{
-	t_group_lst		*group;
-	t_face_lst		*face;
-	int				i_face;
-	int				i_group;
-
-	i_face = 0;
-	i_group = 0;
-	group = model->root_group;
-	while (group != NULL)
-	{
-		face = group->root_face->next;
-		i_face = 0;
-		while (face != NULL)
-		{
-			//fill_index_arrays(model->arr_groups, face, i_group, i_face);
-			face = face->next;
-			i_face += 3;
-		}
-		i_group++;
-		group = group->next;
-	}
-}
-
 int			main(int argc, char **argv)
 {
 	t_scop	scop;
@@ -104,10 +61,6 @@ int			main(int argc, char **argv)
 		scop.gl = init_gl_mem();
 		load_shaders(scop.gl);
 		load_obj(scop.model, fd);
-		//init_array_memory(scop.model);
-		//gen_index_array(scop.model);
-		//fill_model_arrays(scop.model);
-		//check_indexes(scop.model);
 		init_window(&scop.window, argv[1], 400, 400);
 		init_open_gl();
 		put_image(&scop);
