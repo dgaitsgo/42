@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:23:09 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/04 19:21:51 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/05 00:24:13 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ t_obj_data	**fetch_obj_data_mem(t_group_lst *group, int n_groups)
 		memset(d[i]->vert_indices, 0, 4 * group->n_faces);
 		memset(d[i]->text_indices, 0, 4 * group->n_faces);
 		memset(d[i]->norm_indices, 0, 4 * group->n_faces);
+		printf("%d %d\n", group->n_vertices, group->n_normals);
 		d[i]->quads = group->quads;
 		d[i]->n_faces = -4;
 		d[i]->n_vertices = -1;
