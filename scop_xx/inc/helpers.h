@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:52:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/02 23:57:41 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/05 03:27:43 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,8 @@ void		free_if(void *ptr);
 void		multi_free_4(void *addr1, void *addr2, void *addr3, void *addr4);
 int			get_extension(const char *file_name);
 char		*file_to_string(const char *path, const char *file);
+int			count_char(char c, char *s);
+void		set_to_zero3(int *a, int *b, int *c);
+void		set_to_zero4(int *a, int *b, int *c, int *d);
 
 #endif

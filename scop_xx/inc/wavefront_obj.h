@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:25:05 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/04 19:24:16 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/05 03:25:53 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,20 @@ typedef	struct				s_shader_state
 	struct s_shader_state	*next;
 }							t_shader_state;
 
+typedef	struct				s_vertex_table
+{
+	GLuint					vbo;
+	int						i_pos;
+	int						i_text;
+	int						i_norm;
+	float					*position;
+	float					*text_coords;
+	float					*normals;
+}							t_vertex_table;
+
 typedef struct				s_obj_data
 {
-	t_shader_state			*shdr_state;
+//	t_shader_state			*shdr_state;
 	int						quads;
 
 	t_vector				*vertices;
@@ -90,6 +101,7 @@ typedef struct				s_model
 	int						n_groups;
 	t_group_lst				*root_group;
 	t_obj_data				**obj_data;
+	t_vertex_table			*vertex_tables;
 	GLuint					vao;
 }							t_model;
 

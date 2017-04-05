@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:23:09 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/05 00:24:13 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/05 04:27:41 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ ALL_DEFINED			- many complete		40/30/20/30 19/53/214/30 3592/359/12
 TEXT_UNDEFINED 		- texts non defined	40//34 234//234 34/234/21
 */
 
-
-int			count_char(char c, char *s)
-{
-	int		i;
-	int		n;
-	
-	n = 0;
-	i = 0;
-	while (s[i] != 0)
-	{
-		if (s[i] == c)
-			n++;
-		i++;
-	}
-	return (n);
-}
 
 t_group_lst		*update_group(t_group_lst *group,
 								int *n_groups)
@@ -107,53 +91,6 @@ void		count_group_data(FILE *fd, t_group_lst *group, int *n_groups, int *flags)
 				group->quads++;
 		}
 	}
-}
-
-void		check_groups(t_group_lst *group)
-{
-	int	i;
-
-	i = 0;
-	while (group != NULL)
-	{
-		printf("Group %d\n", i);
-		printf("n normals =\t%d\n", group->n_normals);
-		printf("n vertices =\t%d\n", group->n_vertices);
-		printf("n text coords = %d\n", group->n_text_coords);
-		i++;
-		group = group->next;
-	}
-}
-
-t_obj_data	**fetch_obj_data_mem(t_group_lst *group, int n_groups)
-{
-	t_obj_data **d;
-	int			i;
-
-	i = 0;
-	d = malloc_if(sizeof(t_obj_data *), n_groups);
-	while (i < n_groups)
-	{
-		d[i] = malloc_if(sizeof(t_obj_data), 1);
-		d[i]->vertices = malloc_if(sizeof(t_vector), group->n_vertices);
-		d[i]->text_coords = malloc_if(sizeof(t_vector), group->n_text_coords);
-		d[i]->normals = malloc_if(sizeof(t_vector), group->n_normals);
-		d[i]->vert_indices = malloc_if(sizeof(int), 4 * group->n_faces);
-		d[i]->text_indices = malloc_if(sizeof(int), 4 * group->n_faces);
-		d[i]->norm_indices = malloc_if(sizeof(int), 4 * group->n_faces);
-		memset(d[i]->vert_indices, 0, 4 * group->n_faces);
-		memset(d[i]->text_indices, 0, 4 * group->n_faces);
-		memset(d[i]->norm_indices, 0, 4 * group->n_faces);
-		printf("%d %d\n", group->n_vertices, group->n_normals);
-		d[i]->quads = group->quads;
-		d[i]->n_faces = -4;
-		d[i]->n_vertices = -1;
-		d[i]->n_text_coords = -1;
-		d[i]->n_normals = -1;
-		group = group->next;
-		i++;
-	}
-	return (d);
 }
 
 void		push_vertex(t_obj_data *data, char *line)
@@ -219,6 +156,7 @@ void		check_flags(int flags)
 		ft_putstr ("f %d/%d/ %d/%d/ %d/%d/ %d/%d/\n");
 }
 
+
 void		load_obj(t_model *model, FILE *fd)
 {
 	t_group_lst		*group;
@@ -230,4 +168,6 @@ void		load_obj(t_model *model, FILE *fd)
 //	check_groups(model->root_group);
 	fseek(fd, 0, SEEK_SET);	
 	write_in_data(model->obj_data, fd, model->flags);
+	model->vertex_tables = fetch_vertex_table_mem(model->obj_data, model->n_groups, model->flags);
+	order_data(model->vertex_tables, model->obj_data, model->n_groups, model->flags);
 }

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/04 23:31:10 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/05 04:40:07 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int			main(int argc, char **argv)
 		scop.gl = init_gl_mem();
 		load_shaders(scop.gl);
 		load_obj(scop.model, fd);
+		printf("okay???\n");
 		init_window(&scop.window, argv[1], 400, 400);
+		printf("window???\n");
 		init_open_gl();
 		put_image(&scop);
 	}

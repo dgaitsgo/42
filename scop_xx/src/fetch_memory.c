@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:37:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/04 19:25:02 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/05 04:11:36 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,66 @@ t_gl		*init_gl_mem(void)
 	gl->curr_vert_shdr = gl->root_vert_shdr;
 	gl->vao = malloc_if(sizeof(GLuint), 1);
 	return (gl);
+}
+
+t_vertex_table	*fetch_vertex_table_mem(t_obj_data **data,
+				int n_groups, int flags)
+{
+	t_vertex_table	*v;
+	int				i;
+
+	i = 0;
+	v = malloc_if(sizeof(t_vertex_table), n_groups);
+	while (i < n_groups)
+	{
+		v[i].position = malloc_if(sizeof(float), 3 * data[i]->n_vertices + data[i]->quads * 3);
+		memset(v[i].position, 0, data[i]->n_vertices + data[i]->quads * 3);
+		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
+		{
+			v[i].text_coords = malloc_if(sizeof(float), 3 * data[i]->n_text_coords + data[i]->quads * 3);
+			memset(v[i].text_coords, 0, data[i]->n_vertices + data[i]->quads * 3);
+		}
+		else
+			v[i].text_coords = NULL;
+		if (BIT_CHECK(flags, NORMALS_DEFINED))
+		{
+			v[i].normals = malloc_if(sizeof(float), 3 * data[i]->n_normals + data[i]->quads * 3);
+			memset(v[i].normals, 0, data[i]->n_vertices + data[i]->quads * 3);
+		}
+		else
+			v[i].normals = NULL;
+		set_to_zero3(&v[i].i_pos, &v[i].i_text, &v[i].i_norm);
+		i++;
+	}
+	return (v);
+}
+
+t_obj_data	**fetch_obj_data_mem(t_group_lst *group, int n_groups)
+{
+	t_obj_data **d;
+	int			i;
+
+	i = 0;
+	d = malloc_if(sizeof(t_obj_data *), n_groups);
+	while (i < n_groups)
+	{
+		d[i] = malloc_if(sizeof(t_obj_data), 1);
+		d[i]->vertices = malloc_if(sizeof(t_vector), group->n_vertices);
+		d[i]->text_coords = malloc_if(sizeof(t_vector), group->n_text_coords);
+		d[i]->normals = malloc_if(sizeof(t_vector), group->n_normals);
+		d[i]->vert_indices = malloc_if(sizeof(int), 4 * group->n_faces);
+		d[i]->text_indices = malloc_if(sizeof(int), 4 * group->n_faces);
+		d[i]->norm_indices = malloc_if(sizeof(int), 4 * group->n_faces);
+		memset(d[i]->vert_indices, 0, 4 * group->n_faces);
+		memset(d[i]->text_indices, 0, 4 * group->n_faces);
+		memset(d[i]->norm_indices, 0, 4 * group->n_faces);
+		d[i]->quads = group->quads;
+		d[i]->n_faces = -4;
+		d[i]->n_vertices = -1;
+		d[i]->n_text_coords = -1;
+		d[i]->n_normals = -1;
+		group = group->next;
+		i++;
+	}
+	return (d);
 }
