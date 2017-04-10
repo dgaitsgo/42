@@ -6,17 +6,17 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/05 04:39:17 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/10 17:50:15 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-float vertices[] = {
-	0.0f, 0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	-0.5f, -0.5f, 0.0f,
-};
+//float vertices[] = {
+//	0.0f, 0.5f, 0.0f,
+//	0.5f, -0.5f, 0.0f,
+//	-0.5f, -0.5f, 0.0f,
+//};
 
 const char* vertexSource =
 	"#version 410\n"
@@ -62,14 +62,18 @@ void	status_gl(const char *message, int line, char *file)
 
 void	setup_render(t_scop *display)
 {	
+	float *vertices = display->model->vertex_tables->position;
+
 	GLuint err;
 	GLuint vbo;
 	GLuint vao;
+	printf("n vertes = %d\n", display->model->vertex_tables->i_pos);
 	/* Pass vertices to Graphics Card*/
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * display->model->vertex_tables->i_pos, vertices, GL_STATIC_DRAW);
 	//status_gl("Got some vbos", __LINE__, __FILE__);
 
 	glGenVertexArrays(1, &vao);
@@ -101,11 +105,11 @@ void	setup_render(t_scop *display)
 	glAttachShader(shaderProgram, fragmentShader);
 //	glBindFragDataLocation(shaderProgram, 0, "outColor");
 	glLinkProgram(shaderProgram);
-//	glUseProgram(shaderProgram);
+	glUseProgram(shaderProgram);
 	status_gl("generated and linked nukka", __LINE__, __FILE__);
 
 	/* Attach dem' VAOs*/
-	//GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 	//status_gl("A = All them VAOs can getit", __LINE__, __FILE__);
 	//status_gl("C = All them VAOs can getit", __LINE__, __FILE__);
 

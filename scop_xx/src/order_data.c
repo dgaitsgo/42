@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 02:22:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/05 04:36:34 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/10 17:25:59 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,23 @@ void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 
 		//it's a quad
 		//make second triangle
-		if (temp_i.w != 0)
+		if ((int)temp_i.w != 0)
 		{
-			pos[v->i_pos + 9] = pos[v->i_pos + 3];
-			pos[v->i_pos + 10] = pos[v->i_pos + 4];
-			pos[v->i_pos + 11] = pos[v->i_pos + 5];
+			pos[v->i_pos + 9] = pos[v->i_pos + 0];
+			pos[v->i_pos + 10] = pos[v->i_pos + 1];
+			pos[v->i_pos + 11] = pos[v->i_pos + 2];
 
-			pos[v->i_pos + 12] = pos[v->i_pos + 6];
-			pos[v->i_pos + 13] = pos[v->i_pos + 7];
-			pos[v->i_pos + 14] = pos[v->i_pos + 8];
+			pos[v->i_pos + 12] = pos[v->i_pos + 3];
+			pos[v->i_pos + 13] = pos[v->i_pos + 4];
+			pos[v->i_pos + 14] = pos[v->i_pos + 5];
 
 			pos[v->i_pos + 15] = data->vertices[(int)temp_i.w + offset].z;
 			pos[v->i_pos + 16] = data->vertices[(int)temp_i.w + offset].y;
 			pos[v->i_pos + 17] = data->vertices[(int)temp_i.w + offset].z;
-			v->i_pos += 8;
+			v->i_pos += 9;
 		}
 		i_index += 4;
-		v->i_pos += 8;
+		v->i_pos += 9;
 	}
 }
 
@@ -78,7 +78,7 @@ void	check_out_floats(float *data, int n)
 		data[i + 0], data[i + 1], data[i + 2],
 		data[i + 3], data[i + 4], data[i + 5],
 		data[i + 6], data[i + 7], data[i + 8]);
-		i += 8;
+		i += 9;
 	}
 }
 
