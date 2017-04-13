@@ -60,8 +60,11 @@ int			main(int argc, char **argv)
 		scop.model = init_model_mem();
 		scop.gl = init_gl_mem();
 		load_shaders(scop.gl);
+		printf("%s : Loaded shaders\n", __FILE__);
 		load_obj(scop.model, fd);
+		printf("%s : Loaded obj\n", __FILE__);
 		init_window(&scop.window, argv[1], 1000, 600);
+		printf("%s : Loaded Window\n", __FILE__);
 		init_open_gl();
 		put_image(&scop);
 	}
