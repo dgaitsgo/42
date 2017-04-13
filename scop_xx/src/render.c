@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/13 01:02:58 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/13 17:19:24 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,31 @@ void	status_gl(const char *message, int line, char *file)
 void	setup_render(t_scop *display)
 {	
 	GLfloat *vertices = display->model->vertex_tables->position;
+	int		n_faces = display->model->vertex_tables->i_pos;
 
 	GLuint err;
 	GLuint vbo = 0;
 	GLuint vao = 0;
 
-	/* Generate VBOs */
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GL_FLOAT) * display->model->vertex_tables->i_pos, vertices, GL_STATIC_DRAW);
-	printf("\nHow many floats to open GL: %d\n", display->model->vertex_tables->i_pos);
-	status_gl("Got some vbos", __LINE__, __FILE__);
-
 	/* Gen VAOs*/
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	//glEnableVertexAttribArray(0);
+	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	status_gl("Got some vbaos", __LINE__, __FILE__);
+
+	/* Generate VBOs */
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * n_faces, vertices, GL_STATIC_DRAW);
+	status_gl("Got some vaos", __LINE__, __FILE__);
+
+	glEnableVertexAttribArray(0);
+	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	printf("\nHow many floats to open GL: %d\n", display->model->vertex_tables->i_pos);
+	status_gl("Got some vbos", __LINE__, __FILE__);
 
 	/* Vertex shader */	
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -125,7 +131,12 @@ void	setup_render(t_scop *display)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(shaderProgram);
 		glBindVertexArray(vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, n_faces / 3);
+		if ((err = glGetError()))
+		{
+			printf("GL %s, l: %d failed: %x\n", __func__, __LINE__, err);
+			exit(-1);
+		}
 		while (SDL_PollEvent(&SDL_EVENT))
 		{
 			if (SDL_EVENT.type == SDL_QUIT ||
