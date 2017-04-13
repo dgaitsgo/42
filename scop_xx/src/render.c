@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/10 17:50:15 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/13 01:02:58 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 //	-0.5f, -0.5f, 0.0f,
 //};
 
-const char* vertexSource =
+const char *vertexSource =
 	"#version 410\n"
 	"in vec3 vp;"
 	"void main () {"
 	"  gl_Position = vec4 (vp, 1.0);"
 	"}";
 
-const char* fragmentSource =
+const char *fragmentSource =
 	"#version 410\n"
 	"out vec4 frag_colour;"
 	"void main () {"
@@ -54,7 +54,7 @@ void	status_gl(const char *message, int line, char *file)
 	if ((err = glGetError()) != GL_NO_ERROR)
 	{
 		printf("Error : %d at  %d, %s\n", err, line, file);
-		//exit(1);
+		exit(1);
 	}
 	else
 		printf("Succeded : %s\n", message);
@@ -67,26 +67,28 @@ void	setup_render(t_scop *display)
 	GLuint err;
 	GLuint vbo;
 	GLuint vao;
-	printf("n vertes = %d\n", display->model->vertex_tables->i_pos);
-	/* Pass vertices to Graphics Card*/
 
+	/* Generate VBOs */
 	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * display->model->vertex_tables->i_pos, vertices, GL_STATIC_DRAW);
-	//status_gl("Got some vbos", __LINE__, __FILE__);
+	printf("\nHow many floats to open GL: %d\n", display->model->vertex_tables->i_pos);
+	status_gl("Got some vbos", __LINE__, __FILE__);
 
+	/* Pass vertices to Graphics Card*/
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	//status_gl("Got some vbos", __LINE__, __FILE__);
+	status_gl("Got some vbaos", __LINE__, __FILE__);
 
 	/* Vertex shader */	
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
 	glCompileShader(vertexShader);
-	//status_gl("Vertex shadezzz", __LINE__, __FILE__);
+	status_gl("Vertex shadezzz", __LINE__, __FILE__);
+
 
 	/* Fragment shader*/
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);

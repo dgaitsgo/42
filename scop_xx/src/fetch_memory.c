@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:37:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/05 04:11:36 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/13 00:39:08 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,28 @@ t_vertex_table	*fetch_vertex_table_mem(t_obj_data **data,
 {
 	t_vertex_table	*v;
 	int				i;
+	int				total_points;
 
 	i = 0;
 	v = malloc_if(sizeof(t_vertex_table), n_groups);
 	while (i < n_groups)
 	{
-		v[i].position = malloc_if(sizeof(float), 3 * data[i]->n_vertices + data[i]->quads * 3);
-		memset(v[i].position, 0, data[i]->n_vertices + data[i]->quads * 3);
+		//printf("N FACES = %d\n", data[i]->n_faces);
+		total_points = 3 * data[i]->quads + ((data[i]->n_faces + 4) / 4) * 9;
+		//printf("mallocing : = %d\n", total_points);
+		v[i].position = malloc_if(sizeof(float), total_points);
+		memset(v[i].position, 0, total_points);
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
 		{
-			v[i].text_coords = malloc_if(sizeof(float), 3 * data[i]->n_text_coords + data[i]->quads * 3);
-			memset(v[i].text_coords, 0, data[i]->n_vertices + data[i]->quads * 3);
+			v[i].text_coords = malloc_if(sizeof(float), total_points);
+			memset(v[i].text_coords, 0, total_points);
 		}
 		else
 			v[i].text_coords = NULL;
 		if (BIT_CHECK(flags, NORMALS_DEFINED))
 		{
-			v[i].normals = malloc_if(sizeof(float), 3 * data[i]->n_normals + data[i]->quads * 3);
-			memset(v[i].normals, 0, data[i]->n_vertices + data[i]->quads * 3);
+			v[i].normals = malloc_if(sizeof(float), total_points);
+			memset(v[i].normals, 0, total_points);
 		}
 		else
 			v[i].normals = NULL;

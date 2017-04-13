@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 02:22:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/10 17:25:59 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/12 23:52:13 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 	int			offset;
 	int			i_index;
 
-	i_index = 0;
+	i_index = -4;
 	pos = v->position;
 	offset = sign ? 0 : data->n_vertices;
+	v->i_pos = -9;
 	printf("n vert indices = %d\n", data->n_faces);
 	while (i_index < data->n_faces)
 	{
+		v->i_pos += 9;
+		i_index += 4;
 		extract_indices(&temp_i, data->vert_indices, i_index, sign);
-		printf("%f, %f, %f\n", temp_i.x, temp_i.y, temp_i.z);
+		//printf("%f, %f, %f\n", temp_i.x, temp_i.y, temp_i.z);
 		pos[v->i_pos + 0] = data->vertices[(int)temp_i.x + offset].x;
 		pos[v->i_pos + 1] = data->vertices[(int)temp_i.x + offset].y;
 		pos[v->i_pos + 2] = data->vertices[(int)temp_i.x + offset].z;
@@ -49,8 +52,9 @@ void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 
 		//it's a quad
 		//make second triangle
-		if ((int)temp_i.w != 0)
+		if (!(temp_i.w < 0))
 		{
+			//printf("shouldn't fall here\n");
 			pos[v->i_pos + 9] = pos[v->i_pos + 0];
 			pos[v->i_pos + 10] = pos[v->i_pos + 1];
 			pos[v->i_pos + 11] = pos[v->i_pos + 2];
@@ -64,9 +68,9 @@ void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 			pos[v->i_pos + 17] = data->vertices[(int)temp_i.w + offset].z;
 			v->i_pos += 9;
 		}
-		i_index += 4;
-		v->i_pos += 9;
 	}
+//	if (v->i_pos != 0)
+		v->i_pos += 9;
 }
 
 void	check_out_floats(float *data, int n)
@@ -92,7 +96,9 @@ void	order_data(t_vertex_table *v, t_obj_data **data, int n_groups, int flags)
 	while (i < n_groups)
 	{
 		order_position(&v[i], data[i], sign);
-		check_out_floats(v[i].position, 3 * data[i]->n_vertices + data[i]->quads * 3);
+		printf("quads = %d\n", data[i]->quads);
+		printf("vertices = %d\n", v[i].i_pos);
+		//check_out_floats(v[i].position, v[i].i_pos);
 	/*
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
   	
@@ -103,5 +109,5 @@ void	order_data(t_vertex_table *v, t_obj_data **data, int n_groups, int flags)
 	*/
 		i++;
 	}
-	printf("makes it out??\n");
+	printf("finished ordering data\n");
 }
