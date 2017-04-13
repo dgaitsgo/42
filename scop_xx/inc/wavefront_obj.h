@@ -16,7 +16,7 @@
 #include "vector.h"
 #include "open_gl.h"
 
-typedef struct	s_array_group t_array_group;
+//typedef struct	s_array_group t_array_group;
 
 enum			e_flags
 {

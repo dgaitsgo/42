@@ -34,7 +34,6 @@ typedef struct			s_shader_lst
 	struct s_shader_lst	*previous;
 }						t_shader_lst;
 
-
 typedef struct			s_array_group
 {	
 	GLuint				vbo;

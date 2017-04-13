@@ -29,7 +29,7 @@ const char *fragmentSource =
 	"#version 410\n"
 	"out vec4 frag_colour;"
 	"void main () {"
-	"  frag_colour = vec4 (0.5, 0.5, 0.5, 1.0);"
+	"  frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
 	"}";
 
 void	check_shader_compile(GLuint shader_name)
@@ -62,24 +62,24 @@ void	status_gl(const char *message, int line, char *file)
 
 void	setup_render(t_scop *display)
 {	
-	float *vertices = display->model->vertex_tables->position;
+	GLfloat *vertices = display->model->vertex_tables->position;
 
 	GLuint err;
-	GLuint vbo;
-	GLuint vao;
+	GLuint vbo = 0;
+	GLuint vao = 0;
 
 	/* Generate VBOs */
 	glGenBuffers(1, &vbo);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * display->model->vertex_tables->i_pos, vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GL_FLOAT) * display->model->vertex_tables->i_pos, vertices, GL_STATIC_DRAW);
 	printf("\nHow many floats to open GL: %d\n", display->model->vertex_tables->i_pos);
 	status_gl("Got some vbos", __LINE__, __FILE__);
 
-	/* Pass vertices to Graphics Card*/
+	/* Gen VAOs*/
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	status_gl("Got some vbaos", __LINE__, __FILE__);
 
@@ -88,7 +88,6 @@ void	setup_render(t_scop *display)
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
 	glCompileShader(vertexShader);
 	status_gl("Vertex shadezzz", __LINE__, __FILE__);
-
 
 	/* Fragment shader*/
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -105,10 +104,8 @@ void	setup_render(t_scop *display)
 	GLuint shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertexShader);
 	glAttachShader(shaderProgram, fragmentShader);
-//	glBindFragDataLocation(shaderProgram, 0, "outColor");
 	glLinkProgram(shaderProgram);
-	glUseProgram(shaderProgram);
-	status_gl("generated and linked nukka", __LINE__, __FILE__);
+	status_gl("Linked shaders", __LINE__, __FILE__);
 
 	/* Attach dem' VAOs*/
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
