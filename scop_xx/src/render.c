@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/13 17:19:24 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/15 10:06:26 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 const char *vertexSource =
 	"#version 410\n"
 	"in vec3 vp;"
+	"uniform mat4 y_rotation;"
 	"void main () {"
-	"  gl_Position = vec4 (vp, 1.0);"
+	"  gl_Position = y_rotation * vec4(vp, 1.0);"
 	"}";
 
 const char *fragmentSource =
@@ -42,7 +43,7 @@ void	check_shader_compile(GLuint shader_name)
 	{
 		glGetShaderInfoLog(shader_name, 512, NULL, buffer);
 		printf("%s\n", buffer);
-		//exit(1);
+		exit(1);
 	}
 	free(buffer);
 }
@@ -62,8 +63,14 @@ void	status_gl(const char *message, int line, char *file)
 
 void	setup_render(t_scop *display)
 {	
-	GLfloat *vertices = display->model->vertex_tables->position;
-	int		n_faces = display->model->vertex_tables->i_pos;
+	GLfloat 	*vertices = display->model->vertex_tables->position;
+	int			n_faces = display->model->vertex_tables->i_pos;
+	t_matrix	y_rotation;
+	float		ry;
+
+	ry = 0.0f;
+	identity_matrix(y_rotation);
+	print_matrix(y_rotation);
 
 	GLuint err;
 	GLuint vbo = 0;
@@ -117,7 +124,10 @@ void	setup_render(t_scop *display)
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 	//status_gl("A = All them VAOs can getit", __LINE__, __FILE__);
 	//status_gl("C = All them VAOs can getit", __LINE__, __FILE__);
-
+	
+	GLint matrix_loc = glGetUniformLocation(shaderProgram, "y_rotation");
+	printf("matrix_ref == %d\n", matrix_loc);
+	status_gl("Matrix bound", __LINE__, __FILE__);
 
 	
 	int			quit;
@@ -146,6 +156,9 @@ void	setup_render(t_scop *display)
 				kill_sdl(&display->window);
 			}
 		}
+		ry += 0.02;
+		rotate_y(y_rotation, ry);
+		glUniformMatrix4fv(matrix_loc, 1, GL_FALSE, &y_rotation[0][0]);
 		SDL_GL_SwapWindow(SDL_WINDOW);
 	}
 }

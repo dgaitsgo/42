@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/05 03:30:21 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/15 09:54:14 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ $(SRC_DIR)/render.c \
 $(SRC_DIR)/file_helpers.c \
 $(SRC_DIR)/fetch_memory.c \
 $(SRC_DIR)/push_face.c \
+$(SRC_DIR)/matrix.c \
+$(SRC_DIR)/matrix_rotate.c \
 $(SRC_DIR)/order_data.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
