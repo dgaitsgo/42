@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/10 17:50:24 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/15 12:39:31 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <math.h>
 
 #include "window.h"
 #include "open_gl.h"
+#include "camera.h"
 #include "window.h"
 #include "macros.h"
 #include "wavefront_obj.h"
 #include "flags.h"
 #include "helpers.h"
 #include "libft.h"
+#include "ft_math.h"
 #include "parse_mesh.h"
 
 enum				e_file_types
@@ -38,8 +41,9 @@ enum				e_file_types
 typedef struct		s_scop
 {
 	WINDOW			window;
-	t_model			*model;	
+	t_model			*model;
 	t_gl			*gl;
+	t_camera		camera;
 }					t_scop;
 
 void				order_data(t_vertex_table *v, t_obj_data **data,

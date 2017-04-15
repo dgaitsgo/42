@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_rotate.c                                    :+:      :+:    :+:   */
+/*   perspective_matrix.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/15 09:46:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/15 11:13:08 by dgaitsgo         ###   ########.fr       */
+/*   Created: 2017/04/15 10:44:07 by dgaitsgo          #+#    #+#             */
+/*   Updated: 2017/04/15 12:41:49 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void		rotate_y(t_matrix ry, float y)
+void	perspective_matrix(t_matrix m)
 {
-	ry[0][0] = cos(y);
-	ry[0][1] = 0;
-	ry[0][2] = sin(y);
-	ry[0][3] = 0;
-	ry[1][0] = 0;
-	ry[1][1] = 1;
-	ry[1][2] = 0;
-	ry[1][3] = 0;
-	ry[2][0] = -sin(y);
-	ry[2][1] = 0;
-	ry[2][2] = cos(y);
-	ry[2][3] = 0;
-	ry[3][0] = 0;
-	ry[3][1] = 0;
-	ry[3][2] = 0;
-	ry[3][3] = 1;
+	float		z_range;
+	float		fov;
+
+	fov = calc_fov(FOV);
+	z_range = Z_NEAR - Z_FAR;
+	m[0][0] = 1.0f / (fov * ASPECT_RATIO);
+	m[0][1] = 0;
+	m[0][2] = 0;
+	m[0][3] = 0;
+	m[1][0] = 0;
+	m[1][1] = 1.0f / fov;
+	m[1][2] = 0;
+	m[1][3] = 0;
+	m[2][0] = 0;
+	m[2][1] = 0;
+	m[2][2] = (-Z_NEAR - Z_FAR) / z_range;
+	m[2][3] = 2 * Z_FAR * Z_NEAR / z_range;
+	m[3][0] = 0;
+	m[3][1] = 0;
+	m[3][2] = 1;
+	m[3][3] = 0;
 }

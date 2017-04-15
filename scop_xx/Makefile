@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/15 09:54:14 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/15 12:39:58 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,16 @@ $(SRC_DIR)/open_gl.c \
 $(SRC_DIR)/constructors.c \
 $(SRC_DIR)/parse_mesh.c \
 $(SRC_DIR)/helpers.c \
+$(SRC_DIR)/math.c \
 $(SRC_DIR)/render.c \
 $(SRC_DIR)/file_helpers.c \
 $(SRC_DIR)/fetch_memory.c \
 $(SRC_DIR)/push_face.c \
-$(SRC_DIR)/matrix.c \
-$(SRC_DIR)/matrix_rotate.c \
 $(SRC_DIR)/order_data.c \
+$(SRC_DIR)/matrix_rotate.c \
+$(SRC_DIR)/matrix.c \
+$(SRC_DIR)/perspective_matrix.c \
+$(SRC_DIR)/vector_constructors.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
@@ -43,6 +46,7 @@ $(INC_DIR)/flags.h \
 $(INC_DIR)/vector.h \
 $(INC_DIR)/wavefront_obj.h \
 $(INC_DIR)/window.h \
+$(INC_DIR)/ft_math.h \
 $(INC_DIR)/helpers.h \
 
 LIB_DIR = ./lib/libft

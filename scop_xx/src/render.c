@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/15 10:06:26 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/15 12:10:14 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ const char *vertexSource =
 	"#version 410\n"
 	"in vec3 vp;"
 	"uniform mat4 y_rotation;"
+	"uniform mat4 camera;"
 	"void main () {"
-	"  gl_Position = y_rotation * vec4(vp, 1.0);"
+	"  gl_Position = camera * y_rotation * vec4(vp, 1.0);"
 	"}";
 
 const char *fragmentSource =
@@ -66,11 +67,10 @@ void	setup_render(t_scop *display)
 	GLfloat 	*vertices = display->model->vertex_tables->position;
 	int			n_faces = display->model->vertex_tables->i_pos;
 	t_matrix	y_rotation;
+	t_matrix	model;
 	float		ry;
 
 	ry = 0.0f;
-	identity_matrix(y_rotation);
-	print_matrix(y_rotation);
 
 	GLuint err;
 	GLuint vbo = 0;
@@ -79,9 +79,6 @@ void	setup_render(t_scop *display)
 	/* Gen VAOs*/
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	//glEnableVertexAttribArray(0);
-	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	status_gl("Got some vbaos", __LINE__, __FILE__);
 
 	/* Generate VBOs */
@@ -91,7 +88,6 @@ void	setup_render(t_scop *display)
 	status_gl("Got some vaos", __LINE__, __FILE__);
 
 	glEnableVertexAttribArray(0);
-	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	printf("\nHow many floats to open GL: %d\n", display->model->vertex_tables->i_pos);
 	status_gl("Got some vbos", __LINE__, __FILE__);
@@ -121,12 +117,10 @@ void	setup_render(t_scop *display)
 	status_gl("Linked shaders", __LINE__, __FILE__);
 
 	/* Attach dem' VAOs*/
-	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
-	//status_gl("A = All them VAOs can getit", __LINE__, __FILE__);
-	//status_gl("C = All them VAOs can getit", __LINE__, __FILE__);
-	
-	GLint matrix_loc = glGetUniformLocation(shaderProgram, "y_rotation");
-	printf("matrix_ref == %d\n", matrix_loc);
+	//GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+
+	GLint model_shdr_ref = glGetUniformLocation(shaderProgram, "y_rotation");
+	GLint camera_shdr_ref = glGetUniformLocation(shaderProgram, "camera");
 	status_gl("Matrix bound", __LINE__, __FILE__);
 
 	
@@ -136,6 +130,7 @@ void	setup_render(t_scop *display)
 
 	window = &display->window;
 	quit = 0;
+	print_matrix(display->camera.perspective);
 	while (!quit)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -155,10 +150,37 @@ void	setup_render(t_scop *display)
 				quit = 1;
 				kill_sdl(&display->window);
 			}
+			if (KEY == SDLK_w)
+				;
+			//	move_forward();
+			if (KEY == SDLK_s)
+				;	
+			//move_backward();
+			if (KEY == SDLK_l)
+				;
+			//	move_left();
+			if (KEY == SDLK_r)
+				;
+			//	move_right();
+			/*
+			if (KEY == SDLK_KP_PLUS || KEY == SDLK_PLUS)
+				zoom_out();
+			if (KEY == SDLK_KP_MINUS || KEY == SDLK_MINUS)
+				zoom_out();
+			if (KEY == SDLK_LEFT)
+				tilt_left();
+			if (KEY == SDLK_RIGHT)
+				tilt_right();
+			if (KEY == SDLK_UP)
+				tilt_up();
+			if (KEY == SDLK_DOWN)
+				tilt_down();
+			*/
 		}
 		ry += 0.02;
 		rotate_y(y_rotation, ry);
-		glUniformMatrix4fv(matrix_loc, 1, GL_FALSE, &y_rotation[0][0]);
+		glUniformMatrix4fv(camera_shdr_ref, 1, GL_FALSE, &display->camera.perspective[0][0]);
+		glUniformMatrix4fv(model_shdr_ref, 1, GL_FALSE, &y_rotation[0][0]);
 		SDL_GL_SwapWindow(SDL_WINDOW);
 	}
 }

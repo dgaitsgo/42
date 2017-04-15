@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/13 01:03:35 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/15 11:29:52 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void				load_shaders(t_gl *gl)
 		}
 	}
 }
+void	setup_camera(t_camera *camera)
+{
+	perspective_matrix(camera->perspective);
+	set_vector(&camera->forward,0, 0, 1);
+	set_vector(&camera->up, 0, 1, 0);
+}
 
 int			main(int argc, char **argv)
 {
@@ -59,11 +65,12 @@ int			main(int argc, char **argv)
 			exit(1);
 		scop.model = init_model_mem();
 		scop.gl = init_gl_mem();
+		setup_camera(&scop.camera);
 		load_shaders(scop.gl);
 		printf("%s : Loaded shaders\n", __FILE__);
 		load_obj(scop.model, fd);
 		printf("%s : Loaded obj\n", __FILE__);
-		init_window(&scop.window, argv[1], 1000, 600);
+		init_window(&scop.window, argv[1], (int)WIN_WIDTH, (int)WIN_HEIGHT);
 		printf("%s : Loaded Window\n", __FILE__);
 		init_open_gl();
 		put_image(&scop);

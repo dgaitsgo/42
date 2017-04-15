@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_rotate.c                                    :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/15 09:46:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/15 11:13:08 by dgaitsgo         ###   ########.fr       */
+/*   Created: 2017/04/15 12:35:08 by dgaitsgo          #+#    #+#             */
+/*   Updated: 2017/04/15 12:40:37 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void		rotate_y(t_matrix ry, float y)
+float	in_radians(float degrees)
 {
-	ry[0][0] = cos(y);
-	ry[0][1] = 0;
-	ry[0][2] = sin(y);
-	ry[0][3] = 0;
-	ry[1][0] = 0;
-	ry[1][1] = 1;
-	ry[1][2] = 0;
-	ry[1][3] = 0;
-	ry[2][0] = -sin(y);
-	ry[2][1] = 0;
-	ry[2][2] = cos(y);
-	ry[2][3] = 0;
-	ry[3][0] = 0;
-	ry[3][1] = 0;
-	ry[3][2] = 0;
-	ry[3][3] = 1;
+	float pi;
+
+	pi = 3.14159;
+	return (degrees * (pi / 180));
+}
+
+float calc_fov(float theta)
+{
+	return (tan(in_radians(theta / 2.0f)));
 }
