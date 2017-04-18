@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/18 19:13:55 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/18 21:23:00 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ const char *vertexSource =
 	"uniform mat4 persp;"
 	"uniform vec4 trans;"
 	"void main () {"
-	"  gl_Position = trans + y_rotation * vec4(vp, 1.0);"
+	"  gl_Position = (trans + y_rotation * vec4(vp, 1.0));"
 	"}";
 
 const char *fragmentSource =
@@ -90,7 +90,6 @@ void	setup_render(t_scop *display)
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	printf("\nHow many floats to open GL: %d\n", display->model->vertex_tables->i_pos);
 	status_gl("Got some vbos", __LINE__, __FILE__);
 
 	/* Vertex shader */	
@@ -122,7 +121,7 @@ void	setup_render(t_scop *display)
 
 	GLint model_shdr_ref = glGetUniformLocation(shaderProgram, "y_rotation");
 	GLint camera_shdr_ref = glGetUniformLocation(shaderProgram, "persp");
-	status_gl("Matrix bound", __LINE__, __FILE__);
+	status_gl("Uniforms bound", __LINE__, __FILE__);
 
 	
 	int			quit;
@@ -155,13 +154,13 @@ void	setup_render(t_scop *display)
 				kill_sdl(&display->window);
 			}
 			if (KEY == SDLK_w)
-				translation[Z] += 0.04f;
+				translation[Z] -= 0.02f;
 			if (KEY == SDLK_s)
-				translation[Z] -= 0.04f;
+				translation[Z] += 0.02f;
 			if (KEY == SDLK_a)
-				translation[X] += 0.04f;
+				translation[X] += 0.02f;
 			if (KEY == SDLK_d)
-				translation[X] -= 0.04f;
+				translation[X] -= 0.02f;
 			/*
 			if (KEY == SDLK_KP_PLUS || KEY == SDLK_PLUS)
 				zoom_out();
