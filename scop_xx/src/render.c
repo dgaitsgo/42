@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/15 12:10:14 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/18 19:13:55 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ const char *vertexSource =
 	"#version 410\n"
 	"in vec3 vp;"
 	"uniform mat4 y_rotation;"
-	"uniform mat4 camera;"
+	"uniform mat4 persp;"
+	"uniform vec4 trans;"
 	"void main () {"
-	"  gl_Position = camera * y_rotation * vec4(vp, 1.0);"
+	"  gl_Position = trans + y_rotation * vec4(vp, 1.0);"
 	"}";
 
 const char *fragmentSource =
@@ -120,14 +121,17 @@ void	setup_render(t_scop *display)
 	//GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 
 	GLint model_shdr_ref = glGetUniformLocation(shaderProgram, "y_rotation");
-	GLint camera_shdr_ref = glGetUniformLocation(shaderProgram, "camera");
+	GLint camera_shdr_ref = glGetUniformLocation(shaderProgram, "persp");
 	status_gl("Matrix bound", __LINE__, __FILE__);
 
 	
 	int			quit;
 	WINDOW		*window;
 	GLuint		vertexbuffer;
+	float		translation[4];
 
+	GLint trans_shdr_ref = glGetUniformLocation(shaderProgram, "trans");
+	bzero(&translation, 4);
 	window = &display->window;
 	quit = 0;
 	print_matrix(display->camera.perspective);
@@ -151,17 +155,13 @@ void	setup_render(t_scop *display)
 				kill_sdl(&display->window);
 			}
 			if (KEY == SDLK_w)
-				;
-			//	move_forward();
+				translation[Z] += 0.04f;
 			if (KEY == SDLK_s)
-				;	
-			//move_backward();
-			if (KEY == SDLK_l)
-				;
-			//	move_left();
-			if (KEY == SDLK_r)
-				;
-			//	move_right();
+				translation[Z] -= 0.04f;
+			if (KEY == SDLK_a)
+				translation[X] += 0.04f;
+			if (KEY == SDLK_d)
+				translation[X] -= 0.04f;
 			/*
 			if (KEY == SDLK_KP_PLUS || KEY == SDLK_PLUS)
 				zoom_out();
@@ -179,6 +179,7 @@ void	setup_render(t_scop *display)
 		}
 		ry += 0.02;
 		rotate_y(y_rotation, ry);
+		glUniform4fv(trans_shdr_ref, 1, &translation[0]);
 		glUniformMatrix4fv(camera_shdr_ref, 1, GL_FALSE, &display->camera.perspective[0][0]);
 		glUniformMatrix4fv(model_shdr_ref, 1, GL_FALSE, &y_rotation[0][0]);
 		SDL_GL_SwapWindow(SDL_WINDOW);
