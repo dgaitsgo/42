@@ -33,13 +33,13 @@ void			kill_sdl(WINDOW *window)
 {
 	SDL_Quit();
 	exit(0);
+	free(window);
 }
 
 void			poll_events(t_scop *display)
 {
 	int			quit;
 	WINDOW		*window;
-	GLuint		vertexbuffer;
 
 	window = &display->window;
 	quit = 0;

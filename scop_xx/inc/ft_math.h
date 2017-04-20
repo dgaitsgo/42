@@ -13,7 +13,7 @@
 #ifndef __FT_MATH_H
 # define __FT_MATH_H
 
-float	ft_in_radians(float degrees);
+float	in_radians(float degrees);
 float	calc_fov(float theta);
 
 #endif

@@ -62,7 +62,7 @@ $(NAME): $(OBJ_FILES)
 	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIB_DIR) -lft -F/Library/Frameworks -framework SDL2 -framework OpenGL
 
 %.o:%.c $(INC_FILES)
-	gcc -c -I$(INC_DIR) $< -o $@
+	gcc -c $(FLAGS) -I$(INC_DIR) $< -o $@
 
 clean:
 	make -C ./lib/libft/ clean

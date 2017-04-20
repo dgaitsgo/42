@@ -21,7 +21,6 @@ void				load_shaders(t_gl *gl)
 {
 	DIR				*dir;
 	struct dirent	*file;		
-	int				fd;
 	int				ext;
 
 	/*Should check flags if at least one of each type of shader is present*/

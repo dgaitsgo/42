@@ -23,9 +23,11 @@ const char *vertexSource =
 	"in vec3 vp;"
 	"uniform mat4 y_rotation;"
 	"uniform mat4 persp;"
+	"uniform float scale;"
 	"uniform vec4 trans;"
+	"mat4 scale_mat = mat4(scale);"
 	"void main () {"
-	"  gl_Position = (trans + y_rotation * vec4(vp, 1.0));"
+	"  gl_Position = persp * (trans + y_rotation * (scale_mat * vec4(vp, 1.0)));"
 	"}";
 
 const char *fragmentSource =
@@ -68,7 +70,6 @@ void	setup_render(t_scop *display)
 	GLfloat 	*vertices = display->model->vertex_tables->position;
 	int			n_faces = display->model->vertex_tables->i_pos;
 	t_matrix	y_rotation;
-	t_matrix	model;
 	float		ry;
 
 	ry = 0.0f;
@@ -126,11 +127,19 @@ void	setup_render(t_scop *display)
 	
 	int			quit;
 	WINDOW		*window;
-	GLuint		vertexbuffer;
 	float		translation[4];
+	float		scale;
 
 	GLint trans_shdr_ref = glGetUniformLocation(shaderProgram, "trans");
-	bzero(&translation, 4);
+	GLint scale_shdr_ref = glGetUniformLocation(shaderProgram, "scale");
+
+	scale = 1.0f;
+
+	translation[0] = 0.0f;
+	translation[1] = 0.0f;
+	translation[2] = 0.0f;
+	translation[3] = 0.0f;
+
 	window = &display->window;
 	quit = 0;
 	print_matrix(display->camera.perspective);
@@ -153,14 +162,23 @@ void	setup_render(t_scop *display)
 				quit = 1;
 				kill_sdl(&display->window);
 			}
-			if (KEY == SDLK_w)
-				translation[Z] -= 0.02f;
-			if (KEY == SDLK_s)
-				translation[Z] += 0.02f;
 			if (KEY == SDLK_a)
 				translation[X] += 0.02f;
 			if (KEY == SDLK_d)
 				translation[X] -= 0.02f;
+			if (KEY == SDLK_UP)
+				translation[Y] -= 0.02f;
+			if (KEY == SDLK_DOWN)
+				translation[Y] += 0.02f;
+			if (KEY == SDLK_w)
+				translation[Z] -= 0.02f;
+			if (KEY == SDLK_s)
+				translation[Z] += 0.02f;
+			if (KEY == SDLK_o)
+				scale += 0.2;
+			if (KEY == SDLK_l)
+				scale -= 0.2;
+
 			/*
 			if (KEY == SDLK_KP_PLUS || KEY == SDLK_PLUS)
 				zoom_out();
@@ -179,6 +197,7 @@ void	setup_render(t_scop *display)
 		ry += 0.02;
 		rotate_y(y_rotation, ry);
 		glUniform4fv(trans_shdr_ref, 1, &translation[0]);
+		glUniform1fv(scale_shdr_ref, 1, &scale);
 		glUniformMatrix4fv(camera_shdr_ref, 1, GL_FALSE, &display->camera.perspective[0][0]);
 		glUniformMatrix4fv(model_shdr_ref, 1, GL_FALSE, &y_rotation[0][0]);
 		SDL_GL_SwapWindow(SDL_WINDOW);
