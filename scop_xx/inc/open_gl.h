@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/10 17:50:27 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/21 02:59:07 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct			s_shader_lst
 {
 	short				type;
 	char				*source;
-	GLuint				id;
+	GLuint				ref;
 	struct s_shader_lst	*next;
 	struct s_shader_lst	*previous;
 }						t_shader_lst;
@@ -57,9 +57,12 @@ typedef struct			s_gl
 	t_shader_lst		*root_vert_shdr;
 	t_shader_lst		*curr_frag_shdr;
 	t_shader_lst		*curr_vert_shdr;
-	GLuint				shader_program;
+	int					n_vert_shdrs;
+	int					n_frag_shdrs;
+	GLuint				shdr_program;
 	GLint				pos_attrib;
-	GLuint				*vao;
+	GLuint				vao;
+	GLuint				vbo;
 }						t_gl;
 
 void					init_open_gl();

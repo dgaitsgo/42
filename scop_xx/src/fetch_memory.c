@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:37:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/13 00:39:08 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/21 02:44:43 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_gl		*init_gl_mem(void)
 	gl->root_vert_shdr = new_shader(VERT_SHDR);
 	gl->curr_frag_shdr = gl->root_frag_shdr;
 	gl->curr_vert_shdr = gl->root_vert_shdr;
-	gl->vao = malloc_if(sizeof(GLuint), 1);
+	gl->n_vert_shdrs = 0;
+	gl->n_frag_shdrs = 0;
 	return (gl);
 }
 
