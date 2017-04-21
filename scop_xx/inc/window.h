@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:46:03 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/18 21:22:58 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/21 02:12:22 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # define WINDOW					t_window
 # define WIN_WIDTH				800.0f
 # define WIN_HEIGHT				600.0f
-# define Z_NEAR					0.1f
-# define Z_FAR					100.0f
+# define Z_NEAR					0.01f
+# define Z_FAR					1000.0f
 # define ASPECT_RATIO			WIN_WIDTH/WIN_HEIGHT
-# define FOV					40.0f
+# define FOV					70.0f
 # define DEFAULT_COLOR_DEPTH	32
 # define SDL_WINDOW				window->window
 # define SDL_SCREEN				window->screen

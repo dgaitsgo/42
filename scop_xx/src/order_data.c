@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 02:22:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/13 17:18:16 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/20 23:14:56 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 		v->i_pos += 9;
 		i_index += 4;
 		extract_indices(&temp_i, data->vert_indices, i_index, sign);
-		printf("%f, %f, %f, %f\n", temp_i.x, temp_i.y, temp_i.z, temp_i.w);
+		//printf("%f, %f, %f, %f\n", temp_i.x, temp_i.y, temp_i.z, temp_i.w);
 		pos[v->i_pos + 0] = data->vertices[(int)temp_i.x + offset].x;
 		pos[v->i_pos + 1] = data->vertices[(int)temp_i.x + offset].y;
 		pos[v->i_pos + 2] = data->vertices[(int)temp_i.x + offset].z;
@@ -54,7 +54,6 @@ void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 		//make second triangle
 		if (!(temp_i.w < 0))
 		{
-			printf("shouldn't fall here\n");
 			pos[v->i_pos + 9] = pos[v->i_pos + 0];
 			pos[v->i_pos + 10] = pos[v->i_pos + 1];
 			pos[v->i_pos + 11] = pos[v->i_pos + 2];
@@ -97,7 +96,7 @@ void	order_data(t_vertex_table *v, t_obj_data **data, int n_groups, int flags)
 		order_position(&v[i], data[i], sign);
 		printf("quads = %d\n", data[i]->quads);
 		printf("vertices = %d\n", v[i].i_pos);
-		check_out_floats(v[i].position, v[i].i_pos);
+	//	check_out_floats(v[i].position, v[i].i_pos);
 	/*
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
   	

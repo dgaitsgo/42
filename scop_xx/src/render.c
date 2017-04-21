@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/18 21:23:00 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/21 02:12:18 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ const char *vertexSource =
 	"uniform mat4 persp;"
 	"uniform float scale;"
 	"uniform vec4 trans;"
-	"mat4 scale_mat = mat4(scale);"
+	"uniform mat4 model;"
+	"mat4 scale_mat = mat4(0.005);"
 	"void main () {"
-	"  gl_Position = persp * (trans + y_rotation * (scale_mat * vec4(vp, 1.0)));"
+	"  	gl_Position = (trans + (y_rotation * (scale_mat * vec4(vp, 1.0))));"
 	"}";
+
+//"  //gl_Position = persp * (trans + (y_rotation * scale_mat) * vec4(vp, 1.0));"
 
 const char *fragmentSource =
 	"#version 410\n"
@@ -142,7 +145,7 @@ void	setup_render(t_scop *display)
 
 	window = &display->window;
 	quit = 0;
-	print_matrix(display->camera.perspective);
+	print_matrix(display->camera.perspective); 
 	while (!quit)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
