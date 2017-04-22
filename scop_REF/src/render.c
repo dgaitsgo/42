@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/21 03:09:20 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 07:27:13 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void	setup_render(t_scop *scop)
 {	
-	t_gl		*gl;
+	t_gl		gl;
 	t_matrix	y_rotation;
 	float		ry;
 	GLuint		shaderProgram;
-	int			n_faces = scop->model->vertex_tables->i_pos;
+	int			n_faces = scop->model.vertex_tables[0].i_pos;
 	float		translation[4];
 	float		scale;	
 	int			quit;
 	WINDOW		*window;
+	
+	shaderProgram = scop->gl.shdr_program;
+	status_gl("NADA", __LINE__, __FILE__);
 	GLint trans_shdr_ref = glGetUniformLocation(shaderProgram, "trans");
+	status_gl("Uniforms bound", __LINE__, __FILE__);
 	GLint scale_shdr_ref = glGetUniformLocation(shaderProgram, "scale");
+	GLint model_shdr_ref = glGetUniformLocation(shaderProgram, "y_rotation");
+	GLint camera_shdr_ref = glGetUniformLocation(shaderProgram, "persp");
 
 	gl = scop->gl;
 	ry = 0.0f;
-	shaderProgram = gl->shdr_program;
-	get_buffer_objects(scop);
-	GLint model_shdr_ref = glGetUniformLocation(shaderProgram, "y_rotation");
-	GLint camera_shdr_ref = glGetUniformLocation(shaderProgram, "persp");
-	status_gl("Uniforms bound", __LINE__, __FILE__);
-
 
 	scale = 1.0f;
 
@@ -49,7 +49,7 @@ void	setup_render(t_scop *scop)
 	{
 		clear_open_gl();
 		glUseProgram(shaderProgram);
-		glBindVertexArray(gl->vao);
+		glBindVertexArray(gl.vao);
 		glDrawArrays(GL_TRIANGLES, 0, n_faces / 3);	
 		while (SDL_PollEvent(&SDL_EVENT))
 		{

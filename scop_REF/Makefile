@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/21 03:11:08 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/22 05:21:00 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ $(SRC_DIR)/debug.c \
 $(SRC_DIR)/file_helpers.c \
 $(SRC_DIR)/fetch_memory.c \
 $(SRC_DIR)/push_face.c \
+$(SRC_DIR)/shader.c \
 $(SRC_DIR)/order_data.c \
 $(SRC_DIR)/matrix_rotate.c \
 $(SRC_DIR)/matrix.c \
@@ -53,7 +54,7 @@ $(INC_DIR)/helpers.h \
 
 LIB_DIR = ./lib/libft
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = #-Wall -Wextra -Werror -g
 
 .PHONY: all, clean, fclean, re
 

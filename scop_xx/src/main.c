@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/21 03:09:19 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 06:29:23 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int			main(int argc, char **argv)
 		scop.model = init_model_mem();
 		scop.gl = init_gl_mem();
 		setup_camera(&scop.camera);
+		printf("%s : Static mem loaded\n", __FILE__);
 		load_shaders(scop.gl);
 		printf("%s : Loaded shaders\n", __FILE__);
 		load_obj(scop.model, fd);

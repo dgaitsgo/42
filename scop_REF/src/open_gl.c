@@ -6,45 +6,56 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:36:43 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/18 18:33:24 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 06:39:41 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
+//			this should be more general to take a color and  a flag
 void		clear_open_gl(void)
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void	set_buffer_refs(t_scop *scop)
+void		generate_vbo(GLuint *ref, int n_faces, GLfloat *vertices)
 {
-	t_gl		*gl;
-	GLfloat 	*vertices;
-	int			n_faces;
+	glGenBuffers(1, ref);
+	glBindBuffer(GL_ARRAY_BUFFER, *ref);
+	glBufferData(GL_ARRAY_BUFFER,
+	sizeof(GLfloat) * n_faces, vertices, GL_STATIC_DRAW);
+	status_gl("Added VBO", __LINE__, __FILE__);
+}
 
-	gl = scop->gl;
-	n_faces = scop->model->vertex_tables->i_pos;
-	vertices = scop->model->vertex_tables->position;
+void		generate_vao(GLuint *ref)
+{
+	glGenVertexArrays(1, ref);
+	glBindVertexArray(*ref);
+	status_gl("Added VAO", __LINE__, __FILE__);
+}
 
-	/* Gen VAOs*/
-	glGenVertexArrays(1, &gl->vao);
-	glBindVertexArray(gl->vao);
-	status_gl("Got some vbaos", __LINE__, __FILE__);
-
-	/* Generate VBOs */
-	glGenBuffers(1, &gl->vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, gl->vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * n_faces, vertices, GL_STATIC_DRAW);
-	status_gl("Got some vaos", __LINE__, __FILE__);
-
+void		default_vertex_attributes(void)
+{	
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	status_gl("Got some vbos", __LINE__, __FILE__);
+	status_gl("Default vertex Attributes", __LINE__, __FILE__);
 }
 
 void		init_open_gl(t_scop *scop)
 {
-	set_buffer_refs(scop);
+	int i;
+
+	i = 0;
+	scop->gl.vbo = malloc_if(sizeof(GLuint), scop->model.n_groups);
+	printf("n groups = %d\n", scop->model.n_groups);
+	while (i < scop->model.n_groups)
+	{
+		generate_vbo(	&scop->gl.vbo[i],
+						scop->model.vertex_tables[i].i_pos,
+						scop->model.vertex_tables[i].position);
+		i++;
+	}
+	generate_vao(&scop->gl.vao);
+	default_vertex_attributes();
 }

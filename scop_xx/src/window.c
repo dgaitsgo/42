@@ -6,13 +6,13 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:34:16 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/15 10:50:09 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 06:29:24 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void	setup_render(t_scop *display);
+void			setup_render(t_scop *display);
 
 void			init_window(WINDOW *window, char *title, int width, int height)
 {
@@ -68,4 +68,4 @@ void			put_image(t_scop *display)
 
 	window = &display->window;
 	poll_events(display);
-}
+

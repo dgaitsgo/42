@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/21 02:59:07 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 05:07:32 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 enum					e_SHADER_TYPES
 {
-	NONE,
+	INVALID,
 	FRAG_SHDR,
 	VERT_SHDR,
 };
@@ -62,9 +62,12 @@ typedef struct			s_gl
 	GLuint				shdr_program;
 	GLint				pos_attrib;
 	GLuint				vao;
-	GLuint				vbo;
+	GLuint				*vbo;
 }						t_gl;
 
-void					init_open_gl();
+void					set_buffer_refs();
+void					clear_open_gl(void);
 struct s_shader_lst		*new_shader(short type);
+void					load_shaders(t_gl *gl);
+
 #endif

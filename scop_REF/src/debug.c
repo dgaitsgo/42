@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 01:32:49 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/21 03:11:59 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 04:37:56 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	check_shader_compile(GLuint shader_name)
 	}
 	free(buffer);
 }
+
+//void	log(char *message, void *value, int type)
+//{
+//	fprintf(scop_log, "%s : %c" message, );
+//}
 
 void	status_gl(const char *message, int line, char *file)
 {

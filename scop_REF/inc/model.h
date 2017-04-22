@@ -27,6 +27,7 @@ typedef struct 				s_texture
 	int						type;
 }							t_texture;
 
+//should be called meta
 typedef	struct				s_group_lst
 {
 	int						quads;
@@ -48,7 +49,6 @@ typedef	struct				s_shader_state
 
 typedef	struct				s_vertex_table
 {
-	GLuint					vbo;
 	int						i_pos;
 	int						i_text;
 	int						i_norm;
