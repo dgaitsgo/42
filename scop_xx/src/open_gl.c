@@ -6,16 +6,17 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:36:43 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 11:43:46 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 21:34:39 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
 //			this should be more general to take a color and  a flag
-void		clear_open_gl(void)
+void		clear_open_gl(t_vector color)
 {
-	glClearColor(0.1f, 0.1f, 0.1f, 1.f);
+	rgb_to_normal(&color);
+	glClearColor(color.x, color.y, color.z, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:31:14 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 22:04:17 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 21:34:38 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ t_vector			matrix_transform_normal(t_vector *normal, t_matrix m);
 void				rotate_x(t_matrix rx, float x);
 void				rotate_y(t_matrix ry, float y);
 void				rotate_z(t_matrix rz, float z);
+void				rgb_to_normal(t_vector *color);
 
 #endif

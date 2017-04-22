@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 12:46:30 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 21:34:37 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	draw_routine(t_scop *scop)
 {
-	int		i;
+	int			i;
+	t_vector	sky;
 
 	i = 0;
+	set_vector(&sky, 191, 209, 229);
 	clear_open_gl();
 	glUseProgram(scop->gl.shdr_program);
 	glBindVertexArray(scop->gl.vao);

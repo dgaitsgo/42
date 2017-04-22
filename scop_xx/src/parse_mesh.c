@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:23:09 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/20 23:14:22 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 21:24:25 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ void		check_flags(int flags)
 		(!(BIT_CHECK(flags, NORMALS_DEFINED))))
 		ft_putstr ("f %d/%d/ %d/%d/ %d/%d/ %d/%d/\n");
 }
-
 
 void		load_obj(t_model *model, FILE *fd)
 {

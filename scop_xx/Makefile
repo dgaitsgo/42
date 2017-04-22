@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/22 12:31:21 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/22 21:28:49 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ INC_DIR = ./inc
 
 SRC_FILES = \
 $(SRC_DIR)/transform.c \
+$(SRC_DIR)/color.c \
 $(SRC_DIR)/model.c \
 $(SRC_DIR)/main.c \
 $(SRC_DIR)/window.c \
