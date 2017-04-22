@@ -6,14 +6,14 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 07:27:13 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 07:54:10 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
 void	setup_render(t_scop *scop)
-{	
+{
 	t_gl		gl;
 	t_matrix	y_rotation;
 	float		ry;

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 05:07:32 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 08:39:08 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void					set_buffer_refs();
 void					clear_open_gl(void);
 struct s_shader_lst		*new_shader(short type);
 void					load_shaders(t_gl *gl);
-
+void					get_active_uniforms(GLuint program, GLuint n_uniforms);
+void					check_open_gl_program(GLuint program);
 #endif

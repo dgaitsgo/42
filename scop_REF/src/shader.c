@@ -6,36 +6,40 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 04:39:38 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 06:45:30 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 09:18:18 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void				bind_shader(GLuint program, GLuint vert_ref, GLuint frag_ref)
+void		bind_shader(GLuint program, GLuint vert_ref, GLuint frag_ref)
 {
 	glAttachShader(program, vert_ref);
-	status_gl("Bind shader", __LINE__, __FILE__);
+	status_gl("Attatched vert", __LINE__, __FILE__);
 	glAttachShader(program, frag_ref);
-	status_gl("Bind shader", __LINE__, __FILE__);
+	status_gl("Attatched frag", __LINE__, __FILE__);
 	glLinkProgram(program);
+	status_gl("Linked Program", __LINE__, __FILE__);
+	check_open_gl_program(program);
 }
 
 void		load_shader(GLenum type, unsigned int *ref, const char *file_name)
 {
 	GLchar 	*shader_source;
 
-	*ref = glCreateShader(GL_VERTEX_SHADER);
+	*ref = glCreateShader(type);
 	shader_source = file_to_string(SHADER_PATH, file_name);
 	//my_assert(shader_source != NULL);
 	glShaderSource(*ref, 1, (const GLchar *const *)&shader_source, NULL);
 	status_gl("Asking for sources", __LINE__, __FILE__);
 	glCompileShader(*ref);
 	status_gl("Compile shader", __LINE__, __FILE__);
+	//free(shader_source)
 }
 
 void			next_shader(int type, t_shader_lst *e)
 {
+
 	e->previous = e;
 	e->next = new_shader(type);
 	e = e->next;
@@ -54,7 +58,6 @@ void				get_shaders_from_directory(t_gl *gl)
 		exit(1);
 	while ((file = readdir(dir)) != NULL)
 	{
-		printf("file->d_name = %s\n", file->d_name);
 		ext = get_extension(file->d_name);
 		if (ext != INVALID)
 		{
@@ -93,7 +96,7 @@ void		load_shaders(t_gl *gl)
 	get_shaders_from_directory(gl);
 	/*	Also, gets first shader running*/
 	gl->shdr_program = glCreateProgram();
+	printf("After create : %d\n", gl->shdr_program);
 	status_gl("Creating program", __LINE__, __FILE__);
 	bind_shader(gl->shdr_program, gl->root_vert_shdr->ref, gl->root_frag_shdr->ref);
-	printf("After creat : %d\n", gl->shdr_program);
 }

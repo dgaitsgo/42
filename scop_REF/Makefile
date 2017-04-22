@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/22 05:21:00 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/22 08:38:08 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ $(SRC_DIR)/parse_mesh.c \
 $(SRC_DIR)/helpers.c \
 $(SRC_DIR)/math.c \
 $(SRC_DIR)/render.c \
+$(SRC_DIR)/debug_open_gl.c \
 $(SRC_DIR)/debug.c \
 $(SRC_DIR)/file_helpers.c \
 $(SRC_DIR)/fetch_memory.c \
