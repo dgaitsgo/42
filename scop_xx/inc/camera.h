@@ -32,5 +32,7 @@ typedef struct
 	double			pixel_width;
 	double			pixel_height;
 }					t_camera;
+void	perspective_matrix(t_matrix m, float fov, float aspect_ratio);
+void	init_camera(t_camera *camera);
 
 #endif

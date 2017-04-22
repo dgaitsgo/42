@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/12 16:02:53 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2016/02/17 20:06:01 by dgaitsgo         ###   ########.fr       */
+/*   Created: 2017/04/22 11:43:48 by dgaitsgo          #+#    #+#             */
+/*   Updated: 2017/04/22 12:46:32 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "scop.h"
 
-int		ft_strequ(char const *s1, char const *s2)
+void		zero_vector(float vec[3])
 {
-	int i;
+	vec[0] = 0;
+	vec[1] = 0;
+	vec[2] = 0;
+}
 
-	i = 0;
-	while ((s1[i] == s2[i]))
-	{
-		i++;
-		if ((s1[i] == '\0') && (s2[i] == '\0'))
-			return (1);
-	}
-	return (0);
+void		init_transform(t_transform *t)
+{
+	t->scale = 1.0f;
+	zero_matrix(t->rotation);
+	zero_vector(t->translation);
 }

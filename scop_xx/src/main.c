@@ -6,97 +6,55 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 06:29:23 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 09:24:49 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+FILE		*scop_log;
 
 void		usage(void)
 {
 	write(1, USAGE, ft_strlen(USAGE));
 }
 
-void				bind_shader(GLuint program, GLuint vert_ref, GLuint frag_ref)
-{
-	glAttachShader(program, vert_ref);
-	glAttachShader(program, frag_ref);
-	glLinkProgram(program);
-}
-
-void				load_shaders(t_gl *gl)
-{
-	DIR				*dir;
-	struct dirent	*file;		
-	int				ext;
-
-	/*Should check flags if at least one of each type of shader is present*/
-	if (!(dir = opendir(SHADER_PATH)))
-		exit(1);
-	while ((file = readdir(dir)) != NULL)
-	{
-		ext = get_extension(file->d_name);
-		if (ext == VERT_SHDR)
-		{
-			gl->curr_vert_shdr->ref = glCreateShader(GL_VERTEX_SHADER);
-			glShaderSource(gl->curr_vert_shdr->ref, 1,
-			(const GLchar *const *)file_to_string(SHADER_PATH, file->d_name),
-				NULL);
-			glCompileShader(gl->curr_vert_shdr->ref);
-			check_shader_compile(gl->curr_vert_shdr->ref);	
-			//gl->curr_vert_shdr->source = file_to_string(SHADER_PATH, file->d_name);
-			gl->curr_vert_shdr->previous = gl->curr_vert_shdr;
-			gl->curr_vert_shdr->next = new_shader(VERT_SHDR);
-			gl->curr_vert_shdr = gl->curr_vert_shdr->next;
-			gl->n_vert_shdrs++;
-		}
-		else if (ext == FRAG_SHDR)
-		{
-			gl->curr_frag_shdr->ref = glCreateShader(GL_FRAGMENT_SHADER);
-			glShaderSource(gl->curr_frag_shdr->ref, 1,
-			(const GLchar *const *)file_to_string(SHADER_PATH, file->d_name),
-				NULL);
-			glCompileShader(gl->curr_frag_shdr->ref);
-			check_shader_compile(gl->curr_frag_shdr->ref);	
-			//gl->curr_frag_shdr->source = file_to_string(SHADER_PATH, file->d_name);
-			gl->curr_frag_shdr->previous = gl->curr_frag_shdr;
-			gl->curr_frag_shdr->next = new_shader(FRAG_SHDR);
-			gl->curr_frag_shdr = gl->curr_frag_shdr->next;
-			gl->n_frag_shdrs++;
-		}
-	}
-	gl->shdr_program = glCreateProgram();
-	bind_shader(gl->shdr_program, gl->root_frag_shdr->ref, gl->root_frag_shdr->ref);
-}
-
-void	setup_camera(t_camera *camera)
-{
-	perspective_matrix(camera->perspective);
-	set_vector(&camera->forward,0, 0, 1);
-	set_vector(&camera->up, 0, 1, 0);
-}
+/*
+	1. Documentation
+	2. Defensive coding
+		a. custom assert
+			i. for error handling
+			ii. for abotss
+		b. persistence check
+	3. Error handling
+		c. logs : log(char *message, &adress, __FILE__, __LINE__);
+		I should be able to look at an error and
+			Know where it happened
+			What was the value, but how to keep types?
+*/
 
 int			main(int argc, char **argv)
 {
 	t_scop	scop;
 	FILE	*fd;
 
+	scop_log = fopen("log", "w");
 	if (argc == 2)
 	{
 		fd = fopen(argv[1], "r");
-		if (fd == NULL)
-			exit(1);
-		scop.model = init_model_mem();
-		scop.gl = init_gl_mem();
-		setup_camera(&scop.camera);
-		printf("%s : Static mem loaded\n", __FILE__);
-		load_shaders(scop.gl);
-		printf("%s : Loaded shaders\n", __FILE__);
-		load_obj(scop.model, fd);
-		printf("%s : Loaded obj\n", __FILE__);
-		init_window(&scop.window, argv[1], (int)WIN_WIDTH, (int)WIN_HEIGHT);
-		printf("%s : Loaded Window\n", __FILE__);
-		init_open_gl();
+		assert(fd != NULL);
+		init_window(&scop.window, argv[1], (int)WIN_WIDTH, (int)WIN_HEIGHT);	
+		printf("Loaded window\n");
+		init_model(&scop.model);
+		printf("Initialized model\n");
+		init_camera(&scop.camera);
+		printf("Initialized camera\n");
+		load_obj(&scop.model, fd);
+		printf("Loaded obj\n");
+		load_shaders(&scop.gl);
+		printf("Loaded shaders\n");
+		init_open_gl(&scop);
+		printf("Initialised openGl\n");
 		put_image(&scop);
 	}
 	else

@@ -19,8 +19,3 @@ float	in_radians(float degrees)
 	pi = 3.14159;
 	return (degrees * (pi / 180));
 }
-
-float calc_fov(float theta)
-{
-	return (tan(in_radians(theta / 2.0f)));
-}

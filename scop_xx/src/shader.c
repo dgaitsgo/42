@@ -6,11 +6,38 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 04:39:38 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 09:18:18 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 12:46:31 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+void		set_standard_shader_uniforms(t_gl *gl)
+{
+	gl->uniform_refs[SCALE] = 
+		glGetUniformLocation(gl->shdr_program, "scale");
+	gl->uniform_refs[ROTATION] =
+		glGetUniformLocation(gl->shdr_program, "rotation");
+	gl->uniform_refs[TRANSLATION] =
+		glGetUniformLocation(gl->shdr_program, "translation");
+	gl->uniform_refs[PROJECTION] =
+		glGetUniformLocation(gl->shdr_program, "projection");
+	status_gl("Uniforms bound", __LINE__, __FILE__);
+}
+
+void		associate_standard_uniforms(t_gl *gl,
+										t_transform *t,
+										t_matrix projection)
+{
+	glUniform1fv(gl->uniform_refs[SCALE],
+		1, &t->scale);
+	glUniformMatrix4fv(gl->uniform_refs[ROTATION],
+		1, GL_FALSE, &t->rotation[0][0]);
+	glUniform3fv(gl->uniform_refs[TRANSLATION],
+		1, &t->translation[0]);
+	glUniformMatrix4fv(gl->uniform_refs[PROJECTION],
+		1, GL_FALSE, &projection[0][0]);
+}
 
 void		bind_shader(GLuint program, GLuint vert_ref, GLuint frag_ref)
 {
@@ -94,9 +121,8 @@ void		load_shaders(t_gl *gl)
 {
 	init_shader_lst(gl);
 	get_shaders_from_directory(gl);
-	/*	Also, gets first shader running*/
+		/*	Also, gets first shader running*/
 	gl->shdr_program = glCreateProgram();
-	printf("After create : %d\n", gl->shdr_program);
 	status_gl("Creating program", __LINE__, __FILE__);
 	bind_shader(gl->shdr_program, gl->root_vert_shdr->ref, gl->root_frag_shdr->ref);
 }

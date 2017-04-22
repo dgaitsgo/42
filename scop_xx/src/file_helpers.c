@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:36:57 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/03 22:08:18 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 05:21:23 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			get_extension(const char *file_name)
 		if (ft_strncmp(file_extension, ".vert", 4) == 0)
 			return (VERT_SHDR);
 	}
-	return (NONE);
+	return (INVALID);
 }
 
 char	*file_to_string(const char *path, const char *file)

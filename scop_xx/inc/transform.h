@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   transform.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/12 16:02:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2016/02/17 18:50:41 by dgaitsgo         ###   ########.fr       */
+/*   Created: 2017/04/22 11:48:31 by dgaitsgo          #+#    #+#             */
+/*   Updated: 2017/04/22 12:46:35 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef __TRANSFORM_H
+# define __TRANSFORM_H
 
-void	ft_strdel(char **as)
+#include "matrix.h"
+
+typedef struct	s_transform
 {
-	free(*as);
-	*as = NULL;
-}
+	float		translation[3];
+	t_matrix	rotation;
+	float		scale;
+}				t_transform;
+
+void			init_transform(t_transform *t);
+
+#endif

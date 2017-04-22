@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/21 02:59:07 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 12:46:36 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,29 @@
 # define __OPEN_GL_H
 
 #include <OpenGL/gl3.h>
-#include "wavefront_obj.h"
+#include "model.h"
+#include "transform.h"
 
 # define SHADER_PATH	"./shaders"
 
 enum					e_SHADER_TYPES
 {
-	NONE,
+	INVALID,
 	FRAG_SHDR,
 	VERT_SHDR,
+};
+
+enum					e_TRANSFORM_TYPES
+{
+	SCALE,
+	ROTATION,
+	TRANSLATION,
+	PROJECTION,
 };
 
 typedef struct			s_shader_lst
 {
 	short				type;
-	char				*source;
 	GLuint				ref;
 	struct s_shader_lst	*next;
 	struct s_shader_lst	*previous;
@@ -59,12 +67,21 @@ typedef struct			s_gl
 	t_shader_lst		*curr_vert_shdr;
 	int					n_vert_shdrs;
 	int					n_frag_shdrs;
+	GLuint				uniform_refs[4];
 	GLuint				shdr_program;
 	GLint				pos_attrib;
 	GLuint				vao;
-	GLuint				vbo;
+	GLuint				*vbo;
 }						t_gl;
 
-void					init_open_gl();
+void					set_standard_shader_uniforms(t_gl *gl);
+void					set_buffer_refs();
+void					clear_open_gl(void);
 struct s_shader_lst		*new_shader(short type);
+void					load_shaders(t_gl *gl);
+void					get_active_uniforms(GLuint program, GLuint n_uniforms);
+void					check_open_gl_program(GLuint program);
+void					associate_standard_uniforms(t_gl *gl,
+										t_transform *t,
+										t_matrix projection);
 #endif
