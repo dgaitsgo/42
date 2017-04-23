@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:36:43 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 20:39:47 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 22:30:25 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		init_open_gl(t_scop *scop)
 	{
 		generate_vbo(	&scop->gl.vbo[i],
 						scop->model.vertex_tables[i].i_pos,
-						scop->model.vertex_tables[i].position);
+						scop->model.vertex_tables[i].positions);
 		i++;
 	}
 	generate_vao(&scop->gl.vao);

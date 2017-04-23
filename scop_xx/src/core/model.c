@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 02:31:59 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 03:20:57 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 22:52:50 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,36 @@ void	init_model(t_model *model)
 	zero_matrix(model->model);
 	model->root_group = new_group();
 	model->n_groups = 1;
+}
+
+void	bound_model(t_model *model)
+{
+	t_vector			curr;
+	t_bounding_sphere	*bv;
+	int 				i;
+	int					j;
+
+	i = 0;
+	bv = &model->bv;
+	set_vector(&model->min, FLT_MAX, FLT_MAX, FLT_MAX);
+	set_vector(&model->max, FLT_MIN, FLT_MIN, FLT_MIN);
+	while (i < model->n_groups)
+	{
+		j = 0;
+		while (j < model->vertex_tables[i].i_pos)
+		{
+			curr.x = model->vertex_tables[i].positions[j + 0];
+			curr.y = model->vertex_tables[i].positions[j + 1];
+			curr.z = model->vertex_tables[i].positions[j + 2];
+			bv->min = vector_min(curr, model->min);
+			bv->max = vector_max(curr, model->max);
+			j += 3;
+		}
+		i++;
+	}
+	bv->center = vector_subtract(bv->max, bv->min);
+	
+
+	//printf("MODEL min = %f, %f, %f\n", model->min.x, model->min.y, model->min.z);
+	//printf("MODEL max = %f, %f, %f\n", model->max.x, model->max.y, model->max.z);
 }

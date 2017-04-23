@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:37:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 21:00:22 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 22:30:38 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_vertex_table	*fetch_vertex_table_mem(t_obj_data **data,
 	while (i < n_groups)
 	{
 		total_points = 3 * data[i]->quads + ((data[i]->n_faces + 4) / 4) * 9;
-		v[i].position = ft_memalloc(sizeof(float) * total_points);
+		v[i].positions = ft_memalloc(sizeof(float) * total_points);
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
 			v[i].text_coords = ft_memalloc(sizeof(float) * total_points);
 		else

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 20:00:50 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 22:28:49 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <assert.h>
+#include <float.h>
 
 #include <unistd.h>
 #include <stdlib.h>

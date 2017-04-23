@@ -27,6 +27,14 @@ typedef struct 				s_texture
 	int						type;
 }							t_texture;
 
+typedef struct				s_bounding_sphere
+{
+	t_vector				min;
+	t_vector				max;
+	t_vector				center;
+	float					diameter;
+}							t_bounding_sphere;
+
 //should be called meta
 typedef	struct				s_group_lst
 {
@@ -52,7 +60,7 @@ typedef	struct				s_vertex_table
 	int						i_pos;
 	int						i_text;
 	int						i_norm;
-	float					*position;
+	float					*positions;
 	float					*text_coords;
 	float					*normals;
 }							t_vertex_table;
@@ -89,9 +97,11 @@ typedef struct				s_model
 	t_group_lst				*root_group;
 	t_obj_data				**obj_data;
 	t_vertex_table			*vertex_tables;
+	t_bounding_sphere		bv;
 	GLuint					vao;
 }							t_model;
 
+void						bound_model(t_model *model);
 struct s_group_lst			*new_group(void);
 void						init_model(t_model *model);
 #endif

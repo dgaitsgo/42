@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:23:09 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 20:05:47 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 22:26:53 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,4 +170,5 @@ void		load_obj(t_model *model, FILE *fd)
 	write_in_data(model->obj_data, fd, model->flags);
 	model->vertex_tables = fetch_vertex_table_mem(model->obj_data, model->n_groups, model->flags);
 	order_data(model->vertex_tables, model->obj_data, model->n_groups, model->flags);
+	bound_model(model);
 }
