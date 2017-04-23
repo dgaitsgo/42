@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 05:55:28 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 20:00:20 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ typedef struct			s_gl
 	GLuint				*vbo;
 }						t_gl;
 
+
+void					check_shader_compile(GLuint shader_name);
+void					status_gl(const char *message, int line, char *file);
 void					set_standard_shader_uniforms(t_gl *gl);
 void					set_buffer_refs();
 void					clear_open_gl(t_vector color);

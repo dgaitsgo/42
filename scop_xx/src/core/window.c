@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:34:16 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 06:04:08 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 20:10:42 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	set_SDL_attributes(void)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
 						SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_ShowCursor(SDL_DISABLE);
 }
 
 void			init_window(WINDOW *window, char *title, int width, int height)
@@ -35,7 +36,6 @@ void			init_window(WINDOW *window, char *title, int width, int height)
 	SDL_BPL = SDL_WIDTH * (SDL_DEPTH / DEFAULT_COLOR_DEPTH / 3);
 	SDL_Init(SDL_INIT_VIDEO);
 	set_SDL_attributes();
-	//SDL_SetRelativeMouseMode(SDL_TRUE);
 	SDL_WINDOW = SDL_CreateWindow(title, 100, 200,
 	SDL_WIDTH, SDL_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	//SDL_SetWindowFullscreen(SDL_WINDOW, SDL_WINDOW_FULLSCREEN_DESKTOP);
@@ -48,9 +48,4 @@ void			kill_sdl(WINDOW *window)
 	SDL_Quit();
 	exit(0);
 	free(window);
-}
-
-void			put_image(t_scop *scop)
-{
-	setup_render(scop);
 }

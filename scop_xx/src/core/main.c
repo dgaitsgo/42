@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 21:25:24 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 20:00:56 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			main(int argc, char **argv)
 		printf("Loaded shaders\n");
 		init_open_gl(&scop);
 		printf("Initialised openGl\n");
-		put_image(&scop);
+		render(&scop);
 	}
 	else
 		usage();

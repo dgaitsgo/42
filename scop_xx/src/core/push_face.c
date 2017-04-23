@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 02:58:21 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/12 23:51:06 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 20:35:41 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void		push_face(t_obj_data *data, char *line, int flags)
 	if (BIT_CHECK(flags, TEXT_COORDS_DEFINED) &&
 		(!(BIT_CHECK(flags, NORMALS_DEFINED))))
 		only_texts_face_push(data, line);
-	//debug_face(data);
+	debug_face(data);
 }

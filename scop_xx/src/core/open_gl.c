@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:36:43 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 04:26:34 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 20:39:47 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		generate_vao(GLuint *ref)
 
 void		default_vertex_attributes(void)
 {	
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	status_gl("Default vertex Attributes", __LINE__, __FILE__);
@@ -48,8 +49,7 @@ void		init_open_gl(t_scop *scop)
 	int i;
 
 	i = 0;
-	scop->gl.vbo = malloc_if(sizeof(GLuint), scop->model.n_groups);
-	printf("n groups = %d\n", scop->model.n_groups);
+	scop->gl.vbo = ft_memalloc(sizeof(GLuint) * scop->model.n_groups);
 	while (i < scop->model.n_groups)
 	{
 		generate_vbo(	&scop->gl.vbo[i],

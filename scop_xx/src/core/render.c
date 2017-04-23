@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 18:49:53 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 20:08:59 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	look_at_cont(t_camera *c, int handedness)
 				c->up);
 }
 
-void	setup_render(t_scop *scop)
+void	render(t_scop *scop)
 {
 	t_transform			t;
 

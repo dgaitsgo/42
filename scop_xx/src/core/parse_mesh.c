@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 14:23:09 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 21:24:25 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 20:05:47 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ Don't parse yet :
 	- assocaited mtls
 	- smooth shading coeffs
 	- mtls changing up in the middle of the fuckin faces
-
 */
 
 /*
@@ -164,7 +163,9 @@ void		load_obj(t_model *model, FILE *fd)
 	count_group_data(fd, group, &model->n_groups, &model->flags);
 	check_flags(model->flags);
 	model->obj_data = fetch_obj_data_mem(model->root_group, model->n_groups);
-//	check_groups(model->root_group);
+
+//	/*DEBUG:*/	check_groups(model->root_group);
+
 	fseek(fd, 0, SEEK_SET);	
 	write_in_data(model->obj_data, fd, model->flags);
 	model->vertex_tables = fetch_vertex_table_mem(model->obj_data, model->n_groups, model->flags);

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:37:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/18 18:31:22 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 21:02:46 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct s_shader_lst		*new_shader(short type)
 {
 	struct s_shader_lst	*node;
 
-	node = malloc_if(sizeof(t_shader_lst), 1);
+	node = ft_memalloc(sizeof(t_shader_lst));
 	node->type = type;
 	if (!node)
 		exit(1);
@@ -35,7 +35,7 @@ struct s_group_lst			*new_group(void)
 {
 	struct s_group_lst *node;
 
-	node = malloc_if(sizeof(t_group_lst), 1);
+	node = ft_memalloc(sizeof(t_group_lst));
 	if (!node)
 		exit(1);
 	node->quads = 0;
