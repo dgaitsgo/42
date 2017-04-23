@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/15 11:00:30 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/18 18:42:02 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/22 23:24:38 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct
 {
-	t_matrix		view_matrix;
-	t_matrix		perspective;
+	t_matrix		view;
+	t_matrix		projection;
 	t_matrix		inverse_view_matrix;
 	t_vector		origin;
 	t_vector		direction;
@@ -32,7 +32,16 @@ typedef struct
 	double			pixel_width;
 	double			pixel_height;
 }					t_camera;
-void	perspective_matrix(t_matrix m, float fov, float aspect_ratio);
-void	init_camera(t_camera *camera);
+
+void				look_at(t_matrix m,
+							t_vector eye,
+							t_vector center,
+							t_vector up);
+
+void				perspective_matrix(	t_matrix m,
+										float fov,
+										float aspect_ratio);
+
+void				init_camera(t_camera *camera);
 
 #endif

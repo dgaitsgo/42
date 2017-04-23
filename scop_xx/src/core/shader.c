@@ -6,35 +6,35 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 04:39:38 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 12:46:31 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 04:26:54 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-
+int		calls_to_function = 0;
 void		set_standard_shader_uniforms(t_gl *gl)
 {
-	gl->uniform_refs[SCALE] = 
-		glGetUniformLocation(gl->shdr_program, "scale");
-	gl->uniform_refs[ROTATION] =
-		glGetUniformLocation(gl->shdr_program, "rotation");
-	gl->uniform_refs[TRANSLATION] =
-		glGetUniformLocation(gl->shdr_program, "translation");
+	printf("Calls to function : %d\n", calls_to_function++);
+
+	gl->uniform_refs[MODEL] =
+		glGetUniformLocation(gl->shdr_program, "model");
+	gl->uniform_refs[VIEW] =
+		glGetUniformLocation(gl->shdr_program, "view");
 	gl->uniform_refs[PROJECTION] =
-		glGetUniformLocation(gl->shdr_program, "projection");
+		glGetUniformLocation(gl->shdr_program, "proj");
 	status_gl("Uniforms bound", __LINE__, __FILE__);
 }
 
+//should just take a generic table instead of "t_gl *gl"
 void		associate_standard_uniforms(t_gl *gl,
-										t_transform *t,
+										t_matrix model,
+										t_matrix view,
 										t_matrix projection)
 {
-	glUniform1fv(gl->uniform_refs[SCALE],
-		1, &t->scale);
-	glUniformMatrix4fv(gl->uniform_refs[ROTATION],
-		1, GL_FALSE, &t->rotation[0][0]);
-	glUniform3fv(gl->uniform_refs[TRANSLATION],
-		1, &t->translation[0]);
+	glUniformMatrix4fv(gl->uniform_refs[MODEL],
+		1, GL_TRUE, &model[0][0]);
+	glUniformMatrix4fv(gl->uniform_refs[VIEW],
+		1, GL_FALSE, &view[0][0]);
 	glUniformMatrix4fv(gl->uniform_refs[PROJECTION],
 		1, GL_FALSE, &projection[0][0]);
 }

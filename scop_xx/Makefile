@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/22 21:28:49 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/23 00:36:50 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,28 +17,42 @@ OBJ_DIR = ./obs
 INC_DIR = ./inc
 
 SRC_FILES = \
-$(SRC_DIR)/transform.c \
-$(SRC_DIR)/color.c \
-$(SRC_DIR)/model.c \
-$(SRC_DIR)/main.c \
-$(SRC_DIR)/window.c \
-$(SRC_DIR)/open_gl.c \
-$(SRC_DIR)/constructors.c \
-$(SRC_DIR)/parse_mesh.c \
-$(SRC_DIR)/helpers.c \
-$(SRC_DIR)/math.c \
-$(SRC_DIR)/render.c \
-$(SRC_DIR)/debug_open_gl.c \
-$(SRC_DIR)/debug.c \
-$(SRC_DIR)/file_helpers.c \
-$(SRC_DIR)/fetch_memory.c \
-$(SRC_DIR)/push_face.c \
-$(SRC_DIR)/shader.c \
-$(SRC_DIR)/order_data.c \
-$(SRC_DIR)/matrix_rotate.c \
-$(SRC_DIR)/matrix.c \
-$(SRC_DIR)/camera.c \
-$(SRC_DIR)/vector_constructors.c \
+$(SRC_DIR)/core/transform.c \
+$(SRC_DIR)/core/color.c \
+$(SRC_DIR)/core/model.c \
+$(SRC_DIR)/core/main.c \
+$(SRC_DIR)/core/window.c \
+$(SRC_DIR)/core/open_gl.c \
+$(SRC_DIR)/core/constructors.c \
+$(SRC_DIR)/core/event.c \
+$(SRC_DIR)/core/parse_mesh.c \
+$(SRC_DIR)/core/helpers.c \
+$(SRC_DIR)/core/math.c \
+$(SRC_DIR)/core/render.c \
+$(SRC_DIR)/core/debug_open_gl.c \
+$(SRC_DIR)/core/debug.c \
+$(SRC_DIR)/core/file_helpers.c \
+$(SRC_DIR)/core/fetch_memory.c \
+$(SRC_DIR)/core/push_face.c \
+$(SRC_DIR)/core/shader.c \
+$(SRC_DIR)/core/order_data.c \
+$(SRC_DIR)/core/camera.c \
+$(SRC_DIR)/matrix/copy_matrix.c \
+$(SRC_DIR)/matrix/matrix.c \
+$(SRC_DIR)/matrix/inverse_rotation_matrix.c \
+$(SRC_DIR)/matrix/matrix_getters.c \
+$(SRC_DIR)/matrix/transformation_matrix.c \
+$(SRC_DIR)/matrix/inverse_transformations.c \
+$(SRC_DIR)/matrix/matrix_utility.c \
+$(SRC_DIR)/matrix/rotation_matrix.c \
+$(SRC_DIR)/vector/vector.c \
+$(SRC_DIR)/vector/vector_basic_ops.c \
+$(SRC_DIR)/vector/vector_basic_ops2.c \
+$(SRC_DIR)/vector/vector_basic_ops3.c \
+$(SRC_DIR)/vector/vector_constructors.c \
+$(SRC_DIR)/vector/vector_min_max.c \
+$(SRC_DIR)/vector/vector_scale.c \
+$(SRC_DIR)/vector/vector_transformations.c \
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

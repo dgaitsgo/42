@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_rotate.c                                    :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/15 09:46:46 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/15 11:13:08 by dgaitsgo         ###   ########.fr       */
+/*   Created: 2017/04/15 12:35:08 by dgaitsgo          #+#    #+#             */
+/*   Updated: 2017/04/23 00:33:49 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void		rotate_y(t_matrix ry, float y)
+double		largest(double a, double b)
 {
-	ry[0][0] = cos(y);
-	ry[0][1] = 0;
-	ry[0][2] = sin(y);
-	ry[0][3] = 0;
-	ry[1][0] = 0;
-	ry[1][1] = 1;
-	ry[1][2] = 0;
-	ry[1][3] = 0;
-	ry[2][0] = -sin(y);
-	ry[2][1] = 0;
-	ry[2][2] = cos(y);
-	ry[2][3] = 0;
-	ry[3][0] = 0;
-	ry[3][1] = 0;
-	ry[3][2] = 0;
-	ry[3][3] = 1;
+	return (a > b ? a : b);
+}
+
+int			sgn(int x)
+{
+	return ((x > 0) - (x < 0));
+}
+
+double		smallest(double a, double b)
+{
+	return (a > b ? b : a);
+}
+
+float	in_radians(float degrees)
+{
+	float pi;
+
+	pi = 3.14159;
+	return (degrees * (pi / 180));
 }

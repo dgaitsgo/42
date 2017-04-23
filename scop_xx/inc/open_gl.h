@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 12:46:36 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 03:10:24 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ enum					e_SHADER_TYPES
 
 enum					e_TRANSFORM_TYPES
 {
-	SCALE,
-	ROTATION,
-	TRANSLATION,
+	MODEL,
+	VIEW,
 	PROJECTION,
 };
 
@@ -67,7 +66,7 @@ typedef struct			s_gl
 	t_shader_lst		*curr_vert_shdr;
 	int					n_vert_shdrs;
 	int					n_frag_shdrs;
-	GLuint				uniform_refs[4];
+	GLuint				uniform_refs[3];
 	GLuint				shdr_program;
 	GLint				pos_attrib;
 	GLuint				vao;
@@ -76,12 +75,13 @@ typedef struct			s_gl
 
 void					set_standard_shader_uniforms(t_gl *gl);
 void					set_buffer_refs();
-void					clear_open_gl(void);
+void					clear_open_gl(t_vector color);
 struct s_shader_lst		*new_shader(short type);
 void					load_shaders(t_gl *gl);
 void					get_active_uniforms(GLuint program, GLuint n_uniforms);
 void					check_open_gl_program(GLuint program);
 void					associate_standard_uniforms(t_gl *gl,
-										t_transform *t,
+										t_matrix model,
+										t_matrix view,
 										t_matrix projection);
 #endif

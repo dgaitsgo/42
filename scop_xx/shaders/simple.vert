@@ -1,15 +1,11 @@
 #version 410
 
 in vec3 position;
-uniform mat4 rotation;
-uniform mat4 projection;
-uniform float scale;
-uniform vec3 translation;
-mat4 scale_mat = mat4(0.005);
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
 void	main()
 {
-	
-	gl_Position =
-		projection * (vec4(translation, 0.0) + rotation * (scale_mat * vec4(position, 1.0)));
+	gl_Position = proj * model * vec4(position, 1.0);
 }

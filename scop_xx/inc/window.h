@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:46:03 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 02:37:57 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 00:23:31 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ typedef	struct					s_sdlwindow
 	int							flags;
 }								t_window;
 
-void							init_window(WINDOW *window, char *title,
-									int width, int height);
+void							init_window(WINDOW *window,
+											char *title, int width, int height);
 void							kill_sdl(WINDOW *window);
-
 #endif

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:31:14 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 21:34:38 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 03:10:20 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ t_vector			matrix_transform_point(t_vector *pnt, t_matrix m);
 t_vector			matrix_transform_raster_point(t_vector *pnt, t_matrix m);
 t_vector			matrix_transform_direction(t_vector *dir, t_matrix m);
 t_vector			matrix_transform_normal(t_vector *normal, t_matrix m);
-void				rotate_x(t_matrix rx, float x);
-void				rotate_y(t_matrix ry, float y);
-void				rotate_z(t_matrix rz, float z);
 void				rgb_to_normal(t_vector *color);
 
 #endif
