@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 07:05:55 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 18:49:53 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,25 @@ void	check_event(t_window *window, t_camera *c)
 			c->position = vector_add(c->position, vector_scale(c->direction, delta_time * m->speed));	
 		if (KEY == SDLK_s)
 			c->position = vector_subtract(c->position, vector_scale(c->direction, delta_time * m->speed));
-		if (KEY == SDLK_a)
-			c->position = vector_add(c->position, vector_scale(c->right, delta_time * m->speed));
 		if (KEY == SDLK_d)
+			c->position = vector_add(c->position, vector_scale(c->right, delta_time * m->speed));
+		if (KEY == SDLK_a)
 			c->position = vector_subtract(c->position, vector_scale(c->right, delta_time * m->speed));
 	}
 }
 
-void	look_at_cont(t_camera *c)
+void	look_at_cont(t_camera *c, int handedness)
 {
-	look_at(c->view,
-			c->position,
-			vector_add(c->position, c->direction),
-			c->up);
+	if (handedness == LH)
+		look_atLH(c->view,
+				c->position,
+				vector_add(c->position, c->direction),
+				c->up);
+	else if (handedness == RH)
+		look_atRH(c->view,
+				c->position,
+				vector_add(c->position, c->direction),
+				c->up);
 }
 
 void	setup_render(t_scop *scop)
@@ -70,8 +76,6 @@ void	setup_render(t_scop *scop)
 	init_transform(&t);
 	set_standard_shader_uniforms(&scop->gl);
 	build_transformation_matrix(scop->model.model, t);
-	look_at(scop->camera.view,
-			new_vector(0, 0, 0), new_vector(0, 1, 0), new_vector(0, 1, 0));
 	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
 	while (1)
 	{
@@ -79,7 +83,7 @@ void	setup_render(t_scop *scop)
 		t.rotation.y += 0.2;
 		adjust_view(&scop->camera.fps_mouse, &scop->camera, &scop->window);
 		check_event(&scop->window, &scop->camera);
-		look_at_cont(&scop->camera);
+		look_at_cont(&scop->camera, RH);
 		build_transformation_matrix(scop->model.model, t);
 		associate_standard_uniforms(&scop->gl,
 									scop->model.model,

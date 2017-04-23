@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:46:03 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 05:59:21 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 18:40:23 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define WIN_WIDTH				800.0f
 # define WIN_HEIGHT				600.0f
 # define Z_NEAR					0.01f
-# define Z_FAR					1000.0f
+# define Z_FAR					10000.0f
 # define ASPECT_RATIO			WIN_WIDTH/WIN_HEIGHT
 # define FOV					70.0f
 # define DEFAULT_COLOR_DEPTH	32

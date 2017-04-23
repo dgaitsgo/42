@@ -6,35 +6,13 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 23:04:51 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 07:09:12 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 18:46:12 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-/*
-template<typename T, precision P>
-	GLM_FUNC_QUALIFIER mat<4, 4, T, P> lookAtLH
-	(
-		vec<3, T, P> const & eye,
-		vec<3, T, P> const & center,
-		vec<3, T, P> const & up
-	)
-	{
-		vec<3, T, P> const f(normalize(center - eye));
-		vec<3, T, P> const s(normalize(cross(up, f)));
-		vec<3, T, P> const u(cross(f, s));
-
-		mat<4, 4, T, P> Result(1);
-		Result[0][0] = s.x;				Result[0][1] = u.x;				Result[0][2] = f.x; 
-		Result[1][0] = s.y;				Result[1][1] = u.y;				Result[1][2] = f.y;
-		Result[2][0] = s.z;				Result[2][1] = u.z;				Result[2][2] = f.z;  
-		Result[3][0] = -dot(s, eye);	Result[3][1] = -dot(u, eye);	Result[3][2] = -dot(f, eye);
-		return Result;
-	}
-*/
-
-void		look_at(t_matrix m, t_vector eye, t_vector center, t_vector up)
+void		look_atLH(t_matrix m, t_vector eye, t_vector center, t_vector up)
 {
 	t_vector 	f;
 	t_vector	s;
@@ -44,10 +22,26 @@ void		look_at(t_matrix m, t_vector eye, t_vector center, t_vector up)
 	f = unit_vector(vector_subtract(center, eye));
 	s = unit_vector(vector_cross(up, f));
 	u = vector_cross(f, s);
-	m[0][0] = s.x;					m[0][1] = u.x;					m[0][2] = f.x;
-	m[1][0] = s.y;					m[1][1] = u.y;					m[1][2] = f.y;
-	m[2][0] = s.z;					m[2][1] = u.z;					m[2][2] = f.z;
-	m[3][0] = -dot_product(s, eye);	m[3][1] = -dot_product(u, eye);	m[3][2] = -dot_product(f, eye);
+	m[0][0] = s.x;	m[0][1] = u.x;	m[0][2] = f.x;	m[0][3] = -dot_product(s, eye);
+	m[1][0] = s.y;	m[1][1] = u.y;	m[1][2] = f.y; 	m[1][3] = -dot_product(u, eye);	
+	m[2][0] = s.z;	m[2][1] = u.z;	m[2][2] = f.z;	m[2][3] = -dot_product(f, eye);
+	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
+}
+
+void		look_atRH(t_matrix m, t_vector eye, t_vector center, t_vector up)
+{
+	t_vector 	f;
+	t_vector	s;
+	t_vector	u;
+
+	zero_matrix(m);
+	f = unit_vector(vector_subtract(center, eye));
+	s = unit_vector(vector_cross(f, up));
+	u = vector_cross(s, f);
+	m[0][0] = s.x;	m[0][1] = u.x;	m[0][2] = -f.x; m[0][3] = -dot_product(s, eye);	
+	m[1][0] = s.y;	m[1][1] = u.y;	m[1][2] = -f.y; m[1][3] = -dot_product(u, eye);
+	m[2][0] = s.z;	m[2][1] = u.z;	m[2][2] = -f.z; m[2][3] = dot_product(f, eye);
+	m[3][0] = 0;  	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;	
 }
 
 void	projection_matrix(t_matrix m, float fov, float aspect_ratio)
@@ -71,7 +65,6 @@ void	projection_matrix(t_matrix m, float fov, float aspect_ratio)
 	m[3][2] = pz;
 }
 
-
 void			calc_camera_rig(t_camera *c, t_fps_mouse *m)
 {
 	c->direction = new_vector(	cos(m->vertical_angle) * sin(m->horizontal_angle),
@@ -90,6 +83,6 @@ void	init_camera(t_camera *camera)
 {
 	init_fps_mouse(&camera->fps_mouse);
 	projection_matrix(camera->projection, FOV, ASPECT_RATIO);
-	set_vector(&camera->forward,0, 0, 1);
+	set_vector(&camera->forward, 0, 0, 1);
 	set_vector(&camera->up, 0, 1, 0);
 }

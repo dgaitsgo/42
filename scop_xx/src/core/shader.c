@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 04:39:38 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 07:05:14 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 18:22:35 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		associate_standard_uniforms(t_gl *gl,
 	glUniformMatrix4fv(gl->uniform_refs[MODEL],
 		1, GL_TRUE, &model[0][0]);
 	glUniformMatrix4fv(gl->uniform_refs[VIEW],
-		1, GL_FALSE, &view[0][0]);
+		1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(gl->uniform_refs[PROJECTION],
 		1, GL_FALSE, &projection[0][0]);
 }

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 06:04:48 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 07:09:13 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 18:47:35 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	init_fps_mouse(t_fps_mouse *m)
 {
-	m->position = new_vector(0, 0, 5);
+	m->position = new_vector(0, 0, 0);
 	m->horizontal_angle = 3.14f;
 	m->vertical_angle = 0.0f;
-	m->speed = 3.0f;
-	m->mouse_speed = 0.005f;
+	m->speed = 0.02f;
+	m->mouse_speed = 0.0005f;
 }
 
 void			reset_mouse(t_window *window)
@@ -31,8 +31,8 @@ void			calc_viewing_angles(t_fps_mouse *m,
 									float width,
 									float height)
 {
-	m->horizontal_angle += m->mouse_speed * delta * (width / 2 - m->xpos);
-	m->vertical_angle += m->mouse_speed * delta * (height / 2 - m->ypos);
+	m->horizontal_angle += m->mouse_speed * (width / 2 - m->xpos);
+	m->vertical_angle += m->mouse_speed * (height / 2 - m->ypos);
 }
 
 void			adjust_view(t_fps_mouse *m,

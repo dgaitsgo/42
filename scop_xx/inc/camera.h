@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/15 11:00:30 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 07:09:27 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 18:43:43 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include "vector.h"
 # include "matrix.h"
 # include "time.h"
+
+enum				e_handedness
+{
+	LH,
+	RH,
+};
 
 typedef	struct		s_fps_mouse
 {
@@ -47,7 +53,12 @@ typedef struct		s_camera
 	double			pixel_height;
 }					t_camera;
 
-void				look_at(t_matrix m,
+void				look_atLH(t_matrix m,
+							t_vector eye,
+							t_vector center,
+							t_vector up);
+
+void				look_atRH(t_matrix m,
 							t_vector eye,
 							t_vector center,
 							t_vector up);
