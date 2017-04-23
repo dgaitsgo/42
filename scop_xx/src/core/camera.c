@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 23:04:51 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 02:26:56 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 07:09:12 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,23 @@ void	projection_matrix(t_matrix m, float fov, float aspect_ratio)
 }
 
 
+void			calc_camera_rig(t_camera *c, t_fps_mouse *m)
+{
+	c->direction = new_vector(	cos(m->vertical_angle) * sin(m->horizontal_angle),
+								sin(m->vertical_angle),
+								cos(m->vertical_angle) * cos(m->horizontal_angle)
+	);
+	c->right = new_vector(		sin(m->horizontal_angle - 3.14f / 2.0f),
+								0,
+								cos(m->horizontal_angle - 3.14f / 2.0f)
+	);
+	c->up = vector_cross(c->right, c->direction);
+}
+
+
 void	init_camera(t_camera *camera)
 {
+	init_fps_mouse(&camera->fps_mouse);
 	projection_matrix(camera->projection, FOV, ASPECT_RATIO);
 	set_vector(&camera->forward,0, 0, 1);
 	set_vector(&camera->up, 0, 1, 0);

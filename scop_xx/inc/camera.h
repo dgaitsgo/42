@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/15 11:00:30 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 23:24:38 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 07:09:27 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,27 @@
 
 # include "vector.h"
 # include "matrix.h"
+# include "time.h"
 
-typedef struct
+typedef	struct		s_fps_mouse
 {
+	t_vector		position;
+	t_time			time;
+	float			horizontal_angle;
+	float			vertical_angle;
+	float			speed;
+	float			mouse_speed;
+	int				xpos;
+	int				ypos;
+}					t_fps_mouse;
+
+typedef struct		s_camera
+{
+	t_fps_mouse		fps_mouse;
 	t_matrix		view;
 	t_matrix		projection;
 	t_matrix		inverse_view_matrix;
-	t_vector		origin;
+	t_vector		position;
 	t_vector		direction;
 	t_vector		eye;
 	t_vector		up;
@@ -43,5 +57,14 @@ void				perspective_matrix(	t_matrix m,
 										float aspect_ratio);
 
 void				init_camera(t_camera *camera);
+
+void				init_fps_mouse(t_fps_mouse *m);
+
+void				calc_viewing_angles(	t_fps_mouse *m,
+											float delta,
+											float width,
+											float height);
+
+void				calc_camera_rig(t_camera *c, t_fps_mouse *m);
 
 #endif

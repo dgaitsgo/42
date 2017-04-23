@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:34:16 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 12:29:15 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 06:04:08 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void			init_window(WINDOW *window, char *title, int width, int height)
 	SDL_BPL = SDL_WIDTH * (SDL_DEPTH / DEFAULT_COLOR_DEPTH / 3);
 	SDL_Init(SDL_INIT_VIDEO);
 	set_SDL_attributes();
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
 	SDL_WINDOW = SDL_CreateWindow(title, 100, 200,
 	SDL_WIDTH, SDL_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	//SDL_SetWindowFullscreen(SDL_WINDOW, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	window->gl_context = SDL_GL_CreateContext(SDL_WINDOW);
 	printf("%s\n", glGetString(GL_VERSION));
 }

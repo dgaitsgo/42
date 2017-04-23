@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 07:05:55 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 04:35:03 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,56 +30,36 @@ void	draw_routine(t_scop *scop)
 		i++;
 	}
 }
-
-void	check_event(t_window *window, t_camera *c)
-{
-	float 		delta_time;
-	t_fps_mouse *m;
-
-	m = &c->fps_mouse;
-	delta_time = m->time.delta;
-	while (SDL_PollEvent(&SDL_EVENT))
-	{
-		if (SDL_EVENT.type == SDL_QUIT || KEY == SDLK_ESCAPE)
-			kill_sdl(window);
-		if (KEY == SDLK_w)
-			c->position = vector_add(c->position, vector_scale(c->direction, delta_time * m->speed));	
-		if (KEY == SDLK_s)
-			c->position = vector_subtract(c->position, vector_scale(c->direction, delta_time * m->speed));
-		if (KEY == SDLK_a)
-			c->position = vector_add(c->position, vector_scale(c->right, delta_time * m->speed));
-		if (KEY == SDLK_d)
-			c->position = vector_subtract(c->position, vector_scale(c->right, delta_time * m->speed));
-	}
-}
-
-void	look_at_cont(t_camera *c)
-{
-	look_at(c->view,
-			c->position,
-			vector_add(c->position, c->direction),
-			c->up);
-}
+/*
+	Debug stepthrough:
+- Checked init transform is well initialised to 0 foreverthing, identity for scale
+- shader uniforms conform to what in program
+- their locations match from when itialised to when used 
+- Confusing as fuck:
+	rotation works... so the transformation matrix partialy works.
+	So it must be the projection you say?
+		Well, the straffe doesn't work.
+	Yet
+		The keys do change the value of translation
+		Each cycle a new matrix is generated reflecting the changes of the translation
+		The passed matrix does rotate the object
+		
+*/
 
 void	setup_render(t_scop *scop)
 {
-	t_transform			t;
+	t_transform	t;
 
-	// Wrap this up in a propper "setup"
-	// then call mainloop - putimage makes a nice container
 	init_transform(&t);
 	set_standard_shader_uniforms(&scop->gl);
 	build_transformation_matrix(scop->model.model, t);
 	look_at(scop->camera.view,
 			new_vector(0, 0, 0), new_vector(0, 1, 0), new_vector(0, 1, 0));
-	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
 	while (1)
 	{
 		draw_routine(scop);
+		poll_events(&scop->window, &t);
 		t.rotation.y += 0.2;
-		adjust_view(&scop->camera.fps_mouse, &scop->camera, &scop->window);
-		check_event(&scop->window, &scop->camera);
-		look_at_cont(&scop->camera);
 		build_transformation_matrix(scop->model.model, t);
 		associate_standard_uniforms(&scop->gl,
 									scop->model.model,

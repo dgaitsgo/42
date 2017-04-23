@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 00:23:19 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 07:09:22 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ void				load_obj(t_model *model, FILE *fd);
 void				check_shader_compile(GLuint shader_name);
 void				status_gl(const char *message, int line, char *file);
 void				poll_events(t_window *window, t_transform *t);
+void				adjust_view(t_fps_mouse *m,
+								t_camera *c,
+								t_window *window);
 
 #endif

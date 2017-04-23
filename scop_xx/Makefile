@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/23 00:36:50 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/23 06:57:41 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ $(SRC_DIR)/core/fetch_memory.c \
 $(SRC_DIR)/core/push_face.c \
 $(SRC_DIR)/core/shader.c \
 $(SRC_DIR)/core/order_data.c \
+$(SRC_DIR)/core/fps_mouse.c \
 $(SRC_DIR)/core/camera.c \
 $(SRC_DIR)/matrix/copy_matrix.c \
 $(SRC_DIR)/matrix/matrix.c \
@@ -64,6 +65,7 @@ $(INC_DIR)/macros.h \
 $(INC_DIR)/matrix.h \
 $(INC_DIR)/flags.h \
 $(INC_DIR)/transform.h \
+$(INC_DIR)/time.h \
 $(INC_DIR)/vector.h \
 $(INC_DIR)/model.h \
 $(INC_DIR)/window.h \

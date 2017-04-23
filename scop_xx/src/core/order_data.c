@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 02:22:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/22 03:05:18 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/23 05:09:45 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	order_data(t_vertex_table *v, t_obj_data **data, int n_groups, int flags)
 	while (i < n_groups)
 	{
 		order_position(&v[i], data[i], sign);
-	//	check_out_floats(v[i].position, v[i].i_pos);
+		check_out_floats(v[i].position, v[i].i_pos);
 	/*
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
   	
