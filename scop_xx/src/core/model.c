@@ -29,8 +29,8 @@ void	bound_model(t_model *model)
 
 	i = 0;
 	bv = &model->bv;
-	set_vector(&model->min, FLT_MAX, FLT_MAX, FLT_MAX);
-	set_vector(&model->max, FLT_MIN, FLT_MIN, FLT_MIN);
+	set_vector(&bv->min, FLT_MAX, FLT_MAX, FLT_MAX);
+	set_vector(&bv->max, FLT_MIN, FLT_MIN, FLT_MIN);
 	while (i < model->n_groups)
 	{
 		j = 0;
@@ -39,14 +39,16 @@ void	bound_model(t_model *model)
 			curr.x = model->vertex_tables[i].positions[j + 0];
 			curr.y = model->vertex_tables[i].positions[j + 1];
 			curr.z = model->vertex_tables[i].positions[j + 2];
-			bv->min = vector_min(curr, model->min);
-			bv->max = vector_max(curr, model->max);
+			bv->min = vector_min(curr, bv->min);
+			bv->max = vector_max(curr, bv->max);
 			j += 3;
 		}
 		i++;
 	}
-	bv->center = vector_subtract(bv->max, bv->min);
-	
+	bv->center.x = (bv->max.x + bv->min.x) / 2;
+	bv->center.y = (bv->max.y + bv->min.y) / 2;
+	bv->center.z = (bv->max.z + bv->min.z) / 2;
+	bv->diameter = euclidean_distance3d(bv->max, bv->min);
 
 	//printf("MODEL min = %f, %f, %f\n", model->min.x, model->min.y, model->min.z);
 	//printf("MODEL max = %f, %f, %f\n", model->max.x, model->max.y, model->max.z);

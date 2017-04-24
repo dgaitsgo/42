@@ -67,6 +67,19 @@ void	look_at_cont(t_camera *c, int handedness)
 				c->up);
 }
 
+void	center_model_in_view(t_camera *c, t_model *m)
+{
+	t_vector pos;
+	t_vector direction;
+
+	pos = new_vector(	m->bv.center.x,
+						m->bv.center.y,
+						m->bv.center.z + m->bv.diameter);
+	direction = new_vector(0, 0, -1);
+	set_camera(c, pos, direction, new_vector(0, 1, 0));
+	look_at_cont(c, LH);
+}
+
 void	render(t_scop *scop)
 {
 	t_transform			t;
@@ -77,6 +90,8 @@ void	render(t_scop *scop)
 	set_standard_shader_uniforms(&scop->gl);
 	build_transformation_matrix(scop->model.model, t);
 	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
+	center_model_in_view(&scop->camera, &scop->model);
+	reset_mouse(&scop->window);
 	while (1)
 	{
 		draw_routine(scop);

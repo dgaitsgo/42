@@ -18,5 +18,5 @@ float		calc_fov(float theta);
 double		largest(double a, double b);
 int			sgn(int x);
 double		smallest(double a, double b);
-
+float		euclidean_distance3d(t_vector a, t_vector b);
 #endif

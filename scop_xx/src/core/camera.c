@@ -78,11 +78,22 @@ void			calc_camera_rig(t_camera *c, t_fps_mouse *m)
 	c->up = vector_cross(c->right, c->direction);
 }
 
+void	look_at_cont(t_camera *c, int handedness)
+void	set_camera(	t_camera *c,
+					t_vector position,
+					t_vector direction,
+					t_vector up)
+{
+	c->position = position;
+	c->direction = direction;
+	c->up = up;
+}
 
 void	init_camera(t_camera *camera)
 {
 	init_fps_mouse(&camera->fps_mouse);
 	projection_matrix(camera->projection, FOV, ASPECT_RATIO);
+	//most likely useless :
 	set_vector(&camera->forward, 0, 0, 1);
 	set_vector(&camera->up, 0, 1, 0);
 }
