@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "scop.h"
-int		calls_to_function = 0;
 void		set_standard_shader_uniforms(t_gl *gl)
 {
-	printf("Calls to function : %d\n", calls_to_function++);
-
 	gl->uniform_refs[MODEL] =
 		glGetUniformLocation(gl->shdr_program, "model");
+	gl->uniform_refs[OFFSET] = 
+		glGetUniformLocation(gl->shdr_program, "offset");
 	gl->uniform_refs[VIEW] =
 		glGetUniformLocation(gl->shdr_program, "view");
 	gl->uniform_refs[PROJECTION] =

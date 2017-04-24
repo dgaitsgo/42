@@ -29,6 +29,7 @@ enum					e_SHADER_TYPES
 enum					e_TRANSFORM_TYPES
 {
 	MODEL,
+	OFFSET,
 	VIEW,
 	PROJECTION,
 };
@@ -66,7 +67,7 @@ typedef struct			s_gl
 	t_shader_lst		*curr_vert_shdr;
 	int					n_vert_shdrs;
 	int					n_frag_shdrs;
-	GLuint				uniform_refs[3];
+	GLuint				uniform_refs[4];
 	GLuint				shdr_program;
 	GLint				pos_attrib;
 	GLuint				vao;

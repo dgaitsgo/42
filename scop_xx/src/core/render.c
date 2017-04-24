@@ -80,30 +80,57 @@ void	center_model_in_view(t_camera *c, t_model *m)
 	look_at_cont(c, LH);
 }
 
+void	center_model(t_model *model)
+{
+	t_vector	center;
+	float		*positions;
+	int i;
+
+	i = 0;
+	center = model->bv.center;
+	positions = model->vertex_tables->positions;
+	while (i < model->vertex_tables->i_pos)
+	{
+		positions[i + 0] += 2 * center.x;
+		positions[i + 1] += 2 * center.y;
+		positions[i + 2] += 2 * center.z;
+		i += 3;
+	}
+}
+
 void	render(t_scop *scop)
 {
-	t_transform			t;
+	float		y_rotation;
+
+	y_rotation = 0;
+	build_translation_matrix(scop->model.offset,
+	-scop->model.bv.center.x,
+	-scop->model.bv.center.y,
+	-scop->model.bv.center.z);
 
 	// Wrap this up in a propper "setup"
 	// then call mainloop - putimage makes a nice container
-	init_transform(&t);
+
 	set_standard_shader_uniforms(&scop->gl);
-	build_transformation_matrix(scop->model.model, t);
 	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
 	center_model_in_view(&scop->camera, &scop->model);
-	reset_mouse(&scop->window);
+	reset_mouse(&scop->window);	
 	while (1)
 	{
 		draw_routine(scop);
-		t.rotation.y += 0.2;
+		y_rotation += 1;
 		adjust_view(&scop->camera.fps_mouse, &scop->camera, &scop->window);
 		check_event(&scop->window, &scop->camera);
 		look_at_cont(&scop->camera, RH);
-		build_transformation_matrix(scop->model.model, t);
+		build_rotation_matrix(scop->model.model, 0, y_rotation, 0);
+		//build_transformation_matrix(scop->model.model, t);
 		associate_standard_uniforms(&scop->gl,
 									scop->model.model,
 									scop->camera.view,
 									scop->camera.projection);
+		glUniformMatrix4fv(	scop->gl.uniform_refs[OFFSET],
+							1, GL_TRUE,
+							&scop->model.offset[0][0]);
 		SDL_GL_SwapWindow(scop->window.window);
 	}
 }

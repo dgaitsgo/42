@@ -78,7 +78,6 @@ void			calc_camera_rig(t_camera *c, t_fps_mouse *m)
 	c->up = vector_cross(c->right, c->direction);
 }
 
-void	look_at_cont(t_camera *c, int handedness)
 void	set_camera(	t_camera *c,
 					t_vector position,
 					t_vector direction,
