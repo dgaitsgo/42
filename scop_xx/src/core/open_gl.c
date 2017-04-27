@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:36:43 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 22:30:25 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:55:17 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void		generate_vao(GLuint *ref)
 
 void		default_vertex_attributes(void)
 {	
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	status_gl("Default vertex Attributes", __LINE__, __FILE__);

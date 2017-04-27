@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 20:00:20 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:15:44 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 enum					e_SHADER_TYPES
 {
 	INVALID,
-	FRAG_SHDR,
 	VERT_SHDR,
+	GEOM_SHDR,
+	FRAG_SHDR,
 };
 
 enum					e_TRANSFORM_TYPES
@@ -61,12 +62,19 @@ typedef struct			s_array_group
 typedef struct			s_gl
 {
 	int					flags;
-	t_shader_lst		*root_frag_shdr;
+
 	t_shader_lst		*root_vert_shdr;
-	t_shader_lst		*curr_frag_shdr;
+	t_shader_lst		*root_geom_shdr;
+	t_shader_lst		*root_frag_shdr;
+
 	t_shader_lst		*curr_vert_shdr;
+	t_shader_lst		*curr_geom_shdr;
+	t_shader_lst		*curr_frag_shdr;
+
 	int					n_vert_shdrs;
 	int					n_frag_shdrs;
+	int					n_geom_shdrs;
+
 	GLuint				uniform_refs[4];
 	GLuint				shdr_program;
 	GLint				pos_attrib;

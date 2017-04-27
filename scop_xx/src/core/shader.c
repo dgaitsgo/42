@@ -6,11 +6,26 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 04:39:38 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 18:22:35 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:57:36 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+struct s_shader_lst		*new_shader(short type)
+{
+	struct s_shader_lst	*node;
+
+	node = ft_memalloc(sizeof(t_shader_lst));
+	node->type = type;
+	if (!node)
+		exit(1);
+	node->next = NULL;
+	node->previous = NULL;
+	return (node);
+}
+
+
 void		set_standard_shader_uniforms(t_gl *gl)
 {
 	gl->uniform_refs[MODEL] =
@@ -38,10 +53,15 @@ void		associate_standard_uniforms(t_gl *gl,
 		1, GL_FALSE, &projection[0][0]);
 }
 
-void		bind_shader(GLuint program, GLuint vert_ref, GLuint frag_ref)
+void		bind_shader(GLuint program,
+						GLuint vert_ref,
+						GLuint geom_ref,
+						GLuint frag_ref)
 {
 	glAttachShader(program, vert_ref);
 	status_gl("Attatched vert", __LINE__, __FILE__);
+	glAttachShader(program, geom_ref);
+	status_gl("Attatched geom", __LINE__, __FILE__);
 	glAttachShader(program, frag_ref);
 	status_gl("Attatched frag", __LINE__, __FILE__);
 	glLinkProgram(program);
@@ -55,11 +75,11 @@ void		load_shader(GLenum type, unsigned int *ref, const char *file_name)
 
 	*ref = glCreateShader(type);
 	shader_source = file_to_string(SHADER_PATH, file_name);
-	//my_assert(shader_source != NULL);
 	glShaderSource(*ref, 1, (const GLchar *const *)&shader_source, NULL);
 	status_gl("Asking for sources", __LINE__, __FILE__);
 	glCompileShader(*ref);
 	status_gl("Compile shader", __LINE__, __FILE__);
+
 	//free(shader_source)
 }
 
@@ -93,6 +113,12 @@ void				get_shaders_from_directory(t_gl *gl)
 				shader_type = GL_VERTEX_SHADER;	
 				gl->n_vert_shdrs++;
 			}
+			else if (ext == GEOM_SHDR)
+			{
+				ref = &gl->curr_geom_shdr->ref;
+				shader_type = GL_GEOMETRY_SHADER;
+				gl->n_geom_shdrs++;
+			}
 			else if (ext == FRAG_SHDR)
 			{
 				ref = &gl->curr_frag_shdr->ref;
@@ -108,12 +134,17 @@ void				get_shaders_from_directory(t_gl *gl)
 
 void		init_shader_lst(t_gl *gl)
 {
-	gl->root_frag_shdr = new_shader(FRAG_SHDR);
 	gl->root_vert_shdr = new_shader(VERT_SHDR);
-	gl->curr_frag_shdr = gl->root_frag_shdr;
+	gl->root_geom_shdr = new_shader(GEOM_SHDR);
+	gl->root_frag_shdr = new_shader(FRAG_SHDR);
+
 	gl->curr_vert_shdr = gl->root_vert_shdr;
+	gl->curr_frag_shdr = gl->root_frag_shdr;
+	gl->curr_geom_shdr = gl->root_geom_shdr;
+
 	gl->n_vert_shdrs = 0;
 	gl->n_frag_shdrs = 0;
+	gl->n_geom_shdrs = 0;
 }
 
 void		load_shaders(t_gl *gl)
@@ -123,5 +154,8 @@ void		load_shaders(t_gl *gl)
 		/*	Also, gets first shader running*/
 	gl->shdr_program = glCreateProgram();
 	status_gl("Creating program", __LINE__, __FILE__);
-	bind_shader(gl->shdr_program, gl->root_vert_shdr->ref, gl->root_frag_shdr->ref);
+	bind_shader(gl->shdr_program,
+				gl->root_vert_shdr->ref,
+				gl->root_geom_shdr->ref,
+				gl->root_frag_shdr->ref);
 }
