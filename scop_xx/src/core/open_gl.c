@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:36:43 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 15:50:29 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:17:46 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,11 @@ void		init_open_gl(t_scop *scop)
 	generate_vao(&scop->gl.vao);
 	default_vertex_attributes();
 }
+
+void		init_gl_struct(t_gl *gl)
+{
+	//init_gl_texture_list();
+	//init_shader_lst();
+	//gl->n_textures = 0;
+}
+

@@ -6,13 +6,13 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 12:17:55 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 14:16:09 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:37:57 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void		about_tga(t_tga *t, FILE *f)
+void		about_tga(t_texture_lst *t, FILE *f)
 {
 	unsigned char	trash_char;
 	short int		trash_int;
@@ -22,6 +22,7 @@ void		about_tga(t_tga *t, FILE *f)
 	fread(&trash_char, sizeof(unsigned char), 1, f);
 
 	fread(&t->image_type, sizeof(unsigned char), 1, f);
+	printf("This image type = %d\n", (int)t->image_type);
 	if (t->image_type != 2 && t->image_type != 3)
 	{
 		//ft_error : invalid_texture
@@ -44,18 +45,17 @@ void		about_tga(t_tga *t, FILE *f)
 	t->image_size = t->width * t->height * t->bit_depth;
 }
 
-char		*parse_tga(char *path)
+void	parse_tga(const char *file_name, t_texture_lst *t)
 {
 	FILE			*f;
-	char			*tga;
-	t_tga			t;
-	int				i;
+	char			buff[512];
 
-	i = 0;
-	f = fopen(path, "r");
+	sprintf(buff, "%s%s", TEXTURE_PATH, file_name);
+	printf("BUFF = %s\n", buff);
+	f = fopen(buff, "r");
 	assert(f != NULL);
-	about_tga(&t, f);
-	tga = ft_memalloc(sizeof(unsigned char) * t.image_size);
-	fread(tga, sizeof(unsigned char), t.image_size, f);
-	return (tga);
+	printf("Obfiously here\n");
+	about_tga(t, f);
+	t->data = ft_memalloc(sizeof(unsigned char) * t->image_size);
+	fread(t->data, sizeof(unsigned char), t->image_size, f);
 }

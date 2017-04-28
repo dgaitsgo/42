@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 16:00:50 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:38:02 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct		s_scop
 	t_model			model;
 	t_gl			gl;
 	t_camera		camera;
-	t_texture		*textures;
 }					t_scop;
 
 void				init_open_gl(t_scop *scop);
@@ -80,5 +79,7 @@ void				render(t_scop *scop);
 void				adjust_view(t_fps_mouse *m,
 								t_camera *c,
 								t_window *window);
+
+void				load_textures(t_gl *gl);
 
 #endif

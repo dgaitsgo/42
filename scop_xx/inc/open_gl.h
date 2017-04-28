@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 16:00:49 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:38:01 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "model.h"
 #include "transform.h"
 
-# define SHADER_PATH	"./shaders"
+# define SHADER_PATH	"./shaders/"
 
 enum					e_SHADER_TYPES
 {
@@ -43,7 +43,6 @@ typedef struct			s_shader_lst
 typedef struct			s_array_group
 {	
 	GLuint				vbo;
-	t_texture			texture;
 	GLfloat				*vertices;
 	GLfloat				*normals;
 	GLfloat				*text_coords;
@@ -68,9 +67,14 @@ typedef struct			s_gl
 	t_shader_lst		*curr_geom_shdr;
 	t_shader_lst		*curr_frag_shdr;
 
+	t_texture_lst		*root_texture;
+	t_texture_lst		*curr_texture;
+
 	int					n_vert_shdrs;
 	int					n_frag_shdrs;
 	int					n_geom_shdrs;
+
+	int					n_textures;
 
 	GLuint				uniform_refs[4];
 	GLuint				shdr_program;

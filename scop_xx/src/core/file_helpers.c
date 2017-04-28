@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:36:57 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 16:00:45 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:14:47 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ char	*file_to_string(const char *path, const char *file)
 	char	buff[512];
 	char	*dst;
 
-	sprintf(buff, "%s/%s", path, file);
+	if (path != NULL)
+		sprintf(buff, "%s%s", path, file);
+	else
+		sprintf(buff, "%s", file);
 	if (!(fd = fopen(buff, "r")))
 		exit(1);
 	fseek(fd, 0L, SEEK_END);

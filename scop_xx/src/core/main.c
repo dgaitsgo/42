@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 15:24:16 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:17:48 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			main(int argc, char **argv)
 		//this should have getters, window size can change in execution
 		init_window(&scop.window, argv[1], (int)WIN_WIDTH, (int)WIN_HEIGHT);	
 		printf("Loaded window\n");
+		//gl struct should be initited also
 		init_model(&scop.model);
 		printf("Initialized model\n");
 		init_camera(&scop.camera);
@@ -54,7 +55,7 @@ int			main(int argc, char **argv)
 		printf("Loaded obj\n");
 		load_shaders(&scop.gl);
 		printf("Loaded shaders\n");
-		//load_textures(&scop.textures);
+		load_textures(&scop.gl);
 		printf("Loaded Textures\n");
 		init_open_gl(&scop);
 		printf("Initialised openGl\n");

@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/28 15:17:09 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/28 16:48:55 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ $(SRC_DIR)/core/constructors.c \
 $(SRC_DIR)/core/event.c \
 $(SRC_DIR)/core/texture.c \
 $(SRC_DIR)/core/parse_mesh.c \
+$(SRC_DIR)/core/parse_tga.c \
 $(SRC_DIR)/core/helpers.c \
 $(SRC_DIR)/core/math.c \
 $(SRC_DIR)/core/render.c \

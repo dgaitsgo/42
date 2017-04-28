@@ -3,6 +3,7 @@
 
 #include "vector.h"
 #include "open_gl.h"
+#include "texture.h"
 
 enum			e_flags
 {
@@ -21,11 +22,10 @@ enum						e_model_indices
 	TEXTURE,
 };
 
-typedef struct 				s_texture
+typedef struct				s_mtl
 {
-	GLuint					id;
-	int						type;
-}							t_texture;
+	t_texture_lst			*textures;
+}							t_mtl;
 
 typedef struct				s_bounding_sphere
 {

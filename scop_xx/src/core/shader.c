@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 04:39:38 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 16:00:47 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:14:54 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,20 @@ void			next_shader(int type, t_shader_lst *e)
 	e = e->next;
 }
 
+/*
+	This is organized in a shitty way.
+
+	there should be 1 shader program per node, and the programs 
+	should switch not individual components.
+	They could be associated by name e.g:
+		simple.vert
+		simple.geom
+		simple.frag
+
+		complicated.vert
+		complicated.frag
+*/
+
 void				get_shaders_from_directory(t_gl *gl)
 {
 	DIR				*dir;
@@ -113,7 +127,6 @@ void				get_shaders_from_directory(t_gl *gl)
 	{
 		ext_str = get_extension(file->d_name);
 		ext = match_extension_to_enum(ext_str);
-		printf("FILE : %s\t\tEXT = %d\n", file->d_name, ext);
 		if (ext != INVALID)
 		{
 			add_to_shader_tally(gl, ext);
