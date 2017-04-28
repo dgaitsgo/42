@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/31 16:35:38 by dgaitsgo          #+#    #+#              #
-#    Updated: 2017/04/23 06:57:41 by dgaitsgo         ###   ########.fr        #
+#    Updated: 2017/04/28 15:17:09 by dgaitsgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ $(SRC_DIR)/core/window.c \
 $(SRC_DIR)/core/open_gl.c \
 $(SRC_DIR)/core/constructors.c \
 $(SRC_DIR)/core/event.c \
+$(SRC_DIR)/core/texture.c \
 $(SRC_DIR)/core/parse_mesh.c \
 $(SRC_DIR)/core/helpers.c \
 $(SRC_DIR)/core/math.c \
@@ -63,6 +64,7 @@ $(INC_DIR)/libft.h \
 $(INC_DIR)/get_next_line.h \
 $(INC_DIR)/macros.h \
 $(INC_DIR)/matrix.h \
+$(INC_DIR)/texture.h \
 $(INC_DIR)/flags.h \
 $(INC_DIR)/transform.h \
 $(INC_DIR)/time.h \

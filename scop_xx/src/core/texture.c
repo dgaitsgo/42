@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags.h                                            :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/24 17:15:48 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 14:14:24 by dgaitsgo         ###   ########.fr       */
+/*   Created: 2017/04/28 11:40:23 by dgaitsgo          #+#    #+#             */
+/*   Updated: 2017/04/28 15:23:28 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FLAGS_H
-# define __FLAGS_H
+#include "scop.h"
 
-# define BIT_SET(a,b) ((a) |= (1<<(b)))
-# define BIT_CLEAR(a,b) ((a) &= ~(1<<(b)))
-# define BIT_FLIP(a,b) ((a) ^= (1<<(b)))
-# define BIT_CHECK(a,b) ((a) & (1<<(b)))
-
-#endif
+void		load_textures(t_scop *scop)
+{
+	
+}

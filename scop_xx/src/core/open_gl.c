@@ -6,11 +6,46 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:36:43 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/27 17:55:17 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 15:50:29 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+GLuint		get_curr_shader_ref(t_gl *gl, int shader_type)
+{
+	GLuint 	ref;
+
+	if (shader_type == GL_VERTEX_SHADER)
+		ref = gl->curr_vert_shdr->ref;
+	else if (shader_type == GL_GEOMETRY_SHADER)
+		ref = gl->curr_geom_shdr->ref;
+	else if (shader_type == GL_FRAGMENT_SHADER)
+		ref = gl->curr_frag_shdr->ref;
+	return (ref);
+}
+
+t_shader_lst *get_curr_shader(t_gl *gl, int shader_type)
+{
+	if (shader_type == GL_VERTEX_SHADER)
+		return (gl->curr_vert_shdr);
+	else if (shader_type == GL_GEOMETRY_SHADER)
+		return (gl->curr_geom_shdr);
+	else if (shader_type == GL_FRAGMENT_SHADER)
+		return (gl->curr_frag_shdr);
+	return (NULL);
+}
+
+void	add_to_shader_tally(t_gl *gl, int shader_type)
+{
+	if (shader_type == GL_VERTEX_SHADER)
+		gl->n_vert_shdrs++;
+	else if (shader_type == GL_GEOMETRY_SHADER)
+		gl->n_geom_shdrs++;
+	else if (shader_type == GL_FRAGMENT_SHADER)
+		gl->n_frag_shdrs++;
+}
+
 
 //			this should be more general to take a color and  a flag
 void		clear_open_gl(t_vector color)

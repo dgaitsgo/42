@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:12:10 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/27 17:15:44 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 16:00:49 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@
 
 enum					e_SHADER_TYPES
 {
-	INVALID,
-	VERT_SHDR,
-	GEOM_SHDR,
-	FRAG_SHDR,
+	INVALID = -1,
 };
 
 enum					e_TRANSFORM_TYPES
@@ -96,4 +93,10 @@ void					associate_standard_uniforms(t_gl *gl,
 										t_matrix model,
 										t_matrix view,
 										t_matrix projection);
+
+
+GLuint					get_curr_shader_ref(t_gl *gl, int shader_type);
+t_shader_lst			*get_curr_shader(t_gl *gl, int shader_type);
+void					add_to_shader_tally(t_gl *gl, int shader_type);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:40:01 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/23 22:28:49 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 16:00:50 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@
 #include "model.h"
 #include "flags.h"
 #include "helpers.h"
+#include "texture.h"
 #include "transform.h"
 #include "libft.h"
 #include "ft_math.h"
 #include "parse_mesh.h"
 
-enum				e_file_types
+enum				e_3d_types
 {
 	OBJ,
 };
@@ -47,6 +48,7 @@ typedef struct		s_scop
 	t_model			model;
 	t_gl			gl;
 	t_camera		camera;
+	t_texture		*textures;
 }					t_scop;
 
 void				init_open_gl(t_scop *scop);

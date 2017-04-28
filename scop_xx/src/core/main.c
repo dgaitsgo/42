@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 16:49:52 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/27 17:16:05 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 15:24:16 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int			main(int argc, char **argv)
 	{
 		fd = fopen(argv[1], "r");
 		assert(fd != NULL);
+		//this should have getters, window size can change in execution
 		init_window(&scop.window, argv[1], (int)WIN_WIDTH, (int)WIN_HEIGHT);	
 		printf("Loaded window\n");
 		init_model(&scop.model);
@@ -53,6 +54,8 @@ int			main(int argc, char **argv)
 		printf("Loaded obj\n");
 		load_shaders(&scop.gl);
 		printf("Loaded shaders\n");
+		//load_textures(&scop.textures);
+		printf("Loaded Textures\n");
 		init_open_gl(&scop);
 		printf("Initialised openGl\n");
 		render(&scop);

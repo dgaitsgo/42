@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 04:39:38 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/27 17:57:36 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 16:00:47 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,15 @@ void		set_standard_shader_uniforms(t_gl *gl)
 	status_gl("Uniforms bound", __LINE__, __FILE__);
 }
 
-//should just take a generic table instead of "t_gl *gl"
+/*
+	TO DO: 
+	typedef struct s_uniform {
+		unsigned int	*locations;
+		int				*types;
+		void 			*uniforms;
+	}
+*/
+
 void		associate_standard_uniforms(t_gl *gl,
 										t_matrix model,
 										t_matrix view,
@@ -85,7 +93,6 @@ void		load_shader(GLenum type, unsigned int *ref, const char *file_name)
 
 void			next_shader(int type, t_shader_lst *e)
 {
-
 	e->previous = e;
 	e->next = new_shader(type);
 	e = e->next;
@@ -95,48 +102,34 @@ void				get_shaders_from_directory(t_gl *gl)
 {
 	DIR				*dir;
 	struct dirent	*file;		
+	char			*ext_str;
 	int				ext;
-	unsigned int	*ref;
-	GLenum			shader_type;
+	t_shader_lst	*shader;
 
 	/*Should check flags if at least one of each type of shader is present*/
 	if (!(dir = opendir(SHADER_PATH)))
 		exit(1);
 	while ((file = readdir(dir)) != NULL)
 	{
-		ext = get_extension(file->d_name);
+		ext_str = get_extension(file->d_name);
+		ext = match_extension_to_enum(ext_str);
+		printf("FILE : %s\t\tEXT = %d\n", file->d_name, ext);
 		if (ext != INVALID)
 		{
-			if (ext == VERT_SHDR)
-			{
-				ref = &gl->curr_vert_shdr->ref;
-				shader_type = GL_VERTEX_SHADER;	
-				gl->n_vert_shdrs++;
-			}
-			else if (ext == GEOM_SHDR)
-			{
-				ref = &gl->curr_geom_shdr->ref;
-				shader_type = GL_GEOMETRY_SHADER;
-				gl->n_geom_shdrs++;
-			}
-			else if (ext == FRAG_SHDR)
-			{
-				ref = &gl->curr_frag_shdr->ref;
-				shader_type = GL_FRAGMENT_SHADER;	
-				gl->n_frag_shdrs++;
-			}
-			load_shader(shader_type, ref, file->d_name);
-			check_shader_compile(*ref);
-			next_shader(ext, gl->curr_vert_shdr);
+			add_to_shader_tally(gl, ext);
+			shader = get_curr_shader(gl, ext);
+			load_shader(ext, &shader->ref, file->d_name);
+			check_shader_compile(shader->ref);
+			next_shader(ext, shader);
 		}
 	}
 }
 
 void		init_shader_lst(t_gl *gl)
 {
-	gl->root_vert_shdr = new_shader(VERT_SHDR);
-	gl->root_geom_shdr = new_shader(GEOM_SHDR);
-	gl->root_frag_shdr = new_shader(FRAG_SHDR);
+	gl->root_vert_shdr = new_shader(GL_VERTEX_SHADER);
+	gl->root_geom_shdr = new_shader(GL_GEOMETRY_SHADER);
+	gl->root_frag_shdr = new_shader(GL_FRAGMENT_SHADER);
 
 	gl->curr_vert_shdr = gl->root_vert_shdr;
 	gl->curr_frag_shdr = gl->root_frag_shdr;

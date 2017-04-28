@@ -6,35 +6,44 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 03:36:57 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/27 17:26:30 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 16:00:45 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
 /*
-	Should be more general to accept an array of strings and expected values
+	match extension to enum:
 
+	TO DO;
+	Should be more general to accept an array of strings and expected values
+	
+	problems:
+	this would match ".geomXXX"
 */
 
-int			get_extension(const char *file_name)
+int	match_extension_to_enum(const char *file_extension)
 {
-	char	*file_extension;
-
-	file_extension = ft_strrchr(file_name, '.');
-	if (file_extension)
+	if (file_extension != NULL)
 	{
 		if (ft_strncmp(file_extension, ".frag", 4) == 0)
-			return (FRAG_SHDR);
+			return (GL_FRAGMENT_SHADER);
 		if (ft_strncmp(file_extension, ".geom", 4) == 0)
-		{
-			printf("Get that geom\n");
-			return (GEOM_SHDR);
-		}
+			return (GL_GEOMETRY_SHADER);
 		if (ft_strncmp(file_extension, ".vert", 4) == 0)
-			return (VERT_SHDR);
+			return (GL_VERTEX_SHADER);
+		if (ft_strncmp(file_extension, ".tga", 4) == 0)
+			return (TGA);
 	}
 	return (INVALID);
+}
+
+char		*get_extension(const char *file_name)
+{
+	char	*extension;
+
+	extension = ft_strrchr(file_name, '.');
+	return (extension);
 }
 
 char	*file_to_string(const char *path, const char *file)

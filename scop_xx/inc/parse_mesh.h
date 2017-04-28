@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:05:56 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/10 17:08:48 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/28 14:00:02 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ typedef struct	s_getline
 }				t_getline;
 
 void		init_getline(t_getline *line);
-int			get_extension(const char *file_name);
 
 #endif
