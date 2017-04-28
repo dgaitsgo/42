@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 13:36:05 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/28 17:38:03 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/29 00:48:17 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #define			TEXTURE_PATH			"./textures/"
 #define			MAX_TEXTURES			8
 
+#include		"open_gl.h"
+
 enum			e_texture_types
 {
 	TGA,
@@ -23,6 +25,7 @@ enum			e_texture_types
 
 typedef struct				s_texture_lst
 {
+	GLuint					ref;
 	int						file_type;
 	unsigned char			image_type;
 	unsigned char			bit_depth;

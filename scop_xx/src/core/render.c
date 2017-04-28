@@ -6,11 +6,18 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 13:24:23 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2017/04/27 17:57:35 by dgaitsgo         ###   ########.fr       */
+/*   Updated: 2017/04/29 01:23:05 by dgaitsgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+void	set_texture(t_gl *gl)
+{
+	int tex_loc = glGetUniformLocation (gl->shdr_program, "basic_texture");
+	glUseProgram(gl->shdr_program);
+	glUniform1i(tex_loc, 0);
+}
 
 void	draw_routine(t_scop *scop)
 {
@@ -20,6 +27,7 @@ void	draw_routine(t_scop *scop)
 	i = 0;
 	set_vector(&sky, 19, 12, 30);
 	clear_open_gl(sky);
+	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
 	glBindVertexArray(scop->gl.vao);
 	while (i < scop->model.n_groups)
@@ -43,13 +51,21 @@ void	check_event(t_window *window, t_camera *c)
 		if (SDL_EVENT.type == SDL_QUIT || KEY == SDLK_ESCAPE)
 			kill_sdl(window);
 		if (KEY == SDLK_w)
-			c->position = vector_add(c->position, vector_scale(c->direction, delta_time * m->speed));	
+			c->position = 
+				vector_add(c->position,
+				vector_scale(c->direction, delta_time * m->speed));	
 		if (KEY == SDLK_s)
-			c->position = vector_subtract(c->position, vector_scale(c->direction, delta_time * m->speed));
+			c->position =
+				vector_subtract(c->position,
+				vector_scale(c->direction, delta_time * m->speed));
 		if (KEY == SDLK_d)
-			c->position = vector_add(c->position, vector_scale(c->right, delta_time * m->speed));
+			c->position =
+				vector_add(c->position,
+				vector_scale(c->right, delta_time * m->speed));
 		if (KEY == SDLK_a)
-			c->position = vector_subtract(c->position, vector_scale(c->right, delta_time * m->speed));
+			c->position =
+				vector_subtract(c->position,
+				vector_scale(c->right, delta_time * m->speed));
 	}
 }
 
