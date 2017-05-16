@@ -36,6 +36,7 @@
 
 typedef	struct					s_sdlwindow
 {
+	SDL_DisplayMode				mode;
 	SDL_Window					*window;
 	SDL_Surface					*screen;
 	SDL_Surface					*image;

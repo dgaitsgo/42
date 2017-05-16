@@ -20,11 +20,10 @@ void		 main () {
 
 	text_coords.x = map(fPositions.x, -1, 1, 0, 1);
 	text_coords.y = map(fPositions.y, -1, 1, 0, 1);
-
 	texel = texture(basic_texture, text_coords); 
 
 	normal_map = vec4 (fNormal, 1.0);
 
-	//frag_colour = normal_map;
 	frag_colour = texel;
+//	frag_colour = normal_map;
 }

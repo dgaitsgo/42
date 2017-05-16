@@ -93,6 +93,7 @@ void		init_open_gl(t_scop *scop)
 						scop->model.vertex_tables[i].positions);
 		i++;
 	}
+	glEnable(GL_DEPTH_TEST);
 	generate_vao(&scop->gl.vao);
 	default_vertex_attributes();
 }

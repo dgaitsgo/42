@@ -33,6 +33,8 @@ void	draw_routine(t_scop *scop)
 	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
 	glBindVertexArray(scop->gl.vao);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
 	while (i < scop->model.n_groups)
 	{
 		glDrawArrays(	GL_TRIANGLES,
@@ -137,7 +139,7 @@ void	render(t_scop *scop)
 	while (1)
 	{
 		draw_routine(scop);
-		y_rotation += 1;
+		y_rotation += .4;
 		adjust_view(&scop->camera.fps_mouse, &scop->camera, &scop->window);
 		check_event(&scop->window, &scop->camera);
 		look_at_cont(&scop->camera, RH);

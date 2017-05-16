@@ -30,15 +30,27 @@ void	set_SDL_attributes(void)
 
 void			init_window(WINDOW *window, char *title, int width, int height)
 {
-	SDL_WIDTH = width;
-	SDL_HEIGHT = height;
+	int x_offset;
+	int y_offset;
+
 	SDL_DEPTH = DEFAULT_COLOR_DEPTH;
 	SDL_BPL = SDL_WIDTH * (SDL_DEPTH / DEFAULT_COLOR_DEPTH / 3);
 	SDL_Init(SDL_INIT_VIDEO);
+
+	SDL_GetCurrentDisplayMode(0, &window->mode);
+	SDL_WIDTH = window->mode.w;
+	SDL_HEIGHT = window->mode.h;
+
 	set_SDL_attributes();
-	SDL_WINDOW = SDL_CreateWindow(title, 100, 200,
-	SDL_WIDTH, SDL_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-	//SDL_SetWindowFullscreen(SDL_WINDOW, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	x_offset = (window->mode.w - SDL_WIDTH) / 2;
+	y_offset = (window->mode.h - SDL_HEIGHT) / 2;
+	SDL_WINDOW = SDL_CreateWindow(	title,
+									x_offset,
+									y_offset,
+									SDL_WIDTH,
+									SDL_HEIGHT,
+									SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	SDL_SetWindowFullscreen(SDL_WINDOW, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	window->gl_context = SDL_GL_CreateContext(SDL_WINDOW);
 	printf("%s\n", glGetString(GL_VERSION));
 }
