@@ -46,12 +46,11 @@ void	add_to_shader_tally(t_gl *gl, int shader_type)
 		gl->n_frag_shdrs++;
 }
 
-//			this should be more general to take a color and  a flag
-void		clear_open_gl(t_vector color)
+void		clear_open_gl(t_vector color, GLbitfield mask)
 {
 	rgb_to_normal(&color);
 	glClearColor(color.x, color.y, color.z, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(mask);
 }
 
 void		generate_vbo(GLuint *ref, int n_faces, GLfloat *vertices)

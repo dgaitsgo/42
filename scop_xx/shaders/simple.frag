@@ -1,19 +1,30 @@
 #version 410
 
-out vec4 frag_colour;
-vec4 normal_map;
+out vec4			frag_colour;
 
-in vec3 fNormal;
+in	vec3 			fNormal;
+in	vec4			fPositions;
 
-uniform sampler2D basic_texture;
+vec4 				normal_map;
+vec4				texel;
+vec2				text_coords;
 
-vec2 text_coords;
+uniform sampler2D	basic_texture;
 
-void main () {
-	text_coords = gl_FragCoord.xz;
+float		map(float value, float low1, float high1, float low2, float high2)
+{
+	return (low2 + (value - low1) * (high2 - low2) / (high1 - low1));
+}
+
+void		 main () {
+
+	text_coords.x = map(fPositions.x, -1, 1, 0, 1);
+	text_coords.y = map(fPositions.y, -1, 1, 0, 1);
+
+	texel = texture(basic_texture, text_coords); 
+
 	normal_map = vec4 (fNormal, 1.0);
-	frag_colour = vec4(sin(normal_map.z), cos(text_coords.y), tan(normal_map.x) * gl_FragCoord.z, 1);
 
-	//texture(basic_texture, text_coords);
-
+	//frag_colour = normal_map;
+	frag_colour = texel;
 }

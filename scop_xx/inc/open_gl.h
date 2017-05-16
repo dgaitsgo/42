@@ -88,7 +88,7 @@ void					check_shader_compile(GLuint shader_name);
 void					status_gl(const char *message, int line, char *file);
 void					set_standard_shader_uniforms(t_gl *gl);
 void					set_buffer_refs();
-void					clear_open_gl(t_vector color);
+void					clear_open_gl(t_vector color, GLbitfield mask);
 struct s_shader_lst		*new_shader(short type);
 void					load_shaders(t_gl *gl);
 void					get_active_uniforms(GLuint program, GLuint n_uniforms);
@@ -99,6 +99,7 @@ void					associate_standard_uniforms(t_gl *gl,
 										t_matrix projection);
 
 
+void					set_texture(t_gl *gl);
 GLuint					get_curr_shader_ref(t_gl *gl, int shader_type);
 t_shader_lst			*get_curr_shader(t_gl *gl, int shader_type);
 void					add_to_shader_tally(t_gl *gl, int shader_type);

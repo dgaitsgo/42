@@ -39,3 +39,9 @@ float euclidean_distance3d(t_vector a, t_vector b)
 {
 	return (sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2)));
 }
+
+int		power_of_two(int x, int y)
+{
+	return ((x & (x - 1)) != 0 || (y & (y - 1)) != 0);
+}
+

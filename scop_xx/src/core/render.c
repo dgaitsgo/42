@@ -14,7 +14,9 @@
 
 void	set_texture(t_gl *gl)
 {
-	int tex_loc = glGetUniformLocation (gl->shdr_program, "basic_texture");
+	int tex_loc;
+
+	tex_loc = glGetUniformLocation (gl->shdr_program, "basic_texture");
 	glUseProgram(gl->shdr_program);
 	glUniform1i(tex_loc, 0);
 }
@@ -25,8 +27,9 @@ void	draw_routine(t_scop *scop)
 	t_vector	sky;
 
 	i = 0;
+	//set_vector(&sky, 190, 112, 130);
 	set_vector(&sky, 19, 12, 30);
-	clear_open_gl(sky);
+	clear_open_gl(sky, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
 	glBindVertexArray(scop->gl.vao);

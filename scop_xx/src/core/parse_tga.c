@@ -17,6 +17,7 @@ void		about_tga(t_texture_lst *t, FILE *f)
 	unsigned char	trash_char;
 	short int		trash_int;
 
+	printf("\nAbout Texture :\n");
 	//first two bytes are id length, useless
 	fread(&trash_char, sizeof(unsigned char), 1, f);
 	fread(&trash_char, sizeof(unsigned char), 1, f);
@@ -24,6 +25,8 @@ void		about_tga(t_texture_lst *t, FILE *f)
 	fread(&t->image_type, sizeof(unsigned char), 1, f);
 	if (t->image_type != 2 && t->image_type != 3)
 		exit (1);
+	if (t->image_type == 2)
+		printf("Uncompressed RGB Image\n");
 	fread(&trash_int, sizeof(short int), 1, f);
 	fread(&trash_int, sizeof(short int), 1, f);
 	fread(&trash_char, sizeof(unsigned char), 1, f);
@@ -44,6 +47,21 @@ void		about_tga(t_texture_lst *t, FILE *f)
 	t->image_size = t->width * t->height * t->color_mode;
 }
 
+void bgr_to_rgb(unsigned char *data, int size)
+{
+	int				i;
+	char			temp;
+
+	i = 0;
+	while (i < size)
+	{
+		temp = data[i + 0];
+		data[i + 0] = data[i + 2];
+		data[i + 2] = temp;
+		i += 3;
+	}
+}
+
 void	parse_tga(const char *file_name, t_texture_lst *t)
 {
 	FILE			*f;
@@ -54,11 +72,8 @@ void	parse_tga(const char *file_name, t_texture_lst *t)
 	assert(f != NULL);
 	about_tga(t, f);
 	t->data = ft_memalloc(sizeof(unsigned char) * t->image_size);
-	if (fread(t->data, sizeof(unsigned char), t->image_size, f) != t->image_size)
+	if (fread(t->data, 1, t->image_size, f) != t->image_size)
 		//ft_error (UNEXPECTED_EOF)
 		exit (-1);
-	//int	fd;
-
-	//fd = open("test", O_RDWR | O_CREAT, S_IRUSR | S_IRGRP | S_IROTH);
-	//write(fd, buff, t->image_size);	
+	bgr_to_rgb(t->data, t->image_size);
 }
