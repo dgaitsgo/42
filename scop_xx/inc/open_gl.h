@@ -24,12 +24,14 @@ enum					e_SHADER_TYPES
 	INVALID = -1,
 };
 
+//fuck this enum, burn it to hell
 enum					e_TRANSFORM_TYPES
 {
 	MODEL,
 	OFFSET,
 	VIEW,
 	PROJECTION,
+	FADE,
 };
 
 typedef struct			s_shader_lst
@@ -55,6 +57,12 @@ typedef struct			s_array_group
 	int					n_faces;
 }						t_array_group;
 
+typedef struct			s_uniform
+{
+	GLuint				*locations;
+	void				**adresses;
+}						t_uniform;
+
 typedef struct			s_gl
 {
 	int					flags;
@@ -76,7 +84,7 @@ typedef struct			s_gl
 
 	int					n_textures;
 
-	GLuint				uniform_refs[4];
+	GLuint				uniform_refs[5];
 	GLuint				shdr_program;
 	GLint				pos_attrib;
 	GLuint				vao;

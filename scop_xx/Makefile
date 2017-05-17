@@ -24,7 +24,6 @@ $(SRC_DIR)/core/main.c \
 $(SRC_DIR)/core/window.c \
 $(SRC_DIR)/core/open_gl.c \
 $(SRC_DIR)/core/constructors.c \
-$(SRC_DIR)/core/event.c \
 $(SRC_DIR)/core/texture.c \
 $(SRC_DIR)/core/parse_mesh.c \
 $(SRC_DIR)/core/parse_tga.c \

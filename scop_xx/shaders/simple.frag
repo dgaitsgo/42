@@ -1,5 +1,7 @@
 #version 410
 
+uniform	 float		fade;
+
 out vec4			frag_colour;
 
 in	vec3 			fNormal;
@@ -20,10 +22,9 @@ void		 main () {
 
 	text_coords.x = map(fPositions.x, -1, 1, 0, 1);
 	text_coords.y = map(fPositions.y, -1, 1, 0, 1);
-	texel = texture(basic_texture, text_coords); 
 
+	texel = texture(basic_texture, text_coords); 
 	normal_map = vec4 (fNormal, 1.0);
 
-	frag_colour = texel;
-//	frag_colour = normal_map;
+	frag_colour = mix(normal_map, texel, fade);
 }

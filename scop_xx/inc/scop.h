@@ -48,6 +48,8 @@ typedef struct		s_scop
 	t_model			model;
 	t_gl			gl;
 	t_camera		camera;
+	int				fade;
+	float			curr_fade;
 }					t_scop;
 
 void				init_open_gl(t_scop *scop);

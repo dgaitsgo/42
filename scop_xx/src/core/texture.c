@@ -27,7 +27,6 @@ void		set_open_gl_texture_flags(void)
 {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 }
@@ -38,8 +37,6 @@ void		next_texture(t_texture_lst *e)
 	e->next = new_texture();
 	e = e->next;
 }
-
-//not painfully, but somewhat repetitive (see shaders):
 
 void		gen_and_activate_texture(t_texture_lst *t)
 {

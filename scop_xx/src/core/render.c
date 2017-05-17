@@ -27,13 +27,11 @@ void	draw_routine(t_scop *scop)
 	t_vector	sky;
 
 	i = 0;
-	//set_vector(&sky, 190, 112, 130);
 	set_vector(&sky, 19, 12, 30);
 	clear_open_gl(sky, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
 	glBindVertexArray(scop->gl.vao);
-
 	glGenerateMipmap(GL_TEXTURE_2D);
 	while (i < scop->model.n_groups)
 	{
@@ -44,7 +42,7 @@ void	draw_routine(t_scop *scop)
 	}
 }
 
-void	check_event(t_window *window, t_camera *c)
+void	check_event(t_scop *scop, t_window *window, t_camera *c)
 {
 	float 		delta_time;
 	t_fps_mouse *m;
@@ -71,6 +69,15 @@ void	check_event(t_window *window, t_camera *c)
 			c->position =
 				vector_subtract(c->position,
 				vector_scale(c->right, delta_time * m->speed));
+		if (window->event.type == SDL_KEYDOWN && window->event.key.repeat == 0)
+		{
+			if (KEY == SDLK_c)
+			{
+				printf("Previous = %d\n", scop->fade);
+				scop->fade = !scop->fade;	
+				printf("Next = %d\n", scop->fade);
+			}
+		}
 	}
 }
 
@@ -119,6 +126,26 @@ void	center_model(t_model *model)
 	}
 }
 
+float	update_fade(int fade, float curr_fade, float delta)
+{
+	float speed;
+
+	speed = 0.001f;
+	if (fade && curr_fade < 1.0f)
+	{
+		curr_fade += speed * delta;
+		curr_fade = smallest(curr_fade, 1.0);
+		printf("GOING UP : curr fade = %f\n", curr_fade);
+	}
+	if (!fade && curr_fade > 0.0f)
+	{
+		curr_fade -= speed * delta;
+		curr_fade = largest(curr_fade, 0);
+		printf("GOING DOWN : curr fade = %f\n", curr_fade);
+	}
+	return (curr_fade);
+}
+
 void	render(t_scop *scop)
 {
 	float		y_rotation;
@@ -135,16 +162,19 @@ void	render(t_scop *scop)
 	set_standard_shader_uniforms(&scop->gl);
 	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
 	center_model_in_view(&scop->camera, &scop->model);
-	reset_mouse(&scop->window);	
+	reset_mouse(&scop->window);
+	scop->fade = 0;
+	scop->curr_fade = 0.0f;
 	while (1)
 	{
 		draw_routine(scop);
 		y_rotation += .4;
 		adjust_view(&scop->camera.fps_mouse, &scop->camera, &scop->window);
-		check_event(&scop->window, &scop->camera);
+		check_event(scop, &scop->window, &scop->camera);
 		look_at_cont(&scop->camera, RH);
 		build_rotation_matrix(scop->model.model, 0, y_rotation, 0);
 		//build_transformation_matrix(scop->model.model, t);
+		scop->curr_fade = update_fade(scop->fade, scop->curr_fade, scop->camera.fps_mouse.time.delta);
 		associate_standard_uniforms(&scop->gl,
 									scop->model.model,
 									scop->camera.view,
@@ -152,6 +182,9 @@ void	render(t_scop *scop)
 		glUniformMatrix4fv(	scop->gl.uniform_refs[OFFSET],
 							1, GL_TRUE,
 							&scop->model.offset[0][0]);
+		glUniform1f(scop->gl.uniform_refs[FADE], scop->curr_fade);
 		SDL_GL_SwapWindow(scop->window.window);
+		//printf("I can feel it : %d\n", scop->fade);
 	}
 }
+
