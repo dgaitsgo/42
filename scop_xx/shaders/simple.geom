@@ -4,22 +4,24 @@ layout ( triangles ) in;
 layout ( triangle_strip, max_vertices = 3 ) out;
 
 in vData {
-	vec4 raw_pos;
-}	vertices[];
+	int		render_mode;
+	vec4	raw_pos;
+} vertices[];
 
-vec3 		temp1;
-vec3 		temp2;
-out vec3	fNormal;
+vec3 			temp1;
+vec3 			temp2;
 
-out	vec4	fPositions;
+out vec3		fNormal;
+flat out int	render_mode;
+out	vec4		fPositions;
 
 void	main()
 {
-	fPositions = vertices[0].raw_pos;
+//	fPositions = vertices[0].raw_pos;
+	render_mode = vertices[0].render_mode;
 	for (int i = 0; i < gl_in.length(); i++)
-	{ 
+	{
 		gl_Position = gl_in[0].gl_Position;
-
 		temp1 = gl_in[1].gl_Position.xyz - gl_Position.xyz;
 		temp2 = gl_in[2].gl_Position.xyz - gl_Position.xyz;
 		fNormal = normalize (cross (temp1, temp2));

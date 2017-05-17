@@ -38,6 +38,8 @@ void		set_standard_shader_uniforms(t_gl *gl)
 		glGetUniformLocation(gl->shdr_program, "proj");
 	gl->uniform_refs[FADE] =
 		glGetUniformLocation(gl->shdr_program, "fade");
+	gl->uniform_refs[RENDER_MODE] =
+		glGetUniformLocation(gl->shdr_program, "render_mode");
 	status_gl("Uniforms bound", __LINE__, __FILE__);
 }
 

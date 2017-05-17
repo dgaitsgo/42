@@ -50,6 +50,7 @@ typedef struct		s_scop
 	t_camera		camera;
 	int				fade;
 	float			curr_fade;
+	int				render_mode;
 }					t_scop;
 
 void				init_open_gl(t_scop *scop);

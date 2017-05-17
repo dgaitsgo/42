@@ -72,12 +72,11 @@ void	check_event(t_scop *scop, t_window *window, t_camera *c)
 		if (window->event.type == SDL_KEYDOWN && window->event.key.repeat == 0)
 		{
 			if (KEY == SDLK_c)
-			{
-				printf("Previous = %d\n", scop->fade);
 				scop->fade = !scop->fade;	
-				printf("Next = %d\n", scop->fade);
+			if (KEY == SDLK_m)
+				scop->render_mode +=
+					scop->render_mode == MAX_RENDER_MODES ? -MAX_RENDER_MODES : 1 ;
 			}
-		}
 	}
 }
 
@@ -134,14 +133,12 @@ float	update_fade(int fade, float curr_fade, float delta)
 	if (fade && curr_fade < 1.0f)
 	{
 		curr_fade += speed * delta;
-		curr_fade = smallest(curr_fade, 1.0);
-		printf("GOING UP : curr fade = %f\n", curr_fade);
+		//curr_fade = smallest(curr_fade, 1.0);
 	}
 	if (!fade && curr_fade > 0.0f)
 	{
 		curr_fade -= speed * delta;
-		curr_fade = largest(curr_fade, 0);
-		printf("GOING DOWN : curr fade = %f\n", curr_fade);
+		//curr_fade = largest(curr_fade, 0);
 	}
 	return (curr_fade);
 }
@@ -165,6 +162,7 @@ void	render(t_scop *scop)
 	reset_mouse(&scop->window);
 	scop->fade = 0;
 	scop->curr_fade = 0.0f;
+	scop->render_mode = 0;
 	while (1)
 	{
 		draw_routine(scop);
@@ -183,6 +181,7 @@ void	render(t_scop *scop)
 							1, GL_TRUE,
 							&scop->model.offset[0][0]);
 		glUniform1f(scop->gl.uniform_refs[FADE], scop->curr_fade);
+		glUniform1i(scop->gl.uniform_refs[RENDER_MODE], scop->render_mode);
 		SDL_GL_SwapWindow(scop->window.window);
 		//printf("I can feel it : %d\n", scop->fade);
 	}

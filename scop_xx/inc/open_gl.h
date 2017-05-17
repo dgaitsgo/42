@@ -32,6 +32,7 @@ enum					e_TRANSFORM_TYPES
 	VIEW,
 	PROJECTION,
 	FADE,
+	RENDER_MODE,
 };
 
 typedef struct			s_shader_lst
@@ -84,7 +85,7 @@ typedef struct			s_gl
 
 	int					n_textures;
 
-	GLuint				uniform_refs[5];
+	GLuint				uniform_refs[6];
 	GLuint				shdr_program;
 	GLint				pos_attrib;
 	GLuint				vao;
