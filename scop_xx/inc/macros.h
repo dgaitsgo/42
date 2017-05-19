@@ -13,6 +13,7 @@
 #ifndef __MACROS_H
 # define __MACROS_H
 
-# define USAGE "usage : scop ./example.obj\n"
-# define MAX_RENDER_MODES 1
+# define USAGE				"usage : scop ./example.obj\n"
+# define MAX_RENDER_MODES	1
+
 #endif

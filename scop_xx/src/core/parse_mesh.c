@@ -99,6 +99,13 @@ void		push_vertex(t_obj_data *data, char *line)
 	&data->vertices[data->n_vertices].x,
 	&data->vertices[data->n_vertices].y,
 	&data->vertices[data->n_vertices].z);
+
+	printf("vertex %d, @%p = %f, %f, %f\n",
+	data->n_vertices,
+	&data->vertices[data->n_vertices].x,
+	data->vertices[data->n_vertices].x,
+	data->vertices[data->n_vertices].y,
+	data->vertices[data->n_vertices].z);
 }
 
 void		push_text_coord(t_obj_data *data, char *line)
@@ -114,9 +121,9 @@ void		push_normal(t_obj_data *data, char *line)
 {
 	data->n_normals++;
 	sscanf(line, "vn %f %f %f", 
-	&data->vertices[data->n_vertices].x,
-	&data->vertices[data->n_vertices].y,
-	&data->vertices[data->n_vertices].z);
+	&data->normals[data->n_vertices].x,
+	&data->normals[data->n_vertices].y,
+	&data->normals[data->n_vertices].z);
 }
 
 void		write_in_data(t_obj_data **obj_data, FILE *fd, int flags)
@@ -135,7 +142,9 @@ void		write_in_data(t_obj_data **obj_data, FILE *fd, int flags)
 		else if (line.s[0] == 'v' && line.s[1] == 't')
 			push_text_coord(obj_data[i_group], line.s);
 		else if (line.s[0] == 'v' && line.s[1] == 'n')
+		{
 			push_normal(obj_data[i_group], line.s);
+		}
 		else if (line.s[0] == 'f')
 			push_face(obj_data[i_group], line.s, flags);
 	}
@@ -168,7 +177,13 @@ void		load_obj(t_model *model, FILE *fd)
 
 	fseek(fd, 0, SEEK_SET);	
 	write_in_data(model->obj_data, fd, model->flags);
+
+	printf("IN LOAD OBJ %p ::: %f, %f, %f\n",  &model->obj_data[0]->vertices[7].x, model->obj_data[0]->vertices[7].x,
+										model->obj_data[0]->vertices[7].y,
+										model->obj_data[0]->vertices[7].z);
+
 	model->vertex_tables = fetch_vertex_table_mem(model->obj_data, model->n_groups, model->flags);
+
 	order_data(model->vertex_tables, model->obj_data, model->n_groups, model->flags);
 	bound_model(model);
 }

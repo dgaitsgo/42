@@ -98,5 +98,5 @@ void		push_face(t_obj_data *data, char *line, int flags)
 	if (BIT_CHECK(flags, TEXT_COORDS_DEFINED) &&
 		(!(BIT_CHECK(flags, NORMALS_DEFINED))))
 		only_texts_face_push(data, line);
-	/*DEBUG */ //	debug_face(data);
+	/*DEBUG */	debug_face(data);
 }

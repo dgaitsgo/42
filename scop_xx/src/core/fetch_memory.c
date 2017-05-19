@@ -25,6 +25,7 @@ t_vertex_table	*fetch_vertex_table_mem(t_obj_data **data,
 	while (i < n_groups)
 	{
 		total_points = 3 * data[i]->quads + ((data[i]->n_faces + 4) / 4) * 9;
+		printf("TOTAL POINTS = %d\n", total_points);
 		v[i].positions = ft_memalloc(sizeof(float) * total_points);
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
 			v[i].text_coords = ft_memalloc(sizeof(float) * total_points);
@@ -51,6 +52,7 @@ t_obj_data	**fetch_obj_data_mem(	t_group_lst *group,
 	while (i < n_groups)
 	{
 		d[i] = ft_memalloc(sizeof(t_obj_data));
+		printf("I'm ASKING FOR THIS MANY VERTICES IN GROUPS ===== %d\n", group->n_vertices);
 		d[i]->vertices = ft_memalloc(sizeof(t_vector) * group->n_vertices);
 		d[i]->text_coords = ft_memalloc(sizeof(t_vector) * group->n_text_coords);
 		d[i]->normals = ft_memalloc(sizeof(t_vector) * group->n_normals);
