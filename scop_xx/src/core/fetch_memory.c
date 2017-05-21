@@ -12,30 +12,32 @@
 
 #include "scop.h"
 
-t_vertex_table	*fetch_vertex_table_mem(t_obj_data **data,
+t_vertex_table	**fetch_vertex_table_mem(t_obj_data **data,
 										int n_groups,
 										int flags)
 {
-	t_vertex_table	*v;
+	t_vertex_table	**v;
 	int				i;
 	int				total_points;
 
 	i = 0;
-	v = ft_memalloc(sizeof(t_vertex_table) * n_groups);
+	v = ft_memalloc(sizeof(t_vertex_table *) * n_groups);
 	while (i < n_groups)
 	{
+		v[i] = ft_memalloc(sizeof(t_vertex_table));
 		total_points = 3 * data[i]->quads + ((data[i]->n_faces + 4) / 4) * 9;
-		printf("TOTAL POINTS = %d\n", total_points);
-		v[i].positions = ft_memalloc(sizeof(float) * total_points);
+		printf("TOTAL POINTS in GROUP = %d\n", total_points);
+
+		v[i]->positions = ft_memalloc(sizeof(float) * total_points);
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
-			v[i].text_coords = ft_memalloc(sizeof(float) * total_points);
+			v[i]->text_coords = ft_memalloc(sizeof(float) * total_points);
 		else
-			v[i].text_coords = NULL;
+			v[i]->text_coords = NULL;
 		if (BIT_CHECK(flags, NORMALS_DEFINED))
-			v[i].normals = ft_memalloc(sizeof(float) * total_points);
+			v[i]->normals = ft_memalloc(sizeof(float) * total_points);
 		else
-			v[i].normals = NULL;
-		set_to_zero3(&v[i].i_pos, &v[i].i_text, &v[i].i_norm);
+			v[i]->normals = NULL;
+		set_to_zero3(&v[i]->i_pos, &v[i]->i_text, &v[i]->i_norm);
 		i++;
 	}
 	return (v);
@@ -52,7 +54,8 @@ t_obj_data	**fetch_obj_data_mem(	t_group_lst *group,
 	while (i < n_groups)
 	{
 		d[i] = ft_memalloc(sizeof(t_obj_data));
-		printf("I'm ASKING FOR THIS MANY VERTICES IN GROUPS ===== %d\n", group->n_vertices);
+		printf("GROUP (%d)n Vertices : %d\n", i, group->n_vertices);
+		printf("GROUP (%d)n Faces : %d\n", i, group->n_faces);
 		d[i]->vertices = ft_memalloc(sizeof(t_vector) * group->n_vertices);
 		d[i]->text_coords = ft_memalloc(sizeof(t_vector) * group->n_text_coords);
 		d[i]->normals = ft_memalloc(sizeof(t_vector) * group->n_normals);

@@ -27,8 +27,8 @@ void		check_groups(t_group_lst *group)
 	while (group != NULL)
 	{
 		printf("Group %d\n", i);
-		printf("n normals =\t%d\n", group->n_normals);
 		printf("n vertices =\t%d\n", group->n_vertices);
+		printf("n normals =\t%d\n", group->n_normals);
 		printf("n text coords = %d\n", group->n_text_coords);
 		i++;
 		group = group->next;

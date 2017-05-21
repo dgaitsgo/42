@@ -27,7 +27,8 @@ void	draw_routine(t_scop *scop)
 	t_vector	sky;
 
 	i = 0;
-	set_vector(&sky, 19, 12, 30);
+	set_vector(&sky, 255, 255, 255);
+//	set_vector(&sky, 19, 12, 30);
 	clear_open_gl(sky, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
@@ -37,7 +38,7 @@ void	draw_routine(t_scop *scop)
 	{
 		glDrawArrays(	GL_TRIANGLES,
 						0,
-						scop->model.vertex_tables[i].i_pos / 3);	
+						scop->model.vertex_tables[i]->i_pos / 3);
 		i++;
 	}
 }
@@ -115,8 +116,9 @@ void	center_model(t_model *model)
 
 	i = 0;
 	center = model->bv.center;
-	positions = model->vertex_tables->positions;
-	while (i < model->vertex_tables->i_pos)
+	//THIS FUNCTION STILL ONLY ASSUMES ONE GROUP
+	positions = model->vertex_tables[0]->positions;
+	while (i < model->vertex_tables[0]->i_pos)
 	{
 		positions[i + 0] += 2 * center.x;
 		positions[i + 1] += 2 * center.y;

@@ -34,11 +34,11 @@ void	bound_model(t_model *model)
 	while (i < model->n_groups)
 	{
 		j = 0;
-		while (j < model->vertex_tables[i].i_pos)
+		while (j < model->vertex_tables[i]->i_pos)
 		{
-			curr.x = model->vertex_tables[i].positions[j + 0];
-			curr.y = model->vertex_tables[i].positions[j + 1];
-			curr.z = model->vertex_tables[i].positions[j + 2];
+			curr.x = model->vertex_tables[i]->positions[j + 0];
+			curr.y = model->vertex_tables[i]->positions[j + 1];
+			curr.z = model->vertex_tables[i]->positions[j + 2];
 			bv->min = vector_min(curr, bv->min);
 			bv->max = vector_max(curr, bv->max);
 			j += 3;

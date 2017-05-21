@@ -68,20 +68,28 @@ void		check_face_flags(char *line, int *flags)
 void		count_group_data(FILE *fd, t_group_lst *group, int *n_groups, int *flags)
 {
 	t_getline	line;
+	int			last_read_was_face;
 
+	last_read_was_face = 0;
 	init_getline(&line);
 	while (getline(&line.s, &line.n, fd) > 0)
 	{
-		if (line.s[0] == 'g')
-			group = update_group(group, n_groups);
-		else if (line.s[0] == 'v' && line.s[1] == ' ')
+		if (line.s[0] == 'v' && line.s[1] == ' ')
+		{
+			if (last_read_was_face == 1)
+			{
+				group = update_group(group, n_groups);
+				last_read_was_face = 0;
+			}
 			group->n_vertices++;
+		}
 		else if (line.s[0] == 'v' && line.s[1] == 't')
 			group->n_text_coords++;
 		else if (line.s[0] == 'v' && line.s[1] == 'n')
 			group->n_normals++;
 		else if (line.s[0] == 'f')
 		{
+			last_read_was_face = 1;
 			group->n_faces++;
 			if (group->n_faces == 1)
 				check_face_flags(line.s, flags);
@@ -95,23 +103,22 @@ void		count_group_data(FILE *fd, t_group_lst *group, int *n_groups, int *flags)
 void		push_vertex(t_obj_data *data, char *line)
 {
 	data->n_vertices++;
-	sscanf(line, "v %f %f %f", 
+	sscanf(line, "v %e %e %e", 
 	&data->vertices[data->n_vertices].x,
 	&data->vertices[data->n_vertices].y,
 	&data->vertices[data->n_vertices].z);
-
-	printf("vertex %d, @%p = %f, %f, %f\n",
-	data->n_vertices,
-	&data->vertices[data->n_vertices].x,
-	data->vertices[data->n_vertices].x,
-	data->vertices[data->n_vertices].y,
-	data->vertices[data->n_vertices].z);
+	
+	//printf("vertex (%d) :  %f %f %f\n",
+	//data->n_vertices, 
+	//data->vertices[data->n_vertices].x,
+	//data->vertices[data->n_vertices].y,
+	//data->vertices[data->n_vertices].z);
 }
 
 void		push_text_coord(t_obj_data *data, char *line)
 {
 	data->n_text_coords++;
-	sscanf(line, "vt %f %f %f", 
+	sscanf(line, "vt %e %e %e", 
 	&data->text_coords[data->n_text_coords].x,
 	&data->text_coords[data->n_text_coords].y,
 	&data->text_coords[data->n_text_coords].z);
@@ -120,33 +127,43 @@ void		push_text_coord(t_obj_data *data, char *line)
 void		push_normal(t_obj_data *data, char *line)
 {
 	data->n_normals++;
-	sscanf(line, "vn %f %f %f", 
-	&data->normals[data->n_vertices].x,
-	&data->normals[data->n_vertices].y,
-	&data->normals[data->n_vertices].z);
+	sscanf(line, "vn %e %e %e", 
+	&data->normals[data->n_normals].x,
+	&data->normals[data->n_normals].y,
+	&data->normals[data->n_normals].z);
 }
 
 void		write_in_data(t_obj_data **obj_data, FILE *fd, int flags)
 {
 	t_getline	line;
 	int			i_group;
+	int			last_read_was_face;
 
+	last_read_was_face = 0;
 	i_group = 0;
 	init_getline(&line);
 	while (getline(&line.s, &line.n, fd) > 0)
 	{
-		if (line.s[0] == 'g')
-			i_group++;
-		else if (line.s[0] == 'v' && line.s[1] == ' ')
+	//	if (line.s[0] == 'g')
+	//		i_group++;
+		if (line.s[0] == 'v' && line.s[1] == ' ')
+		{
+			if (last_read_was_face == 1)
+			{
+				i_group++;
+				last_read_was_face = 0;
+			}	
 			push_vertex(obj_data[i_group], line.s);
+		}
 		else if (line.s[0] == 'v' && line.s[1] == 't')
 			push_text_coord(obj_data[i_group], line.s);
 		else if (line.s[0] == 'v' && line.s[1] == 'n')
-		{
 			push_normal(obj_data[i_group], line.s);
-		}
 		else if (line.s[0] == 'f')
+		{
+			last_read_was_face = 1;
 			push_face(obj_data[i_group], line.s, flags);
+		}
 	}
 }
 
@@ -173,17 +190,11 @@ void		load_obj(t_model *model, FILE *fd)
 	check_flags(model->flags);
 	model->obj_data = fetch_obj_data_mem(model->root_group, model->n_groups);
 
-//	/*DEBUG:*/	check_groups(model->root_group);
+	/*DEBUG:*/	check_groups(model->root_group);
 
 	fseek(fd, 0, SEEK_SET);	
 	write_in_data(model->obj_data, fd, model->flags);
-
-	printf("IN LOAD OBJ %p ::: %f, %f, %f\n",  &model->obj_data[0]->vertices[7].x, model->obj_data[0]->vertices[7].x,
-										model->obj_data[0]->vertices[7].y,
-										model->obj_data[0]->vertices[7].z);
-
 	model->vertex_tables = fetch_vertex_table_mem(model->obj_data, model->n_groups, model->flags);
-
 	order_data(model->vertex_tables, model->obj_data, model->n_groups, model->flags);
 	bound_model(model);
 }

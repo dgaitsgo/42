@@ -13,6 +13,7 @@ enum			e_flags
 	TEXT_COORDS_DEFINED,
 	NORMALS_DEFINED,
 	MTL_ASSOCIATED,
+	MULTIPLE_OBJECTS,
 };
 
 enum						e_model_indices
@@ -97,7 +98,7 @@ typedef struct				s_model
 	t_matrix				offset;
 	t_group_lst				*root_group;
 	t_obj_data				**obj_data;
-	t_vertex_table			*vertex_tables;
+	t_vertex_table			**vertex_tables;
 	t_bounding_sphere		bv;
 	GLuint					vao;
 }							t_model;

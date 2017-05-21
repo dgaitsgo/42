@@ -89,8 +89,8 @@ void		init_open_gl(t_scop *scop)
 	while (i < scop->model.n_groups)
 	{
 		generate_vbo(	&scop->gl.vbo[i],
-						scop->model.vertex_tables[i].i_pos,
-						scop->model.vertex_tables[i].positions);
+						scop->model.vertex_tables[i]->i_pos,
+						scop->model.vertex_tables[i]->positions);
 		i++;
 	}
 	glEnable(GL_DEPTH_TEST);
