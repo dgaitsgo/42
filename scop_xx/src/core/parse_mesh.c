@@ -76,7 +76,7 @@ void		count_group_data(FILE *fd, t_group_lst *group, int *n_groups, int *flags)
 	{
 		if (line.s[0] == 'v' && line.s[1] == ' ')
 		{
-			if (last_read_was_face == 1)
+			if (BIT_CHECK(*flags, NEGATIVE_INDEXES) && last_read_was_face == 1)
 			{
 				group = update_group(group, n_groups);
 				last_read_was_face = 0;
@@ -148,7 +148,7 @@ void		write_in_data(t_obj_data **obj_data, FILE *fd, int flags)
 	//		i_group++;
 		if (line.s[0] == 'v' && line.s[1] == ' ')
 		{
-			if (last_read_was_face == 1)
+			if (BIT_CHECK(flags, NEGATIVE_INDEXES) && last_read_was_face == 1)
 			{
 				i_group++;
 				last_read_was_face = 0;
