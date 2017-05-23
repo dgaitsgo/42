@@ -10,7 +10,7 @@ uniform float		fade;
 //Ins
 in	vec3 			fNormal;
 in	vec4			fPositions;
-flat in int		render_mode;
+flat in int			render_mode;
 
 vec4				color;
 vec4				texel;

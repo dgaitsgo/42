@@ -29,6 +29,7 @@ NEGATIVE_INDEXES	- -3/-30/-20
 BARE_FORMAT 		- noseperation 		4 8 2 3
 ALL_DEFINED			- many complete		40/30/20/30 19/53/214/30 3592/359/12
 TEXT_UNDEFINED 		- texts non defined	40//34 234//234 34/234/21
+NORM_UNDEFINED		- norms not defined 10
 */
 
 
@@ -178,7 +179,7 @@ void		check_flags(int flags)
 		ft_putstr("f %d//%d %d//%d %d//%d %d//%d\n");
 	if (BIT_CHECK(flags, TEXT_COORDS_DEFINED) &&
 		(!(BIT_CHECK(flags, NORMALS_DEFINED))))
-		ft_putstr ("f %d/%d/ %d/%d/ %d/%d/ %d/%d/\n");
+		ft_putstr ("f %d/%d %d/%d %d/%d %d/%d\n");
 }
 
 void		load_obj(t_model *model, FILE *fd)

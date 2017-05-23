@@ -70,6 +70,14 @@ void	check_event(t_scop *scop, t_window *window, t_camera *c)
 			c->position =
 				vector_subtract(c->position,
 				vector_scale(c->right, delta_time * m->speed));
+		if (KEY == SDLK_b)
+			scop->shrink = largest(0, scop->shrink - delta_time * 0.0005);
+		if (KEY == SDLK_n)
+			scop->shrink = smallest(1, scop->shrink + delta_time * 0.0005);
+		if (KEY == SDLK_j)
+			scop->explode_factor = largest(0, scop->explode_factor - delta_time * 0.001);
+		if (KEY == SDLK_k)
+			scop->explode_factor += delta_time * 0.001;
 		if (window->event.type == SDL_KEYDOWN && window->event.key.repeat == 0)
 		{
 			if (KEY == SDLK_c)
@@ -86,7 +94,7 @@ void	look_at_cont(t_camera *c, int handedness)
 	if (handedness == LH)
 		look_atLH(c->view,
 				c->position,
-				vector_add(c->position, c->direction),
+			vector_add(c->position, c->direction),
 				c->up);
 	else if (handedness == RH)
 		look_atRH(c->view,
@@ -163,6 +171,8 @@ void	render(t_scop *scop)
 	center_model_in_view(&scop->camera, &scop->model);
 	reset_mouse(&scop->window);
 	scop->fade = 0;
+	scop->shrink = 1.0f;
+	scop->explode_factor = 0.0f;
 	scop->curr_fade = 0.0f;
 	scop->render_mode = 0;
 	while (1)
@@ -184,8 +194,9 @@ void	render(t_scop *scop)
 							&scop->model.offset[0][0]);
 		glUniform1f(scop->gl.uniform_refs[FADE], scop->curr_fade);
 		glUniform1i(scop->gl.uniform_refs[RENDER_MODE], scop->render_mode);
+		glUniform1f(scop->gl.uniform_refs[SHRINK_FACTOR], scop->shrink);
+		glUniform1f(scop->gl.uniform_refs[EXPLODE_FACTOR], scop->explode_factor);
 		SDL_GL_SwapWindow(scop->window.window);
-		//printf("I can feel it : %d\n", scop->fade);
 	}
 }
 

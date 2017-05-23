@@ -48,6 +48,8 @@ typedef struct		s_scop
 	t_model			model;
 	t_gl			gl;
 	t_camera		camera;
+	float			shrink;
+	float			explode_factor;
 	int				fade;
 	float			curr_fade;
 	int				render_mode;

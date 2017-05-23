@@ -53,10 +53,10 @@ void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 		pos[v->i_pos + 7] = data->vertices[(int)temp_i.z + offset].y;
 		pos[v->i_pos + 8] = data->vertices[(int)temp_i.z + offset].z;
 
-		printf("Vertex @ %d :  %f, %f, %f\n", (int)temp_i.x, 
-		data->vertices[(int)temp_i.x + offset].x,
-		data->vertices[(int)temp_i.x + offset].y,
-		data->vertices[(int)temp_i.x + offset].z);
+		//printf("Vertex @ %d :  %f, %f, %f\n", (int)temp_i.x, 
+		//data->vertices[(int)temp_i.x + offset].x,
+		//data->vertices[(int)temp_i.x + offset].y,
+		//data->vertices[(int)temp_i.x + offset].z);
 	
 		//it's a quad
 		//make second triangle

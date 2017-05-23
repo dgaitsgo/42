@@ -71,11 +71,17 @@ void	only_norms_face_push(t_obj_data *data, char *line)
 	&data->norm_indices[data->n_faces + 3]);
 }
 
+
+/*
+		If textures are missing, sometimes there is no
+	extra '/' at the end of the tupple.
+*/
+
 void	only_texts_face_push(t_obj_data *data, char *line)
 {
 
 	data->n_faces += 4;
-	sscanf(line, "f %d/%d/ %d/%d/ %d/%d/ %d/%d/",
+	sscanf(line, "f %d/%d %d/%d %d/%d %d/%d",
 	&data->vert_indices[data->n_faces + 0],
 	&data->text_indices[data->n_faces + 0],
 	&data->vert_indices[data->n_faces + 1],

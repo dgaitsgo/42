@@ -33,6 +33,8 @@ enum					e_TRANSFORM_TYPES
 	PROJECTION,
 	FADE,
 	RENDER_MODE,
+	SHRINK_FACTOR,
+	EXPLODE_FACTOR,
 };
 
 typedef struct			s_shader_lst
@@ -85,7 +87,7 @@ typedef struct			s_gl
 
 	int					n_textures;
 
-	GLuint				uniform_refs[6];
+	GLuint				uniform_refs[8];
 	GLuint				shdr_program;
 	GLint				pos_attrib;
 	GLuint				vao;

@@ -40,6 +40,10 @@ void		set_standard_shader_uniforms(t_gl *gl)
 		glGetUniformLocation(gl->shdr_program, "fade");
 	gl->uniform_refs[RENDER_MODE] =
 		glGetUniformLocation(gl->shdr_program, "render_mode");
+	gl->uniform_refs[SHRINK_FACTOR] =
+		glGetUniformLocation(gl->shdr_program, "shrink");
+	gl->uniform_refs[EXPLODE_FACTOR] =
+		glGetUniformLocation(gl->shdr_program, "explode_factor");
 	status_gl("Uniforms bound", __LINE__, __FILE__);
 }
 

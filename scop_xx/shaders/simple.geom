@@ -8,32 +8,53 @@ in vData {
 	vec4	raw_pos;
 } vertices[];
 
+uniform float	shrink;
+uniform float	explode_factor;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
+uniform mat4 offset;
+
 vec3 			temp1;
 vec3 			temp2;
+
+vec4			v[3];
+vec4			cg;
 
 out vec3		fNormal;
 flat out int	render_mode;
 out	vec4		fPositions;
 
+void	prepVertex(int i)
+{
+	fPositions = vertices[i].raw_pos;
+	//fPositions = gl_Position;
+
+	gl_Position = cg + shrink * (v[i] - cg);
+	gl_Position = gl_Position + vec4(explode_factor * fNormal, 0.0);
+	gl_Position.w = 1.0f;
+	gl_Position = proj * view * model * offset * gl_Position;
+
+	EmitVertex ();
+}
 void	main()
 {
-//	fPositions = vertices[0].raw_pos;
-	render_mode = vertices[0].render_mode;
-	for (int i = 0; i < gl_in.length(); i++)
-	{
-		gl_Position = gl_in[0].gl_Position;
-		temp1 = gl_in[1].gl_Position.xyz - gl_Position.xyz;
-		temp2 = gl_in[2].gl_Position.xyz - gl_Position.xyz;
-		fNormal = normalize (cross (temp1, temp2));
+	v[0] = gl_in[0].gl_Position.xyzw;
+	v[1] = gl_in[1].gl_Position.xyzw;
+	v[2] = gl_in[2].gl_Position.xyzw;
 
-		fPositions = vertices[0].raw_pos;
-			EmitVertex ();
-		gl_Position = gl_in[1].gl_Position;
-		fPositions = vertices[1].raw_pos;
-			EmitVertex ();
-		gl_Position = gl_in[2].gl_Position;
-		fPositions = vertices[2].raw_pos;
-			EmitVertex ();
+	render_mode = vertices[0].render_mode;
+
+	cg = (v[0] + v[1] + v[2]) / 3;
+
+	temp1 = gl_in[1].gl_Position.xyz - gl_in[0].gl_Position.xyz;
+	temp2 = gl_in[2].gl_Position.xyz - gl_in[0].gl_Position.xyz;
+	fNormal = normalize (cross (temp1, temp2));
+
+	for (int i = 0; i < 3; i++)
+	{
+		prepVertex(i);
 	}
 	EndPrimitive ();
 }
