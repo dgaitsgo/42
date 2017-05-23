@@ -13,6 +13,12 @@
 #ifndef __SCOP_H
 # define __SCOP_H
 
+#include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDIServices.h"
+#include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDISetup.h"
+#include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDIThruConnection.h"
+#include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDIDriver.h"
+#include "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFString.h"
+
 #include <stdio.h>
 #include <dirent.h>
 #include <assert.h>
