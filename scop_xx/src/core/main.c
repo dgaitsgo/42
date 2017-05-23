@@ -33,24 +33,39 @@ void		usage(void)
 			What was the value, but how to keep types?
 */
 
-void		setup_midi()
+void	center_model_in_view(t_camera *c, t_model *m)
 {
-	int n_devices;
-	int i;
+	t_vector pos;
+	t_vector direction;
 
-	n_devices = MIDIGetNumberOfDevices();
-		printf("num of Devices = %d\n", n_devices);
-	i = 0;
-	while (i < n_devices)
-	{
-		MIDIDeviceRef midiDevice = MIDIGetDevice(i);
-		CFStringRef	 *midiProperties = malloc(sizeof(CFStringRef));
-		MIDIObjectGetProperties(midiDevice, (CFPropertyListRef *)midiProperties, 0);
-		const char *cs = CFStringGetCStringPtr(*midiProperties, kCFStringEncodingMacRoman );
+	pos = new_vector(	m->bv.center.x,
+						m->bv.center.y,
+						m->bv.center.z + m->bv.diameter);
+	direction = new_vector(0, 0, -1);
+	set_camera(c, pos, direction, new_vector(0, 1, 0));
+	look_at_cont(c, LH);
+}
 
-		i++;
-		//printf("Midi properties: %d, %s\n", i, cs);
-	}
+void	setup_render(t_scop *scop)
+{
+	build_translation_matrix(scop->model.offset,
+	-scop->model.bv.center.x,
+	-scop->model.bv.center.y,
+	-scop->model.bv.center.z);
+
+	// Wrap this up in a propper "setup"
+	// then call mainloop - putimage makes a nice container
+
+	set_standard_shader_uniforms(&scop->gl);
+	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
+	center_model_in_view(&scop->camera, &scop->model);
+	reset_mouse(&scop->window);
+	scop->y_rotation = 0;
+	scop->fade = 0;
+	scop->shrink = 1.0f;
+	scop->explode_factor = 0.0f;
+	scop->curr_fade = 0.0f;
+	scop->render_mode = 0;
 }
 
 int			main(int argc, char **argv)
@@ -58,15 +73,12 @@ int			main(int argc, char **argv)
 	t_scop	scop;
 	FILE	*fd;
 
-
-	scop_log = fopen("log", "w");
+	scop.polygon_mode = 0;
 	if (argc == 2)
 	{
 		fd = fopen(argv[1], "r");
 		assert(fd != NULL);
 		
-		setup_midi();		
-
 		//this should have getters, window size can change in execution
 		init_window(&scop.window, argv[1], (int)WIN_WIDTH, (int)WIN_HEIGHT);	
 		printf("Loaded window\n");
@@ -83,6 +95,8 @@ int			main(int argc, char **argv)
 		printf("Loaded Textures\n");
 		init_open_gl(&scop);
 		printf("Initialised openGl\n");
+		setup_render(&scop);
+		printf("Setup render\n");
 		render(&scop);
 	}
 	else

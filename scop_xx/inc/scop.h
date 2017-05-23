@@ -56,8 +56,10 @@ typedef struct		s_scop
 	t_camera		camera;
 	float			shrink;
 	float			explode_factor;
-	int				fade;
 	float			curr_fade;
+	float			y_rotation;
+	int				polygon_mode;
+	int				fade;
 	int				render_mode;
 }					t_scop;
 

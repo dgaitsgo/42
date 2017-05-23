@@ -84,7 +84,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	make -C ./lib/libft
-	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIB_DIR) -lft -F/Library/Frameworks -framework SDL2 -framework OpenGL -framework CoreMIDIServer -framework CoreFoundation
+	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIB_DIR) -lft -F/Library/Frameworks -framework SDL2 -framework OpenGL
 
 %.o:%.c $(INC_FILES)
 	gcc -c $(FLAGS) -I$(INC_DIR) $< -o $@

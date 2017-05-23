@@ -43,6 +43,14 @@ void	draw_routine(t_scop *scop)
 	}
 }
 
+void	polygon_mode(int pm)
+{
+	if (pm == 1)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
+}
+
 void	check_event(t_scop *scop, t_window *window, t_camera *c)
 {
 	float 		delta_time;
@@ -57,7 +65,7 @@ void	check_event(t_scop *scop, t_window *window, t_camera *c)
 		if (KEY == SDLK_w)
 			c->position = 
 				vector_add(c->position,
-				vector_scale(c->direction, delta_time * m->speed));	
+				vector_scale(c->direction, delta_time * m->speed));
 		if (KEY == SDLK_s)
 			c->position =
 				vector_subtract(c->position,
@@ -80,6 +88,13 @@ void	check_event(t_scop *scop, t_window *window, t_camera *c)
 			scop->explode_factor += delta_time * 0.001;
 		if (window->event.type == SDL_KEYDOWN && window->event.key.repeat == 0)
 		{
+			if (KEY == SDLK_f)
+			{
+				scop->polygon_mode += scop->polygon_mode == MAX_POLYGON_MODES ? -MAX_POLYGON_MODES : 1;
+				polygon_mode(scop->polygon_mode);
+				init_open_gl(scop);
+				render(scop);
+			}
 			if (KEY == SDLK_c)
 				scop->fade = !scop->fade;	
 			if (KEY == SDLK_m)
@@ -101,19 +116,6 @@ void	look_at_cont(t_camera *c, int handedness)
 				c->position,
 				vector_add(c->position, c->direction),
 				c->up);
-}
-
-void	center_model_in_view(t_camera *c, t_model *m)
-{
-	t_vector pos;
-	t_vector direction;
-
-	pos = new_vector(	m->bv.center.x,
-						m->bv.center.y,
-						m->bv.center.z + m->bv.diameter);
-	direction = new_vector(0, 0, -1);
-	set_camera(c, pos, direction, new_vector(0, 1, 0));
-	look_at_cont(c, LH);
 }
 
 void	center_model(t_model *model)
@@ -155,34 +157,15 @@ float	update_fade(int fade, float curr_fade, float delta)
 
 void	render(t_scop *scop)
 {
-	float		y_rotation;
 
-	y_rotation = 0;
-	build_translation_matrix(scop->model.offset,
-	-scop->model.bv.center.x,
-	-scop->model.bv.center.y,
-	-scop->model.bv.center.z);
-
-	// Wrap this up in a propper "setup"
-	// then call mainloop - putimage makes a nice container
-
-	set_standard_shader_uniforms(&scop->gl);
-	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
-	center_model_in_view(&scop->camera, &scop->model);
-	reset_mouse(&scop->window);
-	scop->fade = 0;
-	scop->shrink = 1.0f;
-	scop->explode_factor = 0.0f;
-	scop->curr_fade = 0.0f;
-	scop->render_mode = 0;
 	while (1)
 	{
 		draw_routine(scop);
-		y_rotation += .4;
+		scop->y_rotation += .4;
 		adjust_view(&scop->camera.fps_mouse, &scop->camera, &scop->window);
 		check_event(scop, &scop->window, &scop->camera);
 		look_at_cont(&scop->camera, RH);
-		build_rotation_matrix(scop->model.model, 0, y_rotation, 0);
+		build_rotation_matrix(scop->model.model, 0, scop->y_rotation, 0);
 		//build_transformation_matrix(scop->model.model, t);
 		scop->curr_fade = update_fade(scop->fade, scop->curr_fade, scop->camera.fps_mouse.time.delta);
 		associate_standard_uniforms(&scop->gl,

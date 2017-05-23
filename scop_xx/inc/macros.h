@@ -15,5 +15,6 @@
 
 # define USAGE				"usage : scop ./example.obj\n"
 # define MAX_RENDER_MODES	1
+# define MAX_POLYGON_MODES	1
 
 #endif

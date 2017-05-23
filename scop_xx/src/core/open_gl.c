@@ -71,7 +71,6 @@ void		generate_vao(GLuint *ref)
 
 void		default_vertex_attributes(void)
 {	
-//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
