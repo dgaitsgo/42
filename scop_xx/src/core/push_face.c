@@ -79,7 +79,6 @@ void	only_norms_face_push(t_obj_data *data, char *line)
 
 void	only_texts_face_push(t_obj_data *data, char *line)
 {
-
 	data->n_faces += 4;
 	sscanf(line, "f %d/%d %d/%d %d/%d %d/%d",
 	&data->vert_indices[data->n_faces + 0],
@@ -90,6 +89,8 @@ void	only_texts_face_push(t_obj_data *data, char *line)
 	&data->text_indices[data->n_faces + 2],
 	&data->vert_indices[data->n_faces + 3],
 	&data->text_indices[data->n_faces + 3]);
+
+	printf("NFACES = %d\n", data->n_faces);
 }
 
 void		push_face(t_obj_data *data, char *line, int flags)

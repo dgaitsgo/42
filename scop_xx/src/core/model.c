@@ -31,19 +31,15 @@ void	bound_model(t_model *model)
 	bv = &model->bv;
 	set_vector(&bv->min, FLT_MAX, FLT_MAX, FLT_MAX);
 	set_vector(&bv->max, FLT_MIN, FLT_MIN, FLT_MIN);
-	while (i < model->n_groups)
+	j = 0;
+	while (j < model->vertex_table->i_pos)
 	{
-		j = 0;
-		while (j < model->vertex_tables[i]->i_pos)
-		{
-			curr.x = model->vertex_tables[i]->positions[j + 0];
-			curr.y = model->vertex_tables[i]->positions[j + 1];
-			curr.z = model->vertex_tables[i]->positions[j + 2];
-			bv->min = vector_min(curr, bv->min);
-			bv->max = vector_max(curr, bv->max);
-			j += 3;
-		}
-		i++;
+		curr.x = model->vertex_table->positions[j + 0];
+		curr.y = model->vertex_table->positions[j + 1];
+		curr.z = model->vertex_table->positions[j + 2];
+		bv->min = vector_min(curr, bv->min);
+		bv->max = vector_max(curr, bv->max);
+		j += 3;
 	}
 	bv->center.x = (bv->max.x + bv->min.x) / 2;
 	bv->center.y = (bv->max.y + bv->min.y) / 2;

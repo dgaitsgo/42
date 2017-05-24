@@ -45,8 +45,8 @@ vec4		lambert_shading(vec4 color, s_light light)
 {
 	vec3 inter = normalize(light.origin - positionWorldSpace.xyz);
 	float lambertAmt = dot(inter, fNormal);
-	color += lambertCoeff * color * lambertAmt;
-	return (color);
+	vec4 temp = lambertCoeff * color * lambertAmt;
+	return (temp);
 }
 
 vec4		specular_shading(vec4 color, s_light light)
@@ -57,8 +57,8 @@ vec4		specular_shading(vec4 color, s_light light)
 	float spec = 0;
 	if (dot > 0)
 		spec = pow(dot, 20) * specularCoeff;
-	color += color * spec;
-	return (color);
+	vec4 temp = color * spec;
+	return (temp);
 }
 
 
@@ -75,13 +75,10 @@ void		 main ()
 	texel = texture(basic_texture, text_coords); 
 
 	if (render_mode == mode_greyScale)
-	{
-		//float grey = (abs(fNormal.x) * 0.1f + abs(fNormal.y) * 0.4f + abs(fNormal.z) * 0.2f) / 3.0f + 0.2f;
 		color = vec4(.4, .4, .4, 1.0);
-	}
 	else if (render_mode == mode_normalMapping)
 		color = vec4 (fNormal, 1.0);
 
 	color = mix(color, texel, fade);
-	frag_color = specular_shading(color, light) + lambert_shading(color, light);
+	frag_color = color + specular_shading(color, light) + lambert_shading(color, light);
 }

@@ -85,13 +85,9 @@ void		init_open_gl(t_scop *scop)
 
 	i = 0;
 	scop->gl.vbo = ft_memalloc(sizeof(GLuint) * scop->model.n_groups);
-	while (i < scop->model.n_groups)
-	{
-		generate_vbo(	&scop->gl.vbo[i],
-						scop->model.vertex_tables[i]->i_pos,
-						scop->model.vertex_tables[i]->positions);
-		i++;
-	}
+	generate_vbo(	&scop->gl.vbo[i],
+						scop->model.vertex_table->i_pos,
+						scop->model.vertex_table->positions);
 	glEnable(GL_DEPTH_TEST);
 	generate_vao(&scop->gl.vao);
 	default_vertex_attributes();

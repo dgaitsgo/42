@@ -48,14 +48,16 @@ void		check_face_flags(char *line, int *flags)
 
 	tokens = ft_strsplit(line, ' ');
 	if (count_char('/', tokens[1]) == 0)
+	{
 		BIT_SET(*flags, ONLY_GEOMETRY);
+	}
 	else
 	{
 		sub = strsep(&tokens[1], "/");
 		if (sub[0] == '-')
 			BIT_SET(*flags, NEGATIVE_INDEXES);
 		sub = strsep(&tokens[1], "/");
-		if (sub[0] != '\0')
+		if (sub[0])
 			BIT_SET(*flags, TEXT_COORDS_DEFINED);
 		sub = strsep(&tokens[1], "/");
 		if (sub[0] != '\0')
@@ -70,6 +72,7 @@ void		count_group_data(FILE *fd, t_group_lst *group, int *n_groups, int *flags)
 {
 	t_getline	line;
 	int			last_read_was_face;
+	int			yep = 0;
 
 	last_read_was_face = 0;
 	init_getline(&line);
@@ -98,6 +101,7 @@ void		count_group_data(FILE *fd, t_group_lst *group, int *n_groups, int *flags)
 			if (count_char('/', line.s) > 6)
 				group->quads++;
 		}
+		yep++;
 	}
 }
 
@@ -143,10 +147,11 @@ void		write_in_data(t_obj_data **obj_data, FILE *fd, int flags)
 	last_read_was_face = 0;
 	i_group = 0;
 	init_getline(&line);
+	int	i;
+
+	
 	while (getline(&line.s, &line.n, fd) > 0)
 	{
-	//	if (line.s[0] == 'g')
-	//		i_group++;
 		if (line.s[0] == 'v' && line.s[1] == ' ')
 		{
 			if (BIT_CHECK(flags, NEGATIVE_INDEXES) && last_read_was_face == 1)
@@ -187,15 +192,18 @@ void		load_obj(t_model *model, FILE *fd)
 	t_group_lst		*group;
 
 	group = model->root_group;
+	printf("Made it to fn\n");
 	count_group_data(fd, group, &model->n_groups, &model->flags);
+	printf("Counted group data\n");
 	check_flags(model->flags);
+	printf("Checked flags");
 	model->obj_data = fetch_obj_data_mem(model->root_group, model->n_groups);
 
 	/*DEBUG:*/	check_groups(model->root_group);
 
 	fseek(fd, 0, SEEK_SET);	
 	write_in_data(model->obj_data, fd, model->flags);
-	model->vertex_tables = fetch_vertex_table_mem(model->obj_data, model->n_groups, model->flags);
-	order_data(model->vertex_tables, model->obj_data, model->n_groups, model->flags);
+	model->vertex_table = fetch_vertex_table_mem(model->obj_data, model->n_groups, model->flags);
+	order_data(model->vertex_table, model->obj_data, model->n_groups, model->flags);
 	bound_model(model);
 }

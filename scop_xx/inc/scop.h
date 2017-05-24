@@ -64,14 +64,14 @@ typedef struct		s_scop
 }					t_scop;
 
 void				init_open_gl(t_scop *scop);
-void				order_data(	t_vertex_table **v,
+void				order_data(	t_vertex_table *v,
 								t_obj_data **data,
 								int n_groups,
 								int flags);
 
 void				check_groups(t_group_lst *group);
 
-t_vertex_table		**fetch_vertex_table_mem(t_obj_data **data,
+t_vertex_table		*fetch_vertex_table_mem(t_obj_data **data,
 											int n_groups,
 											int flags);
 

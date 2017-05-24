@@ -22,62 +22,65 @@ void	extract_indices(t_vector *holder, int *indices, int i, int sign)
 	//printf("%d, %d, %d, %d\n", (int)holder->x, (int)holder->y, (int)holder->z, (int)holder->w);
 }
 
+void	push(float *array, int *pos, float item)
+{
+	(*pos)++;
+	array[*pos] = item;
+}
+
 void	order_position(t_vertex_table *v, t_obj_data *data, int sign)
 {
 	t_vector	temp_i;
 	float		*pos;
 	int			offset;
 	int			i_index;
+	int			dubya;
 
 	i_index = -4;
 	pos = v->positions;
-	offset = sign ? 0 : data->n_vertices;
-	v->i_pos = -9;
-	printf("\n n vertices = %d, n vert indices = %d, offset == %d, sign == %d\n",
-	data->n_vertices, data->n_faces, offset, sign);
+	offset = sign == 1 ? 0 : data->n_vertices;
+//	printf("\n n vertices = %d, n vert indices = %d, offset == %d, sign == %d\n",
+//	data->n_vertices, data->n_faces, offset, sign);
 
 	while (i_index < data->n_faces)
 	{
-		v->i_pos += 9;
 		i_index += 4;
 		extract_indices(&temp_i, data->vert_indices, i_index, sign);
 		//printf("%f, %f, %f, %f\n", temp_i.x, temp_i.y, temp_i.z, temp_i.w);
 
-		pos[v->i_pos + 0] = data->vertices[(int)temp_i.x + offset].x;
-		pos[v->i_pos + 1] = data->vertices[(int)temp_i.x + offset].y;
-		pos[v->i_pos + 2] = data->vertices[(int)temp_i.x + offset].z;
-		pos[v->i_pos + 3] = data->vertices[(int)temp_i.y + offset].x;
-		pos[v->i_pos + 4] = data->vertices[(int)temp_i.y + offset].y;
-		pos[v->i_pos + 5] = data->vertices[(int)temp_i.y + offset].z;
-		pos[v->i_pos + 6] = data->vertices[(int)temp_i.z + offset].x;
-		pos[v->i_pos + 7] = data->vertices[(int)temp_i.z + offset].y;
-		pos[v->i_pos + 8] = data->vertices[(int)temp_i.z + offset].z;
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.x + offset].x);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.x + offset].y);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.x + offset].z);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.y + offset].x);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.y + offset].y);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.y + offset].z);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.z + offset].x);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.z + offset].y);
+		push(pos, &v->i_pos, data->vertices[(int)temp_i.z + offset].z);
 
-		//printf("Vertex @ %d :  %f, %f, %f\n", (int)temp_i.x, 
+		//printf("Vertex @ %d :  %f, %f, %f\n", (int)temp_i.x + offset, 
 		//data->vertices[(int)temp_i.x + offset].x,
 		//data->vertices[(int)temp_i.x + offset].y,
 		//data->vertices[(int)temp_i.x + offset].z);
 	
 		//it's a quad
 		//make second triangle
-		if (!(temp_i.w < 0))
+		if ((sign == 1 && temp_i.w > 0) || (sign == -1 && temp_i.w < 0))
 		{
-			pos[v->i_pos + 9] = pos[v->i_pos + 0];
-			pos[v->i_pos + 10] = pos[v->i_pos + 1];
-			pos[v->i_pos + 11] = pos[v->i_pos + 2];
-
-			pos[v->i_pos + 12] = pos[v->i_pos + 6];
-			pos[v->i_pos + 13] = pos[v->i_pos + 7];
-			pos[v->i_pos + 14] = pos[v->i_pos + 8];
-
-			pos[v->i_pos + 15] = data->vertices[(int)temp_i.w + offset].x;
-			pos[v->i_pos + 16] = data->vertices[(int)temp_i.w + offset].y;
-			pos[v->i_pos + 17] = data->vertices[(int)temp_i.w + offset].z;
-			v->i_pos += 9;
+		//	printf("Impossible to fall in here beacuse w = %f\n", temp_i.w);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.x + offset].x);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.x + offset].y);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.x + offset].z);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.z + offset].x);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.z + offset].y);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.z + offset].z);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.w + offset].x);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.w + offset].y);
+			push(pos, &v->i_pos, data->vertices[(int)temp_i.w + offset].z);
 		}
 	}
-	v->i_pos += 9;
-	printf("N FACES == %d\n", v->i_pos);
+//	v->i_pos += 9;
+//	printf("N FACES == %d\n", v->i_pos);
 }
 
 void	check_out_floats(float *data, int n)
@@ -94,17 +97,23 @@ void	check_out_floats(float *data, int n)
 	}
 }
 
-void	order_data(t_vertex_table **v, t_obj_data **data, int n_groups, int flags)
+int round_up(int num, int factor)
+{
+    return num + factor - 1 - (num - 1) % factor;
+}
+
+void	order_data(t_vertex_table *v, t_obj_data **data, int n_groups, int flags)
 {
 	int			sign;
 	int			i;
 
 	i = 0;
 	sign = BIT_CHECK(flags, NEGATIVE_INDEXES) ? -1 : 1;
-	printf("Groups == %d\n", n_groups);
+	//printf("Groups == %d\n", n_groups);
+	v->i_pos = -1;
 	while (i < n_groups)
 	{
-		order_position(v[i], data[i], sign);
+		order_position(v, data[i], sign);
 	//	check_out_floats(v[i]->positions, v[i]->i_pos);
 	/*
 		if (BIT_CHECK(flags, TEXT_COORDS_DEFINED))
@@ -116,5 +125,5 @@ void	order_data(t_vertex_table **v, t_obj_data **data, int n_groups, int flags)
 	*/
 		i++;
 	}
-	printf("finished ordering data\n");
+	v->i_pos = round_up(v->i_pos, 3);
 }

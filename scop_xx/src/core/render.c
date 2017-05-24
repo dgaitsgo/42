@@ -33,14 +33,10 @@ void	draw_routine(t_scop *scop)
 	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
 	glBindVertexArray(scop->gl.vao);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	while (i < scop->model.n_groups)
-	{
-		glDrawArrays(	GL_TRIANGLES,
-						0,
-						scop->model.vertex_tables[i]->i_pos / 3);
+	glDrawArrays(	GL_TRIANGLES,
+					0,
+					scop->model.vertex_table->i_pos / 3);
 		i++;
-	}
 }
 
 void	polygon_mode(int pm)
@@ -126,9 +122,8 @@ void	center_model(t_model *model)
 
 	i = 0;
 	center = model->bv.center;
-	//THIS FUNCTION STILL ONLY ASSUMES ONE GROUP
-	positions = model->vertex_tables[0]->positions;
-	while (i < model->vertex_tables[0]->i_pos)
+	positions = model->vertex_table->positions;
+	while (i < model->vertex_table->i_pos)
 	{
 		positions[i + 0] += 2 * center.x;
 		positions[i + 1] += 2 * center.y;
