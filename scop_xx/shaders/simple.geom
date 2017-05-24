@@ -22,19 +22,22 @@ vec3 			temp2;
 vec4			v[3];
 vec4			cg;
 
-out vec3		fNormal;
+
 flat out int	render_mode;
+out vec3		fNormal;
 out	vec4		fPositions;
+out vec4		positionWorldSpace;
 
 void	prepVertex(int i)
 {
 	fPositions = vertices[i].raw_pos;
-	//fPositions = gl_Position;
 
 	gl_Position = cg + shrink * (v[i] - cg);
 	gl_Position = gl_Position + vec4(explode_factor * fNormal, 0.0);
 	gl_Position.w = 1.0f;
 	gl_Position = proj * view * model * offset * gl_Position;
+
+	positionWorldSpace = gl_Position;
 
 	EmitVertex ();
 }

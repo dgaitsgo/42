@@ -1,32 +1,74 @@
 #version 410
 
-//Defines:
-	const uint		mode_greyScale = 0;
-	const uint		mode_normalMapping = 1;
+	//Defines:
+const uint		mode_greyScale = 0;
+const uint		mode_normalMapping = 1;
 
-//Uniforms
+	//Uniforms
 uniform float		fade;
 
-//Ins
+	//Ins
 in	vec3 			fNormal;
 in	vec4			fPositions;
+in	vec4			positionWorldSpace;
 flat in int			render_mode;
 
-vec4				color;
+	//Texture
 vec4				texel;
 vec2				text_coords;
+uniform sampler2D	basic_texture;
+
+	//Lighting
+struct		s_light
+{
+	vec3 	origin;
+	vec3 	direction;
+	vec3	color;
+}			t_light;
+
+
+float lambertCoeff = 0.6f;
+float specularCoeff = 0.1f;
+vec4				color;
 
 //Out
 out vec4			frag_color;
 
-uniform sampler2D	basic_texture;
+//___________________________________________//
 
 float		map(float value, float low1, float high1, float low2, float high2)
 {
 	return (low2 + (value - low1) * (high2 - low2) / (high1 - low1));
 }
 
-void		 main () {
+vec4		lambert_shading(vec4 color, s_light light)
+{
+	vec3 inter = normalize(light.origin - positionWorldSpace.xyz);
+	float lambertAmt = dot(inter, fNormal);
+	color += lambertCoeff * color * lambertAmt;
+	return (color);
+}
+
+vec4		specular_shading(vec4 color, s_light light)
+{
+	vec3 l = normalize(light.origin - positionWorldSpace.xyz);
+	vec3 r = l + (-2 * fNormal * dot(l, fNormal));
+	float dot = dot(light.direction, r);
+	float spec = 0;
+	if (dot > 0)
+		spec = pow(dot, 20) * specularCoeff;
+	color += color * spec;
+	return (color);
+}
+
+
+void		 main ()
+{
+	s_light		light;
+
+	light.origin = vec3(30, 30, 30);
+	light.direction = normalize(vec3(0, -20, 1));
+	light.color = vec3(.3, .3, .3);
 
 	text_coords.x = map(fPositions.x, -1, 1, 0, 1);
 	text_coords.y = map(fPositions.y, -1, 1, 0, 1);
@@ -34,12 +76,12 @@ void		 main () {
 
 	if (render_mode == mode_greyScale)
 	{
-		float grey = (abs(fNormal.x) * 0.1f + abs(fNormal.y) * 0.4f + abs(fNormal.z) * 0.2f) / 3.0f + 0.2f;
-		color = vec4(grey, grey, grey, 1.0);
+		//float grey = (abs(fNormal.x) * 0.1f + abs(fNormal.y) * 0.4f + abs(fNormal.z) * 0.2f) / 3.0f + 0.2f;
+		color = vec4(.4, .4, .4, 1.0);
 	}
 	else if (render_mode == mode_normalMapping)
-	{
 		color = vec4 (fNormal, 1.0);
-	}
-	frag_color = mix(color, texel, fade);
+
+	color = mix(color, texel, fade);
+	frag_color = specular_shading(color, light) + lambert_shading(color, light);
 }

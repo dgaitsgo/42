@@ -27,8 +27,8 @@ void	draw_routine(t_scop *scop)
 	t_vector	sky;
 
 	i = 0;
-	set_vector(&sky, 255, 255, 255);
-//	set_vector(&sky, 19, 12, 30);
+//	set_vector(&sky, 255, 255, 255);
+	set_vector(&sky, 19, 12, 30);
 	clear_open_gl(sky, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
