@@ -66,6 +66,9 @@ void	setup_render(t_scop *scop)
 	scop->explode_factor = 0.0f;
 	scop->curr_fade = 0.0f;
 	scop->render_mode = 0;
+	scop->instance_len = 1;
+	printf("MODEL DIAMETER : %f\n", scop->model.bv.diameter);
+	glUniform1f(scop->gl.uniform_refs[MODEL_RADIUS], scop->model.bv.diameter / 2);
 }
 
 int			main(int argc, char **argv)

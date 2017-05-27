@@ -61,6 +61,7 @@ typedef struct		s_scop
 	int				polygon_mode;
 	int				fade;
 	int				render_mode;
+	int				instance_len;
 }					t_scop;
 
 void				init_open_gl(t_scop *scop);

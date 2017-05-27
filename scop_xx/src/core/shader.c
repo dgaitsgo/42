@@ -44,6 +44,10 @@ void		set_standard_shader_uniforms(t_gl *gl)
 		glGetUniformLocation(gl->shdr_program, "shrink");
 	gl->uniform_refs[EXPLODE_FACTOR] =
 		glGetUniformLocation(gl->shdr_program, "explode_factor");
+	gl->uniform_refs[MODEL_RADIUS] =
+		glGetUniformLocation(gl->shdr_program, "modelBVRadius");
+	gl->uniform_refs[INSTANCE_LEN] =
+		glGetUniformLocation(gl->shdr_program, "instanceLen");
 	status_gl("Uniforms bound", __LINE__, __FILE__);
 }
 

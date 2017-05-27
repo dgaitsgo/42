@@ -33,9 +33,10 @@ void	draw_routine(t_scop *scop)
 	set_texture(&scop->gl);
 	glUseProgram(scop->gl.shdr_program);
 	glBindVertexArray(scop->gl.vao);
-	glDrawArrays(	GL_TRIANGLES,
+	glDrawArraysInstanced(	GL_TRIANGLES,
 					0,
-					scop->model.vertex_table->i_pos / 3);
+					scop->model.vertex_table->i_pos / 3,
+					scop->instance_len * scop->instance_len);
 		i++;
 }
 
@@ -84,6 +85,10 @@ void	check_event(t_scop *scop, t_window *window, t_camera *c)
 			scop->explode_factor += delta_time * 0.001;
 		if (window->event.type == SDL_KEYDOWN && window->event.key.repeat == 0)
 		{
+			if (KEY == SDLK_o)
+				scop->instance_len = smallest(scop->instance_len + 1, 4);
+			if (KEY == SDLK_i)
+				scop->instance_len = largest(scop->instance_len - 1, 1);
 			if (KEY == SDLK_f)
 			{
 				scop->polygon_mode += scop->polygon_mode == MAX_POLYGON_MODES ? -MAX_POLYGON_MODES : 1;
@@ -152,7 +157,6 @@ float	update_fade(int fade, float curr_fade, float delta)
 
 void	render(t_scop *scop)
 {
-
 	while (1)
 	{
 		draw_routine(scop);
@@ -174,6 +178,7 @@ void	render(t_scop *scop)
 		glUniform1i(scop->gl.uniform_refs[RENDER_MODE], scop->render_mode);
 		glUniform1f(scop->gl.uniform_refs[SHRINK_FACTOR], scop->shrink);
 		glUniform1f(scop->gl.uniform_refs[EXPLODE_FACTOR], scop->explode_factor);
+		glUniform1i(scop->gl.uniform_refs[INSTANCE_LEN], scop->instance_len);
 		SDL_GL_SwapWindow(scop->window.window);
 	}
 }

@@ -2,7 +2,7 @@
 #include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDISetup.h"
 #include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDIThruConnection.h"
 #include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDIDriver.h"
-
+#include <Foundation/NSObjCRuntime.h>
 
 #define SYSEX_LENGTH	1024
 #define UNIQUE_ID		468733292
@@ -173,9 +173,11 @@ int		main(void)
 		NSLog(@"Could not find device by unique Id");
 	}
 
-	result = MIDIPortConnectSource(inputPort, endPoint, NULL);
-	if (result != noErr) {
-		NSLog(@"%d : Could not connect input and output", result);
-	}
+//	result = MIDIPortConnectSource(inputPort, endPoint, NULL);
+//	if (result != noErr) {
+//		NSLog(@"%d : Could not connect input and output", result);
+//	}
+
+	//MIDIReceive(endPoint);
 	CFRunLoopRun();
 }

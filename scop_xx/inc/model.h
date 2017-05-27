@@ -106,4 +106,5 @@ typedef struct				s_model
 void						bound_model(t_model *model);
 struct s_group_lst			*new_group(void);
 void						init_model(t_model *model);
+
 #endif
