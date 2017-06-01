@@ -3,12 +3,26 @@
 #include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDIThruConnection.h"
 #include "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/Headers/MIDIDriver.h"
 #include <Foundation/NSObjCRuntime.h>
+#include <Foundation/NSDictionary.h>
 
 #define SYSEX_LENGTH	1024
 #define UNIQUE_ID		468733292
-
+//#define UNIQUE_ID		138222429
 //These functions exit() if failure, but this should be adapted to just end plug-in
 // as it's not fatal to the overall-program
+
+void listDevices()
+{
+	ItemCount numOfDevices = MIDIGetNumberOfDevices();
+	    
+	for (int i = 0; i < numOfDevices; i++) {
+	    MIDIDeviceRef midiDevice = MIDIGetDevice(i);
+	    NSDictionary *midiProperties;
+	        
+	    MIDIObjectGetProperties(midiDevice, (CFPropertyListRef *)&midiProperties, YES);
+	    NSLog(@"Midi properties: %d \n %@", i, midiProperties);
+	}
+}
 
 void midiInputCallback (const MIDIPacketList *list,
                         void *procRef,
@@ -153,31 +167,37 @@ int		main(void)
 {
 	MIDIClientRef midiClient;
 	MIDIPortRef inputPort;	
-	MIDIObjectRef endPoint;
+	MIDIEndpointRef endPoint;
 	MIDIObjectType foundObj;
 
 	OSStatus result;
+
+	listDevices();
 	    
 	result = MIDIClientCreate(CFSTR("MIDI client"), NULL, NULL, &midiClient);
 	if (result != noErr) {
 	    NSLog(@"Error creating MIDI client");
 	}
+
+	result = MIDIDestinationCreate(midiClient, CFSTR("Virtual port"), midiInputCallback, NULL, &endPoint);
+	if (result != noErr ) {
+    	NSLog(@"Could not create virtual destination");
+	}
 	
-	result = MIDIInputPortCreate(midiClient, CFSTR("Input"), midiInputCallback, NULL, &inputPort);
+	result = MIDIInputPortCreate(midiClient, CFSTR("Input port"), midiInputCallback, NULL, &inputPort);
 	if (result != noErr) {
 		NSLog(@"Could not create client port");
 	}
 
-	result = MIDIObjectFindByUniqueID(UNIQUE_ID, &endPoint, &foundObj);
-	if (result != noErr) {
-		NSLog(@"Could not find device by unique Id");
+	ItemCount numOfDevices = MIDIGetNumberOfDevices();
+
+	for (int i = 0; i < numOfDevices; i++) {
+    	MIDIDeviceRef midiDevice = MIDIGetDevice(i);
+	    NSDictionary *midiProperties;
+
+	    MIDIObjectGetProperties(midiDevice, (CFPropertyListRef *)&midiProperties, YES);
+    	MIDIEndpointRef src = MIDIGetSource(i);
+	    MIDIPortConnectSource(inputPort, src, NULL);
 	}
-
-//	result = MIDIPortConnectSource(inputPort, endPoint, NULL);
-//	if (result != noErr) {
-//		NSLog(@"%d : Could not connect input and output", result);
-//	}
-
-	//MIDIReceive(endPoint);
 	CFRunLoopRun();
 }
