@@ -23,6 +23,7 @@ $(SRC_DIR)/core/model.c \
 $(SRC_DIR)/core/main.c \
 $(SRC_DIR)/core/window.c \
 $(SRC_DIR)/core/open_gl.c \
+$(SRC_DIR)/core/midi.c \
 $(SRC_DIR)/core/constructors.c \
 $(SRC_DIR)/core/texture.c \
 $(SRC_DIR)/core/parse_mesh.c \
@@ -84,7 +85,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	make -C ./lib/libft
-	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIB_DIR) -lft -F/Library/Frameworks -framework SDL2 -framework OpenGL
+	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) -L$(LIB_DIR) -lft -F/Library/Frameworks -framework SDL2 -framework OpenGL -framework Foundation -framework CoreMIDI
 
 %.o:%.c $(INC_FILES)
 	gcc -c $(FLAGS) -I$(INC_DIR) $< -o $@

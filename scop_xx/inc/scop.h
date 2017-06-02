@@ -42,6 +42,7 @@
 #include "libft.h"
 #include "ft_math.h"
 #include "parse_mesh.h"
+#include "midi.h"
 
 enum				e_3d_types
 {
@@ -97,5 +98,5 @@ void				adjust_view(t_fps_mouse *m,
 								t_window *window);
 
 void				load_textures(t_gl *gl);
-
+int					init_midi(t_scop *scop);
 #endif

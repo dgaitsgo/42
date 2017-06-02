@@ -97,7 +97,9 @@ int			main(int argc, char **argv)
 		load_textures(&scop.gl);
 		printf("Loaded Textures\n");
 		init_open_gl(&scop);
-		printf("Initialised openGl\n");
+		printf("Initialised OpenGl\n");
+		init_midi(&scop);
+		printf("Initialised Midi\n");
 		setup_render(&scop);
 		printf("Setup render\n");
 		render(&scop);
