@@ -48,18 +48,19 @@ void midi_state_change(int button, int value, t_scop *scop)
 	else if (button == 8 && value == 127)
 		scop->render_mode +=
 			scop->render_mode == MAX_RENDER_MODES ? -MAX_RENDER_MODES : 1 ;
-	else if (button == 9 && value == 127)
+	else if (button == 10 && value == 127)
 		scop->fade = !scop->fade;	
-	else if (button == 24 && value == 127)
+	else if (button == 18 && value == 127)
 		scop->rotate = !scop->rotate;
-	else if (button == 26 && value == 127)
+	else if (button == 16 && value == 127)
 		scop->y_rotation += 10;
-	else if (button == 26 && value == 1)
+	else if (button == 16 && value == 1)
 		scop->y_rotation -= 10;
 	else if (button == 17 && value == 1)
 	{
 		printf("Tried\n");
-		scop->polygon_mode = !scop->polygon_mode;
+//		scop->polygon_mode = 1;
+//!scop->polygon_mode;
 		printf("Nope");
 		polygon_mode(scop->polygon_mode);
 		printf("PolygonMode");
