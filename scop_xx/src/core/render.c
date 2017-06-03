@@ -160,7 +160,8 @@ void	render(t_scop *scop)
 	while (1)
 	{
 		draw_routine(scop);
-		scop->y_rotation += .4;
+		if (scop->rotate)
+			scop->y_rotation += .4;
 		adjust_view(&scop->camera.fps_mouse, &scop->camera, &scop->window);
 		check_event(scop, &scop->window, &scop->camera);
 		look_at_cont(&scop->camera, RH);

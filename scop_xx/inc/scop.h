@@ -59,6 +59,7 @@ typedef struct		s_scop
 	float			explode_factor;
 	float			curr_fade;
 	float			y_rotation;
+	int				rotate;
 	int				polygon_mode;
 	int				fade;
 	int				render_mode;
@@ -71,6 +72,7 @@ void				order_data(	t_vertex_table *v,
 								int n_groups,
 								int flags);
 
+void				polygon_mode(int pm);
 void				check_groups(t_group_lst *group);
 
 t_vertex_table		*fetch_vertex_table_mem(t_obj_data **data,

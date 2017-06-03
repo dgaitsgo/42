@@ -55,11 +55,11 @@ void	setup_render(t_scop *scop)
 
 	// Wrap this up in a propper "setup"
 	// then call mainloop - putimage makes a nice container
-
 	set_standard_shader_uniforms(&scop->gl);
 	scop->camera.fps_mouse.time.last_time = SDL_GetTicks();
 	center_model_in_view(&scop->camera, &scop->model);
 	reset_mouse(&scop->window);
+	scop->rotate = 1;
 	scop->y_rotation = 0;
 	scop->fade = 0;
 	scop->shrink = 1.0f;

@@ -50,6 +50,23 @@ void midi_state_change(int button, int value, t_scop *scop)
 			scop->render_mode == MAX_RENDER_MODES ? -MAX_RENDER_MODES : 1 ;
 	else if (button == 9 && value == 127)
 		scop->fade = !scop->fade;	
+	else if (button == 24 && value == 127)
+		scop->rotate = !scop->rotate;
+	else if (button == 26 && value == 127)
+		scop->y_rotation += 10;
+	else if (button == 26 && value == 1)
+		scop->y_rotation -= 10;
+	else if (button == 17 && value == 1)
+	{
+		printf("Tried\n");
+		scop->polygon_mode = !scop->polygon_mode;
+		printf("Nope");
+		polygon_mode(scop->polygon_mode);
+		printf("PolygonMode");
+		init_open_gl(scop);
+		printf("Reinit");
+		render(scop);
+	}	
 }
 
 void midi_input_callback(const MIDIPacketList *list,
@@ -75,8 +92,7 @@ void midi_input_callback(const MIDIPacketList *list,
 		{
 			check_status(&m);
 			midi_state_change(m.packet->data[m.i_byte + 1], m.packet->data[m.i_byte + 2], (t_scop *)proc_ref);
-			//printf("Control message: %d, %d\n", m.packet->data[m.i_byte + 1], m.packet->data[m.i_byte + 2]);
-				
+			printf("Control message: %d, %d\n", m.packet->data[m.i_byte + 1], m.packet->data[m.i_byte + 2]);				
 			m.i_byte += m.size;
 		}
 		i++;
