@@ -1,5 +1,0 @@
-- Take care of "Big Problems"
-- flexible Makefile
-- Impliment bonuses already present
-- Change light color
-- kd Trees
